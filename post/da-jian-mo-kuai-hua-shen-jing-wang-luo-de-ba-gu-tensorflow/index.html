@@ -2,23 +2,19 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于 | Gridea</title>
-<link rel="shortcut icon" href="https://github.com/YI-Pengfei/YI-Pengfei.github.io/favicon.ico?v=1581566716619">
+<title>搭建模块化神经网络的八股Tensorflow | Gridea</title>
+<link rel="shortcut icon" href="https://github.com/YI-Pengfei/YI-Pengfei.github.io/favicon.ico?v=1581567015475">
 <link href="https://cdn.remixicon.com/releases/v2.1.0/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://github.com/YI-Pengfei/YI-Pengfei.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="关于 | Gridea - Atom Feed" href="https://github.com/YI-Pengfei/YI-Pengfei.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="搭建模块化神经网络的八股Tensorflow | Gridea - Atom Feed" href="https://github.com/YI-Pengfei/YI-Pengfei.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="
-欢迎来到我的小站呀，很高兴遇见你！🤝
-
-🏠 关于本站
-👨‍💻 博主是谁
-⛹ 兴趣爱好
-📬 联系我呀
-..." />
+    <meta name="description" content="1. 前向传播就是搭建网络，设计网络结构（forward.py）
+def forward(x,regularizer):  #x是输入，regularizer是正则化权重
+    #该函数完成网络结构的设计，给出输入到输出的通路
+    w..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -28,13 +24,13 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://github.com/YI-Pengfei/YI-Pengfei.github.io">
-  <img class="avatar" src="https://github.com/YI-Pengfei/YI-Pengfei.github.io/images/avatar.png?v=1581566716619" alt="">
+  <img class="avatar" src="https://github.com/YI-Pengfei/YI-Pengfei.github.io/images/avatar.png?v=1581567015475" alt="">
   </a>
   <h1 class="site-title">
     Gridea
   </h1>
   <p class="site-description">
-    温故而知新
+    记得戴口罩
   </p>
   <div class="menu-container">
     
@@ -81,37 +77,94 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于
+              搭建模块化神经网络的八股Tensorflow
             </h2>
             <div class="post-info">
               <span>
-                2019-01-25
+                2020-02-13
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
+                <h3 id="1-前向传播就是搭建网络设计网络结构forwardpy">1. 前向传播就是搭建网络，设计网络结构（forward.py）</h3>
+<pre><code>def forward(x,regularizer):  #x是输入，regularizer是正则化权重
+    #该函数完成网络结构的设计，给出输入到输出的通路
+    w=
+    b=
+    y=
+    return y
+
+def get_weight(shape,regularizer):  #shape是w的形状，regularizer是正则化权重
+    w = tf.Variable(  ) #括号里写赋初值的方法，
+    tf.add_to_collection('losses', tf.contrib.layers.l2_regularizer(regularizer)(w))
+    return w
+
+def get_bias(shape):  #shape是b的形状（就是b的个数）
+    b=tf.Variable(  ) #赋初值
+    return b
+</code></pre>
+<h3 id="2-反向传播就是训练网络优化网络参数backwardpy">2. 反向传播就是训练网络，优化网络参数（backward.py）</h3>
+<pre><code>def backward():
+    x=tf.placeholder(    )
+    y_=tf.placeholder(    )
+    y=forward.forward(x,REGULARIZER) #用forward复现网络结构
+    global_step = tf.Variable(0,trainable=False) #轮数计数器定义
+    loss=
+## 正则化 ##
+   loss可以是：
+   y与y_的差距（均方误差）（loss_mse）=tf.reduce_mean(tf.square(y-y_))
+   也可以是：
+              （交叉熵）ce=tf.nn.sparse_softmax_cross_entropy_with_logits(logits=y,labels=tf.argmax(y_,1))
+    y与y_的差距（cem）=tf.reduce_mean(ce)
+    加入正则化后：
+    loss=y与y_的差距 + tf.add_n(tf.get_collection('losses'))
+
+##指数衰减学习率 ##
+    learning_rate = tf.train.exponential_decay(
+        LEARNING_RATE_BASE,
+        global_step,
+        数据集总样本数/BATCH_SIZE,
+        LEARNING_RATE_DECAY,
+        staircase=True)
+
+    train_step=tf.train.GradientDescentOptimizer(learing_rate).minimize(loss,global_step=global_step) #训练过程
+
+##滑动平均##
+    ema = tf.train.ExponentialMovingAverage(MOVING_AVERAGE_DECAY,global_step) #global_step与指数衰减学习率中的公用一个
+    ema_op = ema.apply(tf.trainable_variable())
+    with tf.control_dependencies([train_step,ema_op]):
+        train_op = tf.no_op(name='train')
+
+    with tf.Session() as sess:
+        init_op = tf.global_variables_initializer()
+        sess.run(init_op)
+        for i in range(STEPS) # 迭代轮数
+            sess.run(train_step,feed_dict = {x:    ,y_:    })  #执行训练过程
+            if i%轮数 ==0:  #每隔一定轮数，打印信息
+                print
+</code></pre>
+<h3 id="main函数">main函数</h3>
+<pre><code>if __name__=='__main__':
+    backward()
+</code></pre>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99">🏠 关于本站</a></li>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">👨‍💻 博主是谁</a></li>
-<li><a href="#%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD">⛹ 兴趣爱好</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80">📬 联系我呀</a></li>
+<li>
+<ul>
+<li><a href="#1-%E5%89%8D%E5%90%91%E4%BC%A0%E6%92%AD%E5%B0%B1%E6%98%AF%E6%90%AD%E5%BB%BA%E7%BD%91%E7%BB%9C%E8%AE%BE%E8%AE%A1%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84forwardpy">1. 前向传播就是搭建网络，设计网络结构（forward.py）</a></li>
+<li><a href="#2-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E5%B0%B1%E6%98%AF%E8%AE%AD%E7%BB%83%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96%E7%BD%91%E7%BB%9C%E5%8F%82%E6%95%B0backwardpy">2. 反向传播就是训练网络，优化网络参数（backward.py）</a></li>
+<li><a href="#main%E5%87%BD%E6%95%B0">main函数</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

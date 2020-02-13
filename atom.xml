@@ -2,55 +2,81 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://github.com/YI-Pengfei/YI-Pengfei.github.io</id>
     <title>Gridea</title>
-    <updated>2020-02-13T04:05:59.488Z</updated>
+    <updated>2020-02-13T04:10:20.302Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://github.com/YI-Pengfei/YI-Pengfei.github.io"/>
     <link rel="self" href="https://github.com/YI-Pengfei/YI-Pengfei.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
+    <subtitle>记得戴口罩</subtitle>
     <logo>https://github.com/YI-Pengfei/YI-Pengfei.github.io/images/avatar.png</logo>
     <icon>https://github.com/YI-Pengfei/YI-Pengfei.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
     <entry>
-        <title type="html"><![CDATA[博客测试]]></title>
-        <id>https://github.com/YI-Pengfei/YI-Pengfei.github.io/post/bo-ke-ce-shi</id>
-        <link href="https://github.com/YI-Pengfei/YI-Pengfei.github.io/post/bo-ke-ce-shi">
+        <title type="html"><![CDATA[搭建模块化神经网络的八股Tensorflow]]></title>
+        <id>https://github.com/YI-Pengfei/YI-Pengfei.github.io/post/da-jian-mo-kuai-hua-shen-jing-wang-luo-de-ba-gu-tensorflow</id>
+        <link href="https://github.com/YI-Pengfei/YI-Pengfei.github.io/post/da-jian-mo-kuai-hua-shen-jing-wang-luo-de-ba-gu-tensorflow">
         </link>
-        <updated>2020-02-13T03:39:16.000Z</updated>
-        <content type="html"><![CDATA[<ul>
-<li>开始写作</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://github.com/YI-Pengfei/YI-Pengfei.github.io/post/hello-gridea</id>
-        <link href="https://github.com/YI-Pengfei/YI-Pengfei.github.io/post/hello-gridea">
-        </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+        <updated>2020-02-13T04:08:53.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="1-前向传播就是搭建网络设计网络结构forwardpy">1. 前向传播就是搭建网络，设计网络结构（forward.py）</h3>
+<pre><code>def forward(x,regularizer):  #x是输入，regularizer是正则化权重
+    #该函数完成网络结构的设计，给出输入到输出的通路
+    w=
+    b=
+    y=
+    return y
+
+def get_weight(shape,regularizer):  #shape是w的形状，regularizer是正则化权重
+    w = tf.Variable(  ) #括号里写赋初值的方法，
+    tf.add_to_collection('losses', tf.contrib.layers.l2_regularizer(regularizer)(w))
+    return w
+
+def get_bias(shape):  #shape是b的形状（就是b的个数）
+    b=tf.Variable(  ) #赋初值
+    return b
+</code></pre>
+<h3 id="2-反向传播就是训练网络优化网络参数backwardpy">2. 反向传播就是训练网络，优化网络参数（backward.py）</h3>
+<pre><code>def backward():
+    x=tf.placeholder(    )
+    y_=tf.placeholder(    )
+    y=forward.forward(x,REGULARIZER) #用forward复现网络结构
+    global_step = tf.Variable(0,trainable=False) #轮数计数器定义
+    loss=
+## 正则化 ##
+   loss可以是：
+   y与y_的差距（均方误差）（loss_mse）=tf.reduce_mean(tf.square(y-y_))
+   也可以是：
+              （交叉熵）ce=tf.nn.sparse_softmax_cross_entropy_with_logits(logits=y,labels=tf.argmax(y_,1))
+    y与y_的差距（cem）=tf.reduce_mean(ce)
+    加入正则化后：
+    loss=y与y_的差距 + tf.add_n(tf.get_collection('losses'))
+
+##指数衰减学习率 ##
+    learning_rate = tf.train.exponential_decay(
+        LEARNING_RATE_BASE,
+        global_step,
+        数据集总样本数/BATCH_SIZE,
+        LEARNING_RATE_DECAY,
+        staircase=True)
+
+    train_step=tf.train.GradientDescentOptimizer(learing_rate).minimize(loss,global_step=global_step) #训练过程
+
+##滑动平均##
+    ema = tf.train.ExponentialMovingAverage(MOVING_AVERAGE_DECAY,global_step) #global_step与指数衰减学习率中的公用一个
+    ema_op = ema.apply(tf.trainable_variable())
+    with tf.control_dependencies([train_step,ema_op]):
+        train_op = tf.no_op(name='train')
+
+    with tf.Session() as sess:
+        init_op = tf.global_variables_initializer()
+        sess.run(init_op)
+        for i in range(STEPS) # 迭代轮数
+            sess.run(train_step,feed_dict = {x:    ,y_:    })  #执行训练过程
+            if i%轮数 ==0:  #每隔一定轮数，打印信息
+                print
+</code></pre>
+<h3 id="main函数">main函数</h3>
+<pre><code>if __name__=='__main__':
+    backward()
+</code></pre>
 ]]></content>
     </entry>
 </feed>
