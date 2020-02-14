@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://YI-Pengfei.github.io</id>
     <title>积极</title>
-    <updated>2020-02-13T04:22:51.964Z</updated>
+    <updated>2020-02-14T00:43:15.892Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://YI-Pengfei.github.io"/>
     <link rel="self" href="https://YI-Pengfei.github.io/atom.xml"/>
@@ -24,10 +24,11 @@
     y=
     return y
 
-def get_weight(shape,regularizer):  #shape是w的形状，regularizer是正则化权重
+def get_weight(shape,regularizer):  #shape是w的形状，regularizer是正则化权重0.001
     w = tf.Variable(  ) #括号里写赋初值的方法，
     tf.add_to_collection('losses', tf.contrib.layers.l2_regularizer(regularizer)(w))
-    return w
+    if regularizer!=None:  # L2正则化
+        return w
 
 def get_bias(shape):  #shape是b的形状（就是b的个数）
     b=tf.Variable(  ) #赋初值
@@ -39,15 +40,14 @@ def get_bias(shape):  #shape是b的形状（就是b的个数）
     y_=tf.placeholder(    )
     y=forward.forward(x,REGULARIZER) #用forward复现网络结构
     global_step = tf.Variable(0,trainable=False) #轮数计数器定义
-    loss=
-## 正则化 ##
-   loss可以是：
-   y与y_的差距（均方误差）（loss_mse）=tf.reduce_mean(tf.square(y-y_))
-   也可以是：
-              （交叉熵）ce=tf.nn.sparse_softmax_cross_entropy_with_logits(logits=y,labels=tf.argmax(y_,1))
-    y与y_的差距（cem）=tf.reduce_mean(ce)
-    加入正则化后：
-    loss=y与y_的差距 + tf.add_n(tf.get_collection('losses'))
+    if loss_method=='MSE':  # 损失函数为均方误差
+        loss = tf.reduce_mean(tf.square(y-y_))
+    elif loss_method=='CE':  # 损失函数为交叉熵
+        ce = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=y,
+                                                            labels=tf.argmax(y_,1))
+        loss = tf.reduce_mean(ce)
+    # 加入正则化
+    loss = loss + tf.add_n(tf.get_collection('losses'))
 
 ##指数衰减学习率 ##
     learning_rate = tf.train.exponential_decay(
@@ -65,13 +65,21 @@ def get_bias(shape):  #shape是b的形状（就是b的个数）
     with tf.control_dependencies([train_step,ema_op]):
         train_op = tf.no_op(name='train')
 
+    ### 实例化可还原滑动平均值的saver
+#    ema = tf.train.ExponentialMovingAverage(滑动平均基数)
+    ema_restore = ema.variables_to_restore()
+    saver = tf.train.Saver(ema_restore)
+
     with tf.Session() as sess:
         init_op = tf.global_variables_initializer()
         sess.run(init_op)
         for i in range(STEPS) # 迭代轮数
             sess.run(train_step,feed_dict = {x:    ,y_:    })  #执行训练过程
             if i%轮数 ==0:  #每隔一定轮数，打印信息
-                print
+                saver.save(sess, os.path.join(SAVER_PATH,str(i)),
+                           global_step=global_step)
+                loss_v = sess.run(loss, feed_dict={x:xs, y_:ys})
+                print('After %d steps, loss is: %f'%(i, loss_v))
 </code></pre>
 <h3 id="main函数">main函数</h3>
 <pre><code>if __name__=='__main__':
