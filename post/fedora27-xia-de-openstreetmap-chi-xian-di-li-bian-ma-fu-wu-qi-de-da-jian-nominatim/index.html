@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="keywords" content="">
+<meta name="description" content="记得戴口罩">
+<meta name="theme-color" content="">
+<title>fedora27下的OpenStreetMap离线地理编码服务器的搭建(Nominatim) | 飞天小南鲸</title>
+<link rel="shortcut icon" href="https://YI-Pengfei.github.io/favicon.ico?v=1581641887626">
+<link rel="stylesheet" href="https://YI-Pengfei.github.io/styles/main.css">
+
+<link rel="stylesheet" href="/media/css/pisces.css">
+
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+<link href="/media/hljs/styles/github.css" rel="stylesheet">  
+
+<script src="/media/hljs/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+    <meta name="description" content="fedora27下的OpenStreetMap离线地理编码服务器的搭建(Nominatim)" />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div class="head-top-line"></div>
+    <div class="header-box">
+      
+<div class=" ">
+  <header class="header  ">
+    <div class="blog-header box-shadow-wrapper  " id="header">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-meta">       
+        <div class="site-title">
+          
+            <a href="/" class="brand">
+              <span>飞天小南鲸</span>
+            </a>  
+          
+        </div>
+        
+      </div>
+      <nav class="site-nav" id="site_nav">
+        <ul id="nav_ul">
+          
+            <li class="nav-item ">
+              
+                <a href="/">
+                  <i class="fa fa-home"></i> 首页
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+                <a href="/archives">
+                  <i class="fa fa-archive"></i> 归档
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+                <a href="/tags">
+                  <i class="fa fa-tags"></i> 标签
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+                <a href="/post/about">
+                  <i class="fa fa-user"></i> 关于
+                </a>
+              
+            </li>
+          
+          <li class="nav-item">
+            <a>
+              <i class="fa fa-search"></i> 搜索
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+    </div>
+    <div class="main-continer">
+      
+      <div class="section-layout  ">
+        <div class="section-layout-wrapper">
+          
+
+<div class="sidebar">
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+      <div class="sidebar-body " id="sidebar_body">
+        
+          
+<div class="sidebar-wrapper box-shadow-wrapper bg-color">
+  <div class="sidebar-item">
+    <img class="site-author-image right-motion" src="https://YI-Pengfei.github.io/images/avatar.png"/>
+    <p class="site-author-name">飞天小南鲸</p>
+    <p class="site-description right-motion"></p>
+  </div>
+  <div class="sidebar-item side-item-stat right-motion">
+    <div class="sidebar-item-box">
+      <a href="/archives/">
+        
+        <span class="site-item-stat-count">2</span>
+        <span class="site-item-stat-name">文章</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="">
+        <span class="site-item-stat-count">0</span>
+        <span class="site-item-stat-name">分类</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="/tags/">
+        <span class="site-item-stat-count">0</span>
+        <span class="site-item-stat-name">标签</span>
+      </a>
+    </div>
+  </div>
+  
+    
+      <div class="sidebar-item" style="border-top: 1px dotted #ccc; margin-top: 10px;">
+      </div>
+    
+  
+  
+
+
+</div>
+        
+      </div>
+    </div>
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+  }
+
+  postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+
+  if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+    let hasFix = false;
+    let scrollEl = document.querySelector('.main-continer');
+    let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+    window.addEventListener('scroll', function(e) {
+    if (document.scrollingElement.scrollTop >= limitTop) {
+      if (!hasFix) {
+        sidebar.classList.add('sidebar-fixed');
+        hasFix = true;
+      }
+    } else {
+      if (hasFix) {
+        sidebar.classList.remove('sidebar-fixed');
+        hasFix = false;
+      }
+    }
+  });
+  }
+  
+</script>
+          <div class="section-box box-shadow-wrapper">
+            <div class="section bg-color post post-page">
+              <div class="article-box">
+    <header class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://YI-Pengfei.github.io/post/fedora27-xia-de-openstreetmap-chi-xian-di-li-bian-ma-fu-wu-qi-de-da-jian-nominatim">
+      fedora27下的OpenStreetMap离线地理编码服务器的搭建(Nominatim)
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span>发布于</span>
+      <span>2020-02-14</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>10分钟</span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>2288<span class="pc-show">字数</span></span>
+    </span>
+  </div>
+</header>
+</div>
+              <div class="post-body next-md-body" id="post_body">
+                <h1 id="前言">前言</h1>
+<p>CSDN上有关于ubuntu如何安装Nominatim的博文<a href="https://blog.csdn.net/u013719339/article/details/53908990">ubuntu16.04下的OpenStreetMap离线地理编码服务器的搭建(Nominatim)</a>，但是作者尚未查询到中文的、关于fedora如何安装Nominatim的博文，甚至也未见英文的博文，这是本文写作的目的。</p>
+<p><strong>可以参考的网站：</strong></p>
+<ul>
+<li>Nominatim官方文档<a href="https://nominatim.org/release-docs/develop/appendix/Install-on-Centos-7/">Installation on CentOS 7</a>，CentOS和Fedora还比较像，但是也有不同，最重要的就是fedora装的时候注意指定版本，版本，版本！！<br>
+(fedora与ubuntu的软件目录，配置、启动方式有很大不同，参考ubuntu下的安装反而更容易混淆)<br>
+本文是对于fedora27安装Nominatim的心得步骤，不同的系统、不同的系统版本是有差别的。我的建议是：<mark>注意软件版本，注意相互之间的依赖关系。先通读本文，掌握整个安装思路和重点，切记不顾实际光粘命令行。</mark></li>
+</ul>
+<p><ul class="markdownIt-TOC">
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E4%B8%80-%E6%96%B0%E5%BB%BAfedora%E7%94%A8%E6%88%B7">一、新建Fedora用户</a></li>
+<li><a href="#%E4%BA%8C-%E8%A3%85%E4%BE%9D%E8%B5%96%E8%BD%AF%E4%BB%B6">二、装依赖（软件）</a>
+<ul>
+<li><a href="#1%E4%B8%BB%E8%A6%81%E5%88%86%E4%B8%89%E5%A4%A7%E7%B1%BB">1）主要分三大类：</a></li>
+<li><a href="#2%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4">2）安装命令：</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%89-%E9%85%8D%E7%BD%AE%E5%92%8C%E5%90%AF%E5%8A%A8postgresql-10-fedora%E7%B3%BB%E7%BB%9F%E4%B8%8B">三、配置（和启动）postgresql 10 （Fedora系统下）</a>
+<ul>
+<li><a href="#1-%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8F%8A%E5%90%AF%E5%8A%A8">1） 初始化及启动</a></li>
+<li><a href="#2-%E9%85%8D%E7%BD%AEpostgresqlconf%E6%96%87%E4%BB%B6">2） 配置postgresql.conf文件</a></li>
+<li><a href="#3-%E6%B7%BB%E5%8A%A0%E4%B8%A4%E4%B8%AApostgres%E7%94%A8%E6%88%B7">3) 添加两个postgres用户</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9B%9B-%E8%A3%85nominatim">四、装Nominatim</a>
+<ul>
+<li><a href="#1%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9%E5%B9%B6%E6%94%B9%E6%9D%83%E9%99%90">1）建文件夹并改权限</a></li>
+<li><a href="#2-%E4%B8%8B%E8%BD%BD-%E7%BC%96%E8%AF%91-%E5%AE%89%E8%A3%85nominatim">2) 下载、编译、安装Nominatim</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%94-%E9%85%8D%E7%BD%AEapache-webserver">五、配置Apache Webserver</a></li>
+<li><a href="#%E5%85%AD-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE">六、导入数据</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+<li><a href="#%E9%99%84-%E6%9C%80%E5%90%8E%E7%9A%84%E6%95%88%E6%9E%9C">附、最后的效果</a></li>
+</ul>
+(目录)</p>
+<h1 id="一-新建fedora用户">一、新建Fedora用户</h1>
+<p>Nominatim很乱，先新建个用户，不然各种<strong>权限问题</strong>：</p>
+<ul>
+<li>图形化操作：设置--&gt;详情--&gt;用户--&gt;解锁--&gt;新建(账户类型选<strong>管理员</strong>，这样nominatim就跟你原来的账户权限一样)；</li>
+<li>然后注销当前用户，切换到nominatim用户；</li>
+<li><mark>以下所有操作都在nominatim这个账户下做的。</mark><br>
+<img src="https://img-blog.csdn.net/20181019162710923?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZlbmdLdWFuZ1hpYW9adW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="图形化操作：设置--&gt;详情--&gt;用户--&gt;解锁--&gt;新建--&gt;管理员" height="400" loading="lazy"></li>
+</ul>
+<h1 id="二-装依赖软件">二、装依赖（软件）</h1>
+<p><mark>这部分最重要！！！是后边成功配置的前提，不要光粘到命令行，先看一眼我说的是什么！！！！</mark><br>
+官方<a href="https://blog.csdn.net/u013719339/article/details/53908990">CentOS的安装教程</a>没指定软件的版本，粘贴到fedora27中后，postgresql被不同的依赖项分别安装了两个版本（一个9.x，一个10），后边各种问题，崩溃。。所以重要的是<mark>版本，版本，版本！！！</mark></p>
+<h2 id="1主要分三大类">1）主要分三大类：</h2>
+<ol>
+<li>postgresql类（分9.x版本的和10版本的，不同版本配置文件的位置不同，本文装的是10版本）</li>
+<li>postgis类 （它的版本应该与postgresql的对应，如postgis25_10的意思就是postgis是2.5版本，支持postgresql 10，，，但实际证明postgis2.5版本不被Nominatim支持，本文最后选的postgis23_10）</li>
+<li>php (没什么问题，不用指定版本，好像是7.1版本)</li>
+</ol>
+<h2 id="2安装命令">2）安装命令：</h2>
+<ol>
+<li>postgresql10相关：</li>
+</ol>
+<pre><code>sudo dnf install postgresql10 postgresql10-libs postgresql10-server postgresql10-contrib postgresql10-devel
+</code></pre>
+<ol start="2">
+<li>postgis相关</li>
+</ol>
+<pre><code>sudo dnf install postgis23_10 postgis23_10-utils
+</code></pre>
+<ol start="3">
+<li>php相关</li>
+</ol>
+<pre><code>sudo dnf install php php-pgsql php-pear php-pear-DB php-intl
+</code></pre>
+<ol start="4">
+<li>其他</li>
+</ol>
+<pre><code>sudo dnf install libpqxx-devel proj-epsg bzip2-devel proj-devel libxml2-devel boost-devel \
+                 wget git cmake make gcc gcc-c++ libtool policycoreutils-python \
+                 expat-devel zlib-devel
+</code></pre>
+<p><strong>切记：不要好几个教程对着看，然后重复粘贴命令，软件都装重了！！然后各种问题，，，上边列出来的软件如果都装好了，应该就够了，</strong>（我之前一直处理openstreetmap的.pbf数据，所以与.pbf数据相关的库早就装好了，读者要是知道openstreetmap但还不知道.pbf数据，那你得下点功夫了，本文就不扯怎么装.pbf相关的库了）</p>
+<h1 id="三-配置和启动postgresql-10-fedora系统下">三、配置（和启动）postgresql 10 （Fedora系统下）</h1>
+<p>千万<mark>不要参考</mark>：1. ubuntu中postgresql的配置和启动方式； 2. postgresql 9的配置和启动方式。！！！！不然各种乱（因为不同系统下文件路径不一样，而且9和10版本的文件路径也不一样）</p>
+<h2 id="1-初始化及启动">1） 初始化及启动</h2>
+<pre><code>sudo /usr/pgsql-10/bin/postgresql-10-setup initdb
+</code></pre>
+<pre><code>sudo systemctl enable postgresql-10.service
+</code></pre>
+<pre><code>sudo systemctl start postgresql-10.service
+</code></pre>
+<h2 id="2-配置postgresqlconf文件">2） 配置postgresql.conf文件</h2>
+<p>启动管理员权限下的文本编辑器，编辑postgresql.conf文件</p>
+<pre><code>sudo gedit /var/lib/pgsql/10/data/postgresql.conf
+</code></pre>
+<p>修改如下内容，括号中的值代表要修改成的值</p>
+<pre><code>shared_buffers (2GB)
+maintenance_work_mem (10GB)
+work_mem (50MB)
+effective_cache_size (24GB)
+synchronous_commit = off
+checkpoint_timeout = 10min
+checkpoint_completion_target = 0.9
+</code></pre>
+<p>改完之后，重启服务:</p>
+<pre><code>sudo systemctl restart postgresql-10.service
+</code></pre>
+<h2 id="3-添加两个postgres用户">3) 添加两个postgres用户</h2>
+<p>老实说我也不明白为什么要添加这两个用户，但是注意：<br>
+<em>这是postgres的用户，不是fedora操作系统的用户！！！！ 意思好像是数据库中的用户？？？</em><br>
+（我刚开始卡了很长很长时间，到后来反正也还没明白，苦笑）</p>
+<ul>
+<li>先用命令进入postgres用户 （很绕，我也讲不太清楚这块，好像是因为安装postgresql后自动出来的一个postgres用户，但它只能做特定的数据库相关的事）</li>
+</ul>
+<pre><code>su - postgres
+</code></pre>
+<p>(这块新读者可能容易出问题，密码输入的是nominatim用户的密码)</p>
+<ul>
+<li>运行如下命令，新建两个postgres用户：</li>
+</ul>
+<pre><code>createuser -s nominatim
+createuser apache
+</code></pre>
+<ul>
+<li>然后退回nominatim账户</li>
+</ul>
+<pre><code>exit
+</code></pre>
+<p>如图（我的都创建过了，所以提示失败）<br>
+<img src="https://img-blog.csdn.net/20181019172207974?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZlbmdLdWFuZ1hpYW9adW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述" height="250" loading="lazy"></p>
+<h1 id="四-装nominatim">四、装Nominatim</h1>
+<p>本文将nominatim安装在<code>/opt/nominatim</code>文件夹下（注意官方<a href="https://blog.csdn.net/u013719339/article/details/53908990">CentOS的安装教程</a>是在<code>/srv/nominatim</code>，并将它定义成了<code>$USERHOME</code>，本文少定义，省的混。。读者就跟我装一个路径吧，过程理清了之后想换也方便，，不然后边的配置讲不清楚）</p>
+<h2 id="1建文件夹并改权限">1）建文件夹并改权限</h2>
+<pre><code>sudo mkdir /opt/nominatim
+</code></pre>
+<pre><code>sudo chmod 777 -R /opt/nominatim
+</code></pre>
+<h2 id="2-下载-编译-安装nominatim">2) 下载、编译、安装Nominatim</h2>
+<ul>
+<li><a href="https://github.com/openstreetmap/Nominatim">官网github</a>上下载(截止到我下载的时候是3.20版本)，并移动到<code>/opt/nominatim</code>目录下，解压缩......之后应该是我这样的（还没有<code>build</code>文件夹）<br>
+<img src="https://img-blog.csdn.net/2018101917375673?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZlbmdLdWFuZ1hpYW9adW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述" height="150" loading="lazy"></li>
+<li>先进入<code>Nominatim</code>文件夹里，运行命令<code>wget -O data/country_osm_grid.sql.gz https://www.nominatim.org/data/country_grid.sql.gz</code>下载国家网格(country grid)数据<br>
+<img src="https://img-blog.csdn.net/20181019174142809?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZlbmdLdWFuZ1hpYW9adW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述" loading="lazy"></li>
+<li>退回来，新建<code>build</code>文件夹，进入<code>build</code>文件夹，cmake，然后make</li>
+</ul>
+<pre><code>cd /opt/nominatim
+mkdir build
+cd build
+cmake /opt/nominatim/Nominatim
+make
+</code></pre>
+<p>(<em>在这个目录下进行cmake和make</em>)<br>
+<img src="https://img-blog.csdn.net/20181019174830163?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZlbmdLdWFuZ1hpYW9adW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述" loading="lazy"></p>
+<ul>
+<li>还在<code>build</code>文件夹内，配置<code>settings/local.php</code>文件(即<code>/opt/nominatim/build/settings/local.php</code>)，内容如下(没有就新建)：</li>
+</ul>
+<pre><code>&lt;?php
+ // Paths
+ @define('CONST_Postgresql_Version', '10.5');  //这个是参照ubuntu安装的那篇的配置文件添加的，好像没有也行
+ @define('CONST_Postgis_Version', '2.3');  // 好像没有也行
+ //web set
+ @define('CONST_Database_Web_User', 'apache');
+ @define('CONST_Website_BaseURL', '/nominatim/');
+ @define('CONST_Osm2pgsql_Flatnode_File', '/opt/nominatim/build/flatnode.file'); // 这是官方推荐添加的（非必须）
+</code></pre>
+<p><mark>如果cmake或make不成功，多半是因为前边的postgresql和postgis没装好（只是没装好，还不涉及配置的问题）。。。没更好的办法，按提示去网上查根本特么没有什么答案。。把装了的软件重新卸了，重装，重配置，等你到了不用看教程也大致明白哪里重要的时候，就能装好了</mark></p>
+<h1 id="五-配置apache-webserver">五、配置Apache Webserver</h1>
+<ul>
+<li>配置文件为 <code>/etc/httpd/conf.d/nominatim.conf</code>（没有就新建），同样gedit打开，编辑内容如下：</li>
+</ul>
+<pre><code>&lt;Directory &quot;/opt/nominatim/build/website&quot;&gt;
+  Options FollowSymLinks MultiViews
+  AddType text/html   .php
+  DirectoryIndex search.php
+  Require all granted
+&lt;/Directory&gt;
+Alias /nominatim /opt/nominatim/build/website
+</code></pre>
+<p><em>这里<code>/opt/nominatim</code>就对应上一节Nominatim的位置。</em></p>
+<ul>
+<li>重新载入apache：</li>
+</ul>
+<pre><code>sudo systemctl enable httpd
+sudo systemctl restart httpd
+</code></pre>
+<p>这时候你打开网址<a href="http://localhost/nominatim">http://localhost/nominatim</a>应该就可以看到一些内容了（文本内容，提示严重错误，没有nominatim数据库之类的，因为还没有导入数据嘛）</p>
+<h1 id="六-导入数据">六、导入数据</h1>
+<ul>
+<li>（可选）下载额外的wiki数据，进入到<code>/opt/nominatim/Nominatim/data</code>目录下，运行命令：</li>
+</ul>
+<pre><code>wget https://www.nominatim.org/data/wikipedia_article.sql.bin
+wget https://www.nominatim.org/data/wikipedia_redirect.sql.bin
+</code></pre>
+<ul>
+<li>导入数据：<br>
+openstreetmap数据可以在网站<a href="https://download.geofabrik.de/">https://download.geofabrik.de/</a>下载（读者应该知道吧）。导入命令（还在<code>/opt/nominatim/build</code>目录下呢）：</li>
+</ul>
+<pre><code>./utils/setup.php --osm-file &lt;data file&gt; --all [--osm2pgsql-cache 28000] 2&gt;&amp;1 | tee setup.log
+</code></pre>
+<p>里边<code>&lt;data file&gt;</code>替换为你的.pbf文件，<code>--osm2pgsql-cache 28000</code>是可选参数，一个实际的命令如图：<br>
+<img src="https://img-blog.csdn.net/20181019181616197?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZlbmdLdWFuZ1hpYW9adW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述" loading="lazy"><br>
+要试一试有没有问题的话先选一个小点儿的数据，如北京的。同样地，<mark>如果导入不成功多半是因为前边的postgresql和postgis没装好</mark>，例如，我刚开始装的postgis25_10(2.5版本)，不被支持，提示: <strong>found postgis version 0</strong>(应该就是没找到的意思)，后来换了低版本的postgis23_10，导入成功了。 如果失败，再次导入之前要先删除数据库，命令：</p>
+<pre><code>sudo -u postgresdropdb nominatim
+</code></pre>
+<h1 id="总结">总结</h1>
+<p>本文给出的是Fedora27下安装Nominatim的基本方法，postgresql的版本为10，postgis的版本为2.3，php版本为7.1，Nominatim的版本为3.2。并给出了配置postgresql、apache、nominatim的方法。需要特别注意的是：安装软件过程中要指定软件版本，注意区分不同操作系统、不同软件版本的安装、配置上的差异。限于作者水平和应用场景，关于局域网的配置、更多额外辅助数据的添加、保持数据实时更新的方法未做讨论，这部分内容可以参考<a href="https://nominatim.org/release-docs/develop/">Nominatim官方文档</a>以及<a href="https://blog.csdn.net/u013719339/article/details/53908990">ubuntu16.04下的OpenStreetMap离线地理编码服务器的搭建(Nominatim)</a>。</p>
+<h1 id="附-最后的效果">附、最后的效果</h1>
+<p><img src="https://img-blog.csdn.net/20181019182036905?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZlbmdLdWFuZ1hpYW9adW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述" loading="lazy"><br>
+不联网也会有结果，但是可能网格图片显示有问题。。<br>
+本人的是为了用python中的<code>geocoder</code>库离线使用地理编码功能，python代码如下：</p>
+<pre><code>import geocoder 
+url = 'http://localhost/nominatim'
+g = geocoder.google('北京市北京站', url=url)
+g.json
+</code></pre>
+
+              </div>
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      飞天小南鲸
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://YI-Pengfei.github.io/post/fedora27-xia-de-openstreetmap-chi-xian-di-li-bian-ma-fu-wu-qi-de-da-jian-nominatim" title="fedora27下的OpenStreetMap离线地理编码服务器的搭建(Nominatim)">fedora27下的OpenStreetMap离线地理编码服务器的搭建(Nominatim)</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
+      
+    </div>
+    <div class="nav-next">
+      
+        <a class="nav-pc-next" title="搭建模块化神经网络的八股Tensorflow" href="https://YI-Pengfei.github.io/post/da-jian-mo-kuai-hua-shen-jing-wang-luo-de-ba-gu-tensorflow">搭建模块化神经网络的八股Tensorflow</a>
+        <a class="nav-mobile-next" title="搭建模块化神经网络的八股Tensorflow" href="https://YI-Pengfei.github.io/post/da-jian-mo-kuai-hua-shen-jing-wang-luo-de-ba-gu-tensorflow">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
+      
+    </div>
+  </div>
+</div>
+              
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  gitalk.render('gitalk-container')
+</script>
+                
+                
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-box">
+  <footer class="footer">
+    <div class="copyright">
+      © 2019-2020 <i class="fa fa-heart"></i> HsxyHao
+    </div>
+    <div class="poweredby">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+  </footer>
+  
+  
+  <div class=" back-to-top" id="back_to_top">
+    <i class="fa fa-arrow-up"></i>
+    
+    <span class="scrollpercent">
+      <span id="back_to_top_text">0</span>%
+    </span>
+    
+  </div>
+  
+  
+  
+    
+
+  
+</div>
+<script>
+
+  let sideBarOpen = 'sidebar-open';
+  let body = document.body;
+  let back2Top = document.querySelector('#back_to_top'),
+  back2TopText = document.querySelector('#back_to_top_text'),
+  drawerBox = document.querySelector('#drawer_box'),
+  rightSideBar = document.querySelector('.sidebar'),
+  viewport = document.querySelector('body');
+
+  function scrollAnimation(currentY, targetY) {
+   
+    let needScrollTop = targetY - currentY
+    let _currentY = currentY
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10)
+      _currentY += dist
+      window.scrollTo(_currentY, currentY)
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY)
+      } else {
+        window.scrollTo(_currentY, targetY)
+      }
+    }, 1)
+  }
+
+  back2Top.addEventListener("click", function(e) {
+    scrollAnimation(document.scrollingElement.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+  
+  window.addEventListener('scroll', function(e) {
+    let percent = document.scrollingElement.scrollTop / (document.scrollingElement.scrollHeight - document.scrollingElement.clientHeight) * 100;
+    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
+      back2Top.classList.add('back-top-active');
+    }
+    if (percent == 0) {
+      back2Top.classList.remove('back-top-active');
+    }
+    if (back2TopText) {
+      back2TopText.textContent = Math.floor(percent);
+    }
+  });
+
+  
+  let hasCacu = false;
+  window.onresize = function() {
+    if (window.width > 991) {
+      calcuHeight();
+    } else {
+      hasCacu = false;
+    }
+  }
+
+  function calcuHeight() {
+    // 动态调整站点概览高度
+    if (!hasCacu && back2Top.classList.contains('pisces') || back2Top.classList.contains('gemini')) {
+      let sideBar = document.querySelector('.sidebar');
+      let navUl = document.querySelector('#site_nav');
+      sideBar.style = 'margin-top:' + (navUl.offsetHeight + navUl.offsetTop + 15) + 'px;';
+      hasCacu = true;
+    }
+  }
+  calcuHeight();
+  
+  let open = false, MOTION_TIME = 300, RIGHT_MOVE_DIS = '320px';
+
+  if (drawerBox) {
+    let rightMotions = document.querySelectorAll('.right-motion');
+    let right = drawerBox.classList.contains('right');
+
+    let transitionDir = right ? "transition.slideRightIn" : "transition.slideLeftIn";
+
+    let openProp, closeProp;
+    if (right) {
+      openProp = {
+        paddingRight: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingRight: '0px'
+      };
+    } else {
+      openProp = {
+        paddingLeft: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingLeft: '0px'
+      };
+    }
+
+    drawerBox.onclick = function() {
+      open = !open;
+      window.Velocity(rightSideBar, 'stop');
+      window.Velocity(viewport, 'stop');
+      window.Velocity(rightMotions, 'stop');
+      if (open) {
+        window.Velocity(rightSideBar, {
+          width: RIGHT_MOVE_DIS
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, transitionDir,{ });
+          }
+        })
+        window.Velocity(viewport, openProp,{
+          duration: MOTION_TIME
+        });
+      } else {
+        window.Velocity(rightSideBar, {
+          width: '0px'
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, {
+              opacity: 0
+            });
+          }
+        })
+        window.Velocity(viewport, closeProp ,{
+          duration: MOTION_TIME
+        });
+      }
+      for (let i = 0; i < drawerBox.children.length; i++) {
+        drawerBox.children[i].classList.toggle('muse-line');
+      }
+      drawerBox.classList.toggle(sideBarOpen);
+    }
+  }
+
+  // 代码高亮
+  hljs.initHighlightingOnLoad();
+
+</script>
+    </div>
+  </body>
+  <script src="/media/js/motion.js"></script>
+</html>
