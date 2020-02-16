@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://YI-Pengfei.github.io/favicon.ico?v=1581642157777">
+<link rel="shortcut icon" href="https://YI-Pengfei.github.io/favicon.ico?v=1581817988093">
 <link rel="stylesheet" href="https://YI-Pengfei.github.io/styles/main.css">
 
 
@@ -37,7 +37,7 @@ def forward(x,regularizer):  #x是输入，regularizer是正则化权重
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://YI-Pengfei.github.io">
-        <img src="https://YI-Pengfei.github.io/images/avatar.png?v=1581642157777" class="site-logo">
+        <img src="https://YI-Pengfei.github.io/images/avatar.png?v=1581817988093" class="site-logo">
         <h1 class="site-title">飞天小南鲸</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -136,7 +136,7 @@ def get_bias(shape):  #shape是b的形状（就是b的个数）
     # 加入正则化
     loss = loss + tf.add_n(tf.get_collection('losses'))
 
-##指数衰减学习率 ##
+    ##指数衰减学习率 ##
     learning_rate = tf.train.exponential_decay(
         LEARNING_RATE_BASE,
         global_step,
@@ -146,8 +146,8 @@ def get_bias(shape):  #shape是b的形状（就是b的个数）
 
     train_step=tf.train.GradientDescentOptimizer(learing_rate).minimize(loss,global_step=global_step) #训练过程
 
-##滑动平均##
-    ema = tf.train.ExponentialMovingAverage(MOVING_AVERAGE_DECAY,global_step) #global_step与指数衰减学习率中的公用一个
+    ##滑动平均##
+    ema = tf.train.ExponentialMovingAverage(MOVING_AVERAGE_DECAY,global_step)     #global_step与指数衰减学习率中的公用一个
     ema_op = ema.apply(tf.trainable_variable())
     with tf.control_dependencies([train_step,ema_op]):
         train_op = tf.no_op(name='train')
@@ -160,6 +160,11 @@ def get_bias(shape):  #shape是b的形状（就是b的个数）
     with tf.Session() as sess:
         init_op = tf.global_variables_initializer()
         sess.run(init_op)
+        ## 断点续训
+        ckpt = tf.train.get_checkpoint_state(SAVER_PATH)
+        if ckpt and ckpt.model_checkpoint_path:
+            saver.restore(sess, ckpt.model_checkpoint_path)
+
         for i in range(STEPS) # 迭代轮数
             sess.run(train_step,feed_dict = {x:    ,y_:    })  #执行训练过程
             if i%轮数 ==0:  #每隔一定轮数，打印信息
