@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>文章归档 | 飞天小南鲸</title>
+<title>搜索算法 | 飞天小南鲸</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -12,13 +12,31 @@
 <link rel="stylesheet" href="https://YI-Pengfei.github.io/styles/main.css">
 
 
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
 
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 
 
-    <meta name="description" content="记得戴口罩">
+    <meta name="description" content="BFS
+
+BFS基本代码：
+import networkx as nx
+
+G = nx.Graph()
+G.add_edge(1,2)
+G.add_edge(2,4)
+G.add_edge(2,3)
+G.add_edge(3,5)
+
+def..." />
+    <meta name="keywords" content="" />
   </head>
   <body>
     <div id="app" class="main">
@@ -88,80 +106,63 @@
 
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
-          
+          <div class="post-detail">
+            <h2 class="post-title">搜索算法</h2>
+            <div class="post-date">2020-02-16</div>
+            
+            <div class="post-content" v-pre>
+              <h3 id="bfs">BFS</h3>
+<p><img src="https://YI-Pengfei.github.io/post-images/1581826896242.gif" alt="BFS示意图" loading="lazy"><br>
+BFS基本代码：</p>
+<pre><code class="language-python">import networkx as nx
 
-          <h2 class="archives-title">文章归档</h2>
-          <div class="archives-container">
+G = nx.Graph()
+G.add_edge(1,2)
+G.add_edge(2,4)
+G.add_edge(2,3)
+G.add_edge(3,5)
+
+def bfs(G,node):
+    res = []
+    visited = {}
+    for node in G.nodes(): # 标记所有节点为 &quot;未访问&quot;
+        visited[node] = False
+    queue = [node]
+    visited[node] = True
+    while queue:
+        cur_node = queue.pop(0) # 队头出列
+        res.append(cur_node)
+        for child in nx.neighbors(G, cur_node):
+            if not visited[child]:
+                visited[child]=True
+                queue.append(child) # 入队尾
+    return res
+
+print(bfs(G,5))
+</code></pre>
+
+            </div>
             
-              <h2 class="year" data-aos="fade-in" data-aos-delay="500">2020</h2>
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://YI-Pengfei.github.io/post/ji-qi-xue-xi-bi-ji">
+                  <h3 class="post-title">
+                    机器学习笔记
+                  </h3>
+                </a>
+              </div>
+            
+
+            
               
-                
-                  <article class="post">
-                    <a href="https://YI-Pengfei.github.io/post/lenet5-juan-ji-wang-luo">
-                      <h2 class="post-title">
-                        leNet5卷积网络
-                      </h2>
-                    </a>
-                  </article>
-                
+                <div id="gitalk-container" data-aos="fade-in"></div>
               
-                
-                  <article class="post">
-                    <a href="https://YI-Pengfei.github.io/post/sou-suo-suan-fa">
-                      <h2 class="post-title">
-                        搜索算法
-                      </h2>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://YI-Pengfei.github.io/post/ji-qi-xue-xi-bi-ji">
-                      <h2 class="post-title">
-                        机器学习笔记
-                      </h2>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://YI-Pengfei.github.io/post/lun-wen-xiang-guan-wen-ti-ji-lu">
-                      <h2 class="post-title">
-                        北航论文记录
-                      </h2>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://YI-Pengfei.github.io/post/fedora27-xia-de-openstreetmap-chi-xian-di-li-bian-ma-fu-wu-qi-de-da-jian-nominatim">
-                      <h2 class="post-title">
-                        fedora27下的OpenStreetMap离线地理编码服务器的搭建(Nominatim)
-                      </h2>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://YI-Pengfei.github.io/post/da-jian-mo-kuai-hua-shen-jing-wang-luo-de-ba-gu-tensorflow">
-                      <h2 class="post-title">
-                        搭建模块化神经网络的八股Tensorflow
-                      </h2>
-                    </a>
-                  </article>
-                
+
               
             
+
           </div>
-
-          <div class="pagination-container">
-  
-  
-</div>
 
         </div>
       </div>
@@ -182,6 +183,29 @@ var app = new Vue({
 </script>
 
 
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
 
 
 
