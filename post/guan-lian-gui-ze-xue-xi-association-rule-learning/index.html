@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>无监督学习-Kmeans聚类和 层次聚类 | 飞天小南鲸</title>
+<title>关联规则学习 Association rule learning | 飞天小南鲸</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -24,11 +24,9 @@
 
 
 
-    <meta name="description" content="&quot;&quot;&quot;
-Kmeans聚类和 层次聚类
-https://scikit-learn.org/stable/modules/clustering.html#clustering
+    <meta name="description" content="http://rasbt.github.io/mlxtend/api_subpackages/mlxtend.frequent_patterns/
 &quot;&quot;&quot;
-..." />
+关联规则学习 Association rule lea..." />
     <meta name="keywords" content="" />
   </head>
   <body>
@@ -100,56 +98,56 @@ https://scikit-learn.org/stable/modules/clustering.html#clustering
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">无监督学习-Kmeans聚类和 层次聚类</h2>
+            <h2 class="post-title">关联规则学习 Association rule learning</h2>
             <div class="post-date">2020-02-21</div>
             
             <div class="post-content" v-pre>
-              <p>&quot;&quot;&quot;<br>
-Kmeans聚类和 层次聚类<br>
-<a href="https://scikit-learn.org/stable/modules/clustering.html#clustering">https://scikit-learn.org/stable/modules/clustering.html#clustering</a></p>
-<p>&quot;&quot;&quot;</p>
-<pre><code class="language-python">import numpy as np
-import matplotlib.pyplot as plt
-import sklearn.cluster
-SIZES,SEED,k,num=20,0,5,2
-colors=[&quot;ro&quot;,&quot;b*&quot;,&quot;gs&quot;,&quot;y^&quot;,&quot;kx&quot;]
-Algorithms=[&quot;Kmeans&quot;,&quot;Hierarchical-Single&quot;,&quot;Hierarchical-Average&quot;,&quot;Hierarchical-Maximum&quot;]
-la=len(Algorithms)
-Lx=np.concatenate([np.cos(np.arange(0,np.pi,0.01))*(100+j)/100+np.random.rand(int(np.pi/0.01)+1)*0.05 for j in range(num)]+[np.cos(np.arange(0,np.pi,0.01))*(100+j)/200+np.random.rand(int(np.pi/0.01)+1)*0.05 for j in range(num)])
-Ly=np.concatenate([np.sin(np.arange(0,np.pi,0.01))*(100+j)/100+np.random.rand(int(np.pi/0.01)+1)*0.05 for j in range(num)]+[np.sin(np.arange(0,np.pi,0.01))*(100+j)/200+np.random.rand(int(np.pi/0.01)+1)*0.05 for j in range(num)])
-n=len(Lx)
-c=np.sqrt((Lx-Lx.reshape(n,1))**2+(Ly-Ly.reshape(n,1))**2)  # 为什么这个是目标？？？ 代价函数：误差平方和（SSE）
-fig=plt.figure(figsize=(8,4*la))
-for i in range(la):
-    if Algorithms[i]==&quot;Kmeans&quot;:
-        clustering = sklearn.cluster.KMeans(n_clusters=k,random_state=SEED)
-    elif Algorithms[i]==&quot;Hierarchical-Single&quot;:
-        clustering = sklearn.cluster.AgglomerativeClustering(linkage=&quot;ward&quot;, n_clusters=k)
-    elif Algorithms[i]==&quot;Hierarchical-Average&quot;:
-        clustering = sklearn.cluster.AgglomerativeClustering(linkage=&quot;average&quot;, n_clusters=k)
-    elif Algorithms[i]==&quot;Hierarchical-Maximum&quot;:
-        clustering = sklearn.cluster.AgglomerativeClustering(linkage=&quot;complete&quot;, n_clusters=k)
-    clustering.fit(c)
-    ## 结果在 clustering.labels_ 里 [0,0,0,2,2,...]  # 列表与数据等长，存的是cluster的序号
-    ax = plt.subplot(la,2,i+1)
-    for j in range(n):
-        cluster = clustering.labels_[j]
-        plt.plot(Lx[j],Ly[j],colors[cluster],markersize=5)
+              <p><a href="http://rasbt.github.io/mlxtend/api_subpackages/mlxtend.frequent_patterns/">http://rasbt.github.io/mlxtend/api_subpackages/mlxtend.frequent_patterns/</a><br>
+&quot;&quot;&quot;<br>
+关联规则学习 Association rule learning 的目的是从大数据中发现变量之间的相关性<br>
+如&quot;啤酒和尿布&quot;的故事<br>
+Apriori alogrithm<br>
+实现Apriori alogrithm 用 mlxtend.frequent_patterns<br>
+&quot;&quot;&quot;</p>
+<pre><code class="language-python">import pandas as pd
+from mlxtend.frequent_patterns import apriori
+from mlxtend.frequent_patterns import association_rules
+## 创建数据
+columns = ['Milk', 'Bread', 'Butter', 'Beer', 'Diaper']
+L_transactions=[[1,1,0,0,0],
+                [0,0,1,0,0],
+                [0,0,0,1,1],
+                [1,1,1,0,0],
+                [0,1,0,0,0]]
+df = pd.DataFrame(L_transactions, columns=columns)
 
-    ax.set_title(Algorithms[i],fontsize=SIZES)
-#plt.savefig(&quot;C12Clustering.pdf&quot;,bbox_inches='tight')
-#plt.close()
+frequent_itemsets=apriori(df,min_support=0.4)  ## 计算频繁项集 p&gt;0.4
+print(frequent_itemsets)
+
+rules = association_rules(frequent_itemsets, metric='confidence', min_threshold=0.5)  ## 求关联规则
+print(rules)
 </code></pre>
-<figure data-type="image" tabindex="1"><img src="https://YI-Pengfei.github.io/post-images/1582251656355.png" alt="" loading="lazy"></figure>
+<p>输出：</p>
+<pre><code class="language-python">   support itemsets
+0      0.4      (0)
+1      0.6      (1)
+2      0.4      (2)
+3      0.4   (0, 1)
+  antecedents consequents     ...      leverage  conviction
+0         (0)         (1)     ...          0.16         inf
+1         (1)         (0)     ...          0.16    1.800000
+
+[2 rows x 9 columns]
+</code></pre>
 
             </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://YI-Pengfei.github.io/post/lenet5-juan-ji-wang-luo/">
+                <a href="https://YI-Pengfei.github.io/post/wu-jian-du-xue-xi-kmeans-ju-lei-he-ceng-ci-ju-lei/">
                   <h3 class="post-title">
-                    leNet5卷积网络
+                    无监督学习-Kmeans聚类和 层次聚类
                   </h3>
                 </a>
               </div>

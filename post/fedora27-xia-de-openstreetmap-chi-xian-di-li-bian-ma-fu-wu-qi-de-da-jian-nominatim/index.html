@@ -4,14 +4,11 @@
     <meta charset="utf-8" >
 
 <title>fedora27下的OpenStreetMap离线地理编码服务器的搭建(Nominatim) | 飞天小南鲸</title>
-<meta name="description" content="记得戴口罩">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://YI-Pengfei.github.io/favicon.ico?v=1582251681861">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="shortcut icon" href="https://YI-Pengfei.github.io/favicon.ico?v=1582254535144">
 <link rel="stylesheet" href="https://YI-Pengfei.github.io/styles/main.css">
 
 
@@ -21,79 +18,89 @@
 
   
 
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-
 
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 
+
+    <meta name="description" content="前言
+CSDN上有关于ubuntu如何安装Nominatim的博文ubuntu16.04下的OpenStreetMap离线地理编码服务器的搭建(Nominatim)，但是作者尚未查询到中文的、关于fedora如何安装Nominatim的博文..." />
+    <meta name="keywords" content="" />
   </head>
   <body>
-  
-    <nav class="navbar border fixed split-nav">
-  <div class="nav-brand">
-    <h3><a href="https://YI-Pengfei.github.io">飞天小南鲸</a></h3>
-  </div>
-  <div class="collapsible">
-    <input id="collapsible1" type="checkbox" name="collapsible1">
-    <button>
-      <label for="collapsible1">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-      </label>
-    </button>
-    <div class="collapsible-body">
-      <ul class="inline">
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://YI-Pengfei.github.io">
+        <img src="https://YI-Pengfei.github.io/images/avatar.png?v=1582254535144" class="site-logo">
+        <h1 class="site-title">飞天小南鲸</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
         
-          <li>
-            
-              <a href="/" class="menu">
-                首页
-              </a>
-            
-          </li>
+          <a href="/" class="site-nav">
+            首页
+          </a>
         
-          <li>
-            
-              <a href="/archives" class="menu">
-                归档
-              </a>
-            
-          </li>
+      
         
-          <li>
-            
-              <a href="/tags" class="menu">
-                标签
-              </a>
-            
-          </li>
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
         
-          <li>
-            
-              <a href="/post/about" class="menu">
-                关于
-              </a>
-            
-          </li>
+      
         
-      </ul>
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
     </div>
   </div>
-</nav>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      记得戴口罩
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://YI-Pengfei.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
 
-    <div id="top" class="row site">
-      <div class="sm-12 md-8 col">
-        <div class="paper">
-          <article class="article">
-            <h1>fedora27下的OpenStreetMap离线地理编码服务器的搭建(Nominatim)</h1>
-            <p class="article-meta">
-              2020-02-14
-              
-            </p>
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">fedora27下的OpenStreetMap离线地理编码服务器的搭建(Nominatim)</h2>
+            <div class="post-date">2020-02-14</div>
             
-            <div class="post-content">
+            <div class="post-content" v-pre>
               <h1 id="前言">前言</h1>
 <p>CSDN上有关于ubuntu如何安装Nominatim的博文<a href="https://blog.csdn.net/u013719339/article/details/53908990">ubuntu16.04下的OpenStreetMap离线地理编码服务器的搭建(Nominatim)</a>，但是作者尚未查询到中文的、关于fedora如何安装Nominatim的博文，甚至也未见英文的博文，这是本文写作的目的。</p>
 <p><strong>可以参考的网站：</strong></p>
@@ -306,128 +313,47 @@ g.json
 </code></pre>
 
             </div>
-          </article>
-        </div>
-        <div class="paper" data-aos="fade-in">
-          
-            <div class="next-post">
-              <div class="next">
-                下一篇
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://YI-Pengfei.github.io/post/da-jian-mo-kuai-hua-shen-jing-wang-luo-de-ba-gu-tensorflow/">
+                  <h3 class="post-title">
+                    搭建模块化神经网络的八股Tensorflow
+                  </h3>
+                </a>
               </div>
-              <a href="https://YI-Pengfei.github.io/post/da-jian-mo-kuai-hua-shen-jing-wang-luo-de-ba-gu-tensorflow">
-                <h3 class="post-title">
-                  搭建模块化神经网络的八股Tensorflow
-                </h3>
-              </a>
-            </div>
-          
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
         </div>
-        
-          
-            <div class="paper" data-aos="fade-in">
-              <div id="gitalk-container"></div>
-            </div>
-          
-
-          
-        
       </div>
-
-      <div class="sm-12 md-4 col sidebar">
-  <div class="paper info-container">
-    <img src="https://YI-Pengfei.github.io/images/avatar.png?v=1582251681861" class="no-responsive avatar">
-    <div class="text-muted">记得戴口罩</div>
-    <div class="social-container">
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    </div>
-  </div>
-  <div class="paper">
-    <div class="sidebar-title">
-      最新文章
-    </div>
-    <div class="row">
-      <ul>
-        
-          
-            <li>
-              <a href="https://YI-Pengfei.github.io/post/wu-jian-du-xue-xi-kmeans-ju-lei-he-ceng-ci-ju-lei">无监督学习-Kmeans聚类和 层次聚类</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://YI-Pengfei.github.io/post/lenet5-juan-ji-wang-luo">leNet5卷积网络</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://YI-Pengfei.github.io/post/sou-suo-suan-fa">搜索算法</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://YI-Pengfei.github.io/post/ji-qi-xue-xi-bi-ji">机器学习笔记</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://YI-Pengfei.github.io/post/lun-wen-xiang-guan-wen-ti-ji-lu">北航论文记录</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://YI-Pengfei.github.io/post/fedora27-xia-de-openstreetmap-chi-xian-di-li-bian-ma-fu-wu-qi-de-da-jian-nominatim">fedora27下的OpenStreetMap离线地理编码服务器的搭建(Nominatim)</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://YI-Pengfei.github.io/post/da-jian-mo-kuai-hua-shen-jing-wang-luo-de-ba-gu-tensorflow">搭建模块化神经网络的八股Tensorflow</a>
-            </li>
-          
-        
-      </ul>
-    </div>
-  </div>
-  <div class="paper">
-    <div class="sidebar-title">
-      标签列表
-    </div>
-    <div class="row">
-      
-    </div>
-  </div>
-  <div class="paper">
-    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://YI-Pengfei.github.io/atom.xml" target="_blank">RSS</a>
-  </div>
-</div>
-
-
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-
 <script type="application/javascript">
 
 AOS.init();
 
-hljs.initHighlightingOnLoad()
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
 </script>
+
+
 
 
 

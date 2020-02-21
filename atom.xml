@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://YI-Pengfei.github.io</id>
     <title>飞天小南鲸</title>
-    <updated>2020-02-21T02:21:28.755Z</updated>
+    <updated>2020-02-21T03:08:59.351Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://YI-Pengfei.github.io"/>
     <link rel="self" href="https://YI-Pengfei.github.io/atom.xml"/>
@@ -11,9 +11,54 @@
     <icon>https://YI-Pengfei.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 飞天小南鲸</rights>
     <entry>
+        <title type="html"><![CDATA[关联规则学习 Association rule learning]]></title>
+        <id>https://YI-Pengfei.github.io/post/guan-lian-gui-ze-xue-xi-association-rule-learning/</id>
+        <link href="https://YI-Pengfei.github.io/post/guan-lian-gui-ze-xue-xi-association-rule-learning/">
+        </link>
+        <updated>2020-02-21T03:06:05.000Z</updated>
+        <content type="html"><![CDATA[<p><a href="http://rasbt.github.io/mlxtend/api_subpackages/mlxtend.frequent_patterns/">http://rasbt.github.io/mlxtend/api_subpackages/mlxtend.frequent_patterns/</a><br>
+&quot;&quot;&quot;<br>
+关联规则学习 Association rule learning 的目的是从大数据中发现变量之间的相关性<br>
+如&quot;啤酒和尿布&quot;的故事<br>
+Apriori alogrithm<br>
+实现Apriori alogrithm 用 mlxtend.frequent_patterns<br>
+&quot;&quot;&quot;</p>
+<pre><code class="language-python">import pandas as pd
+from mlxtend.frequent_patterns import apriori
+from mlxtend.frequent_patterns import association_rules
+## 创建数据
+columns = ['Milk', 'Bread', 'Butter', 'Beer', 'Diaper']
+L_transactions=[[1,1,0,0,0],
+                [0,0,1,0,0],
+                [0,0,0,1,1],
+                [1,1,1,0,0],
+                [0,1,0,0,0]]
+df = pd.DataFrame(L_transactions, columns=columns)
+
+frequent_itemsets=apriori(df,min_support=0.4)  ## 计算频繁项集 p&gt;0.4
+print(frequent_itemsets)
+
+rules = association_rules(frequent_itemsets, metric='confidence', min_threshold=0.5)  ## 求关联规则
+print(rules)
+</code></pre>
+<p>输出：</p>
+<pre><code class="language-python">   support itemsets
+0      0.4      (0)
+1      0.6      (1)
+2      0.4      (2)
+3      0.4   (0, 1)
+  antecedents consequents     ...      leverage  conviction
+0         (0)         (1)     ...          0.16         inf
+1         (1)         (0)     ...          0.16    1.800000
+
+[2 rows x 9 columns]
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[无监督学习-Kmeans聚类和 层次聚类]]></title>
-        <id>https://YI-Pengfei.github.io/post/wu-jian-du-xue-xi-kmeans-ju-lei-he-ceng-ci-ju-lei</id>
-        <link href="https://YI-Pengfei.github.io/post/wu-jian-du-xue-xi-kmeans-ju-lei-he-ceng-ci-ju-lei">
+        <id>https://YI-Pengfei.github.io/post/wu-jian-du-xue-xi-kmeans-ju-lei-he-ceng-ci-ju-lei/</id>
+        <link href="https://YI-Pengfei.github.io/post/wu-jian-du-xue-xi-kmeans-ju-lei-he-ceng-ci-ju-lei/">
         </link>
         <updated>2020-02-21T02:18:15.000Z</updated>
         <content type="html"><![CDATA[<p>&quot;&quot;&quot;<br>
@@ -57,8 +102,8 @@ for i in range(la):
     </entry>
     <entry>
         <title type="html"><![CDATA[leNet5卷积网络]]></title>
-        <id>https://YI-Pengfei.github.io/post/lenet5-juan-ji-wang-luo</id>
-        <link href="https://YI-Pengfei.github.io/post/lenet5-juan-ji-wang-luo">
+        <id>https://YI-Pengfei.github.io/post/lenet5-juan-ji-wang-luo/</id>
+        <link href="https://YI-Pengfei.github.io/post/lenet5-juan-ji-wang-luo/">
         </link>
         <updated>2020-02-17T02:13:14.000Z</updated>
         <content type="html"><![CDATA[<p>对mnist数据集训练leNet5卷积网络<br>
@@ -299,8 +344,8 @@ if __name__=='__main__':
     </entry>
     <entry>
         <title type="html"><![CDATA[搜索算法]]></title>
-        <id>https://YI-Pengfei.github.io/post/sou-suo-suan-fa</id>
-        <link href="https://YI-Pengfei.github.io/post/sou-suo-suan-fa">
+        <id>https://YI-Pengfei.github.io/post/sou-suo-suan-fa/</id>
+        <link href="https://YI-Pengfei.github.io/post/sou-suo-suan-fa/">
         </link>
         <updated>2020-02-16T04:20:38.000Z</updated>
         <content type="html"><![CDATA[<h3 id="bfs">BFS</h3>
@@ -336,8 +381,8 @@ print(bfs(G,5))
     </entry>
     <entry>
         <title type="html"><![CDATA[机器学习笔记]]></title>
-        <id>https://YI-Pengfei.github.io/post/ji-qi-xue-xi-bi-ji</id>
-        <link href="https://YI-Pengfei.github.io/post/ji-qi-xue-xi-bi-ji">
+        <id>https://YI-Pengfei.github.io/post/ji-qi-xue-xi-bi-ji/</id>
+        <link href="https://YI-Pengfei.github.io/post/ji-qi-xue-xi-bi-ji/">
         </link>
         <updated>2020-02-16T01:04:31.000Z</updated>
         <content type="html"><![CDATA[<h3 id="神经元">神经元</h3>
@@ -392,8 +437,8 @@ y=a^{(1)}W^{(2)}
     </entry>
     <entry>
         <title type="html"><![CDATA[北航论文记录]]></title>
-        <id>https://YI-Pengfei.github.io/post/lun-wen-xiang-guan-wen-ti-ji-lu</id>
-        <link href="https://YI-Pengfei.github.io/post/lun-wen-xiang-guan-wen-ti-ji-lu">
+        <id>https://YI-Pengfei.github.io/post/lun-wen-xiang-guan-wen-ti-ji-lu/</id>
+        <link href="https://YI-Pengfei.github.io/post/lun-wen-xiang-guan-wen-ti-ji-lu/">
         </link>
         <updated>2020-02-15T05:00:50.000Z</updated>
         <content type="html"><![CDATA[<h3 id="肖振宇">肖振宇</h3>
@@ -415,8 +460,8 @@ y=a^{(1)}W^{(2)}
     </entry>
     <entry>
         <title type="html"><![CDATA[fedora27下的OpenStreetMap离线地理编码服务器的搭建(Nominatim)]]></title>
-        <id>https://YI-Pengfei.github.io/post/fedora27-xia-de-openstreetmap-chi-xian-di-li-bian-ma-fu-wu-qi-de-da-jian-nominatim</id>
-        <link href="https://YI-Pengfei.github.io/post/fedora27-xia-de-openstreetmap-chi-xian-di-li-bian-ma-fu-wu-qi-de-da-jian-nominatim">
+        <id>https://YI-Pengfei.github.io/post/fedora27-xia-de-openstreetmap-chi-xian-di-li-bian-ma-fu-wu-qi-de-da-jian-nominatim/</id>
+        <link href="https://YI-Pengfei.github.io/post/fedora27-xia-de-openstreetmap-chi-xian-di-li-bian-ma-fu-wu-qi-de-da-jian-nominatim/">
         </link>
         <updated>2020-02-14T00:56:09.000Z</updated>
         <content type="html"><![CDATA[<h1 id="前言">前言</h1>
@@ -633,8 +678,8 @@ g.json
     </entry>
     <entry>
         <title type="html"><![CDATA[搭建模块化神经网络的八股Tensorflow]]></title>
-        <id>https://YI-Pengfei.github.io/post/da-jian-mo-kuai-hua-shen-jing-wang-luo-de-ba-gu-tensorflow</id>
-        <link href="https://YI-Pengfei.github.io/post/da-jian-mo-kuai-hua-shen-jing-wang-luo-de-ba-gu-tensorflow">
+        <id>https://YI-Pengfei.github.io/post/da-jian-mo-kuai-hua-shen-jing-wang-luo-de-ba-gu-tensorflow/</id>
+        <link href="https://YI-Pengfei.github.io/post/da-jian-mo-kuai-hua-shen-jing-wang-luo-de-ba-gu-tensorflow/">
         </link>
         <updated>2020-02-13T04:08:53.000Z</updated>
         <content type="html"><![CDATA[<h3 id="1-前向传播就是搭建网络设计网络结构forwardpy">1. 前向传播就是搭建网络，设计网络结构（forward.py）</h3>
