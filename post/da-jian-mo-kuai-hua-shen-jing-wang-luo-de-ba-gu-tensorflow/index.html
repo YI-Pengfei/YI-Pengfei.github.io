@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://YI-Pengfei.github.io/favicon.ico?v=1582254535144">
+<link rel="shortcut icon" href="https://YI-Pengfei.github.io/favicon.ico?v=1582254606366">
 <link rel="stylesheet" href="https://YI-Pengfei.github.io/styles/main.css">
 
 
@@ -37,7 +37,7 @@ def forward(x,regularizer):  #x是输入，regularizer是正则化权重
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://YI-Pengfei.github.io">
-        <img src="https://YI-Pengfei.github.io/images/avatar.png?v=1582254535144" class="site-logo">
+        <img src="https://YI-Pengfei.github.io/images/avatar.png?v=1582254606366" class="site-logo">
         <h1 class="site-title">飞天小南鲸</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -104,7 +104,7 @@ def forward(x,regularizer):  #x是输入，regularizer是正则化权重
             
             <div class="post-content" v-pre>
               <h3 id="1-前向传播就是搭建网络设计网络结构forwardpy">1. 前向传播就是搭建网络，设计网络结构（forward.py）</h3>
-<pre><code>def forward(x,regularizer):  #x是输入，regularizer是正则化权重
+<pre><code class="language-python">def forward(x,regularizer):  #x是输入，regularizer是正则化权重
     #该函数完成网络结构的设计，给出输入到输出的通路
     w=
     b=
@@ -122,7 +122,7 @@ def get_bias(shape):  #shape是b的形状（就是b的个数）
     return b
 </code></pre>
 <h3 id="2-反向传播就是训练网络优化网络参数backwardpy">2. 反向传播就是训练网络，优化网络参数（backward.py）</h3>
-<pre><code>def backward():
+<pre><code class="language-python">def backward():
     x=tf.placeholder(    )
     y_=tf.placeholder(    )
     y=forward.forward(x,REGULARIZER) #用forward复现网络结构
@@ -174,7 +174,7 @@ def get_bias(shape):  #shape是b的形状（就是b的个数）
                 print('After %d steps, loss is: %f'%(i, loss_v))
 </code></pre>
 <h3 id="main函数">main函数</h3>
-<pre><code>if __name__=='__main__':
+<pre><code class="language-python">if __name__=='__main__':
     backward()
 </code></pre>
 
