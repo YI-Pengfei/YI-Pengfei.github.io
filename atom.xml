@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://YI-Pengfei.github.io</id>
     <title>飞天小南鲸</title>
-    <updated>2020-02-21T03:10:19.920Z</updated>
+    <updated>2020-02-21T03:19:24.004Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://YI-Pengfei.github.io"/>
     <link rel="self" href="https://YI-Pengfei.github.io/atom.xml"/>
@@ -10,6 +10,90 @@
     <logo>https://YI-Pengfei.github.io/images/avatar.png</logo>
     <icon>https://YI-Pengfei.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 飞天小南鲸</rights>
+    <entry>
+        <title type="html"><![CDATA[应用tflearn实现神经网络-一个简单的例子]]></title>
+        <id>https://YI-Pengfei.github.io/post/ying-yong-tflearn-shi-xian-shen-jing-wang-luo-yi-ge-jian-dan-de-li-zi/</id>
+        <link href="https://YI-Pengfei.github.io/post/ying-yong-tflearn-shi-xian-shen-jing-wang-luo-yi-ge-jian-dan-de-li-zi/">
+        </link>
+        <updated>2020-02-21T03:16:47.000Z</updated>
+        <content type="html"><![CDATA[<p>tflearn官方文档 <a href="http://tflearn.org/">http://tflearn.org/</a><br>
+&quot;&quot;&quot;<br>
+练习tensorflow和tflearn<br>
+&quot;&quot;&quot;</p>
+<pre><code class="language-python">import tensorflow as tf
+import tflearn
+import numpy as np
+import random
+from matplotlib import pyplot as plt
+
+tf.reset_default_graph()
+
+def generate_data(n=5, num=1000):
+    &quot;&quot;&quot;产生测试用的数据&quot;&quot;&quot;
+    d = [0,1]
+
+    allX = []
+    allY = []
+    for count in range(num):
+        lst = []
+        label = [0,1]
+        for i in range(n):
+            rnd = random.choice(d)
+            if len(lst)&gt;=1 and rnd==1 and rnd==lst[-1]:
+                label = [1,0]   ## 有连续两个1
+            lst.append(rnd)
+        allX.append(lst)
+        allY.append(label)
+    ## 随机将数据分为两组，训练组 和 测试组
+    allX = np.array(allX)
+    allY = np.array(allY)
+    trainIndex = sorted(random.sample(list(range(num)), int(num/5)))
+    testIndex = sorted(list(set(range(num))- set(trainIndex)))
+    trainX, trainY = allX[trainIndex,:], allY[trainIndex ,:]
+    testX, testY = allX[testIndex,:], allY[testIndex ,:]
+
+    return trainX, trainY, testX, testY
+
+
+def train_model(trainX, trainY, acti):
+    &quot;&quot;&quot;构建神经网络，训练神经网络&quot;&quot;&quot;
+    n_in, n_out = len(trainX[0]), len(trainY[0])
+    net = tflearn.input_data(shape=[None, n_in])
+    net = tflearn.fully_connected(net, 8, activation=acti)
+    net = tflearn.fully_connected(net, 8, activation=acti)
+    net = tflearn.fully_connected(net, n_out, activation=acti)
+    net = tflearn.regression(net, optimizer='adam', 
+                             loss='categorical_crossentropy',
+                             learning_rate=0.01)
+    
+    model = tflearn.DNN(net, tensorboard_verbose=3)
+    model.fit(trainX, trainY, n_epoch=100, show_metric=True, batch_size=50)
+    return model
+
+
+def test_model(model, testX, testY):
+    &quot;&quot;&quot;测试神经网络&quot;&quot;&quot;
+    pred = model.predict(testX)
+    n_right=0
+    for i,lst in enumerate(pred):
+        if lst[0]&gt;lst[1]:
+            res = [1,0]
+        else:
+            res = [0,1]
+        if res==testY[i].tolist():
+            n_right+=1
+        
+    accuracy = n_right/len(pred)
+    return accuracy
+
+
+trainX, trainY, testX, testY = generate_data(n=5, num=1000)
+model = train_model(trainX, trainY, acti='softmax') # 训练模型
+accuracy = test_model(model, testX, testY)
+print('Predict accuracy is:%f'%accuracy)
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[关联规则学习 Association rule learning]]></title>
         <id>https://YI-Pengfei.github.io/post/guan-lian-gui-ze-xue-xi-association-rule-learning/</id>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>搜索算法 | 飞天小南鲸</title>
+<title>应用tflearn实现神经网络-一个简单的例子 | 飞天小南鲸</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -24,18 +24,12 @@
 
 
 
-    <meta name="description" content="BFS
-
-BFS基本代码：
-import networkx as nx
-
-G = nx.Graph()
-G.add_edge(1,2)
-G.add_edge(2,4)
-G.add_edge(2,3)
-G.add_edge(3,5)
-
-def..." />
+    <meta name="description" content="tflearn官方文档 http://tflearn.org/
+&quot;&quot;&quot;
+练习tensorflow和tflearn
+&quot;&quot;&quot;
+import tensorflow as tf
+impor..." />
     <meta name="keywords" content="" />
   </head>
   <body>
@@ -107,38 +101,85 @@ def..." />
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">搜索算法</h2>
-            <div class="post-date">2020-02-16</div>
+            <h2 class="post-title">应用tflearn实现神经网络-一个简单的例子</h2>
+            <div class="post-date">2020-02-21</div>
             
             <div class="post-content" v-pre>
-              <h3 id="bfs">BFS</h3>
-<p><img src="https://YI-Pengfei.github.io/post-images/1581826896242.gif" alt="BFS示意图" loading="lazy"><br>
-BFS基本代码：</p>
-<pre><code class="language-python">import networkx as nx
+              <p>tflearn官方文档 <a href="http://tflearn.org/">http://tflearn.org/</a><br>
+&quot;&quot;&quot;<br>
+练习tensorflow和tflearn<br>
+&quot;&quot;&quot;</p>
+<pre><code class="language-python">import tensorflow as tf
+import tflearn
+import numpy as np
+import random
+from matplotlib import pyplot as plt
 
-G = nx.Graph()
-G.add_edge(1,2)
-G.add_edge(2,4)
-G.add_edge(2,3)
-G.add_edge(3,5)
+tf.reset_default_graph()
 
-def bfs(G,node):
-    res = []
-    visited = {}
-    for node in G.nodes(): # 标记所有节点为 &quot;未访问&quot;
-        visited[node] = False
-    queue = [node]
-    visited[node] = True
-    while queue:
-        cur_node = queue.pop(0) # 队头出列
-        res.append(cur_node)
-        for child in nx.neighbors(G, cur_node):
-            if not visited[child]:
-                visited[child]=True
-                queue.append(child) # 入队尾
-    return res
+def generate_data(n=5, num=1000):
+    &quot;&quot;&quot;产生测试用的数据&quot;&quot;&quot;
+    d = [0,1]
 
-print(bfs(G,5))
+    allX = []
+    allY = []
+    for count in range(num):
+        lst = []
+        label = [0,1]
+        for i in range(n):
+            rnd = random.choice(d)
+            if len(lst)&gt;=1 and rnd==1 and rnd==lst[-1]:
+                label = [1,0]   ## 有连续两个1
+            lst.append(rnd)
+        allX.append(lst)
+        allY.append(label)
+    ## 随机将数据分为两组，训练组 和 测试组
+    allX = np.array(allX)
+    allY = np.array(allY)
+    trainIndex = sorted(random.sample(list(range(num)), int(num/5)))
+    testIndex = sorted(list(set(range(num))- set(trainIndex)))
+    trainX, trainY = allX[trainIndex,:], allY[trainIndex ,:]
+    testX, testY = allX[testIndex,:], allY[testIndex ,:]
+
+    return trainX, trainY, testX, testY
+
+
+def train_model(trainX, trainY, acti):
+    &quot;&quot;&quot;构建神经网络，训练神经网络&quot;&quot;&quot;
+    n_in, n_out = len(trainX[0]), len(trainY[0])
+    net = tflearn.input_data(shape=[None, n_in])
+    net = tflearn.fully_connected(net, 8, activation=acti)
+    net = tflearn.fully_connected(net, 8, activation=acti)
+    net = tflearn.fully_connected(net, n_out, activation=acti)
+    net = tflearn.regression(net, optimizer='adam', 
+                             loss='categorical_crossentropy',
+                             learning_rate=0.01)
+    
+    model = tflearn.DNN(net, tensorboard_verbose=3)
+    model.fit(trainX, trainY, n_epoch=100, show_metric=True, batch_size=50)
+    return model
+
+
+def test_model(model, testX, testY):
+    &quot;&quot;&quot;测试神经网络&quot;&quot;&quot;
+    pred = model.predict(testX)
+    n_right=0
+    for i,lst in enumerate(pred):
+        if lst[0]&gt;lst[1]:
+            res = [1,0]
+        else:
+            res = [0,1]
+        if res==testY[i].tolist():
+            n_right+=1
+        
+    accuracy = n_right/len(pred)
+    return accuracy
+
+
+trainX, trainY, testX, testY = generate_data(n=5, num=1000)
+model = train_model(trainX, trainY, acti='softmax') # 训练模型
+accuracy = test_model(model, testX, testY)
+print('Predict accuracy is:%f'%accuracy)
 </code></pre>
 
             </div>
@@ -146,9 +187,9 @@ print(bfs(G,5))
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://YI-Pengfei.github.io/post/ji-qi-xue-xi-bi-ji/">
+                <a href="https://YI-Pengfei.github.io/post/guan-lian-gui-ze-xue-xi-association-rule-learning/">
                   <h3 class="post-title">
-                    机器学习笔记
+                    关联规则学习 Association rule learning
                   </h3>
                 </a>
               </div>
