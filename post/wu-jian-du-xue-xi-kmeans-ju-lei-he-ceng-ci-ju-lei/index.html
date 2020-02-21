@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>搜索算法 | 飞天小南鲸</title>
+<title>无监督学习-Kmeans聚类和 层次聚类 | 飞天小南鲸</title>
 <meta name="description" content="记得戴口罩">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,42 +87,50 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>搜索算法</h1>
+            <h1>无监督学习-Kmeans聚类和 层次聚类</h1>
             <p class="article-meta">
-              2020-02-16
+              2020-02-21
               
             </p>
             
             <div class="post-content">
-              <h3 id="bfs">BFS</h3>
-<p><img src="https://YI-Pengfei.github.io/post-images/1581826896242.gif" alt="BFS示意图" loading="lazy"><br>
-BFS基本代码：</p>
-<pre><code class="language-python">import networkx as nx
+              <p>&quot;&quot;&quot;<br>
+Kmeans聚类和 层次聚类<br>
+<a href="https://scikit-learn.org/stable/modules/clustering.html#clustering">https://scikit-learn.org/stable/modules/clustering.html#clustering</a></p>
+<p>&quot;&quot;&quot;</p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+import sklearn.cluster
+SIZES,SEED,k,num=20,0,5,2
+colors=[&quot;ro&quot;,&quot;b*&quot;,&quot;gs&quot;,&quot;y^&quot;,&quot;kx&quot;]
+Algorithms=[&quot;Kmeans&quot;,&quot;Hierarchical-Single&quot;,&quot;Hierarchical-Average&quot;,&quot;Hierarchical-Maximum&quot;]
+la=len(Algorithms)
+Lx=np.concatenate([np.cos(np.arange(0,np.pi,0.01))*(100+j)/100+np.random.rand(int(np.pi/0.01)+1)*0.05 for j in range(num)]+[np.cos(np.arange(0,np.pi,0.01))*(100+j)/200+np.random.rand(int(np.pi/0.01)+1)*0.05 for j in range(num)])
+Ly=np.concatenate([np.sin(np.arange(0,np.pi,0.01))*(100+j)/100+np.random.rand(int(np.pi/0.01)+1)*0.05 for j in range(num)]+[np.sin(np.arange(0,np.pi,0.01))*(100+j)/200+np.random.rand(int(np.pi/0.01)+1)*0.05 for j in range(num)])
+n=len(Lx)
+c=np.sqrt((Lx-Lx.reshape(n,1))**2+(Ly-Ly.reshape(n,1))**2)  # 为什么这个是目标？？？ 代价函数：误差平方和（SSE）
+fig=plt.figure(figsize=(8,4*la))
+for i in range(la):
+    if Algorithms[i]==&quot;Kmeans&quot;:
+        clustering = sklearn.cluster.KMeans(n_clusters=k,random_state=SEED)
+    elif Algorithms[i]==&quot;Hierarchical-Single&quot;:
+        clustering = sklearn.cluster.AgglomerativeClustering(linkage=&quot;ward&quot;, n_clusters=k)
+    elif Algorithms[i]==&quot;Hierarchical-Average&quot;:
+        clustering = sklearn.cluster.AgglomerativeClustering(linkage=&quot;average&quot;, n_clusters=k)
+    elif Algorithms[i]==&quot;Hierarchical-Maximum&quot;:
+        clustering = sklearn.cluster.AgglomerativeClustering(linkage=&quot;complete&quot;, n_clusters=k)
+    clustering.fit(c)
+    ## 结果在 clustering.labels_ 里 [0,0,0,2,2,...]  # 列表与数据等长，存的是cluster的序号
+    ax = plt.subplot(la,2,i+1)
+    for j in range(n):
+        cluster = clustering.labels_[j]
+        plt.plot(Lx[j],Ly[j],colors[cluster],markersize=5)
 
-G = nx.Graph()
-G.add_edge(1,2)
-G.add_edge(2,4)
-G.add_edge(2,3)
-G.add_edge(3,5)
-
-def bfs(G,node):
-    res = []
-    visited = {}
-    for node in G.nodes(): # 标记所有节点为 &quot;未访问&quot;
-        visited[node] = False
-    queue = [node]
-    visited[node] = True
-    while queue:
-        cur_node = queue.pop(0) # 队头出列
-        res.append(cur_node)
-        for child in nx.neighbors(G, cur_node):
-            if not visited[child]:
-                visited[child]=True
-                queue.append(child) # 入队尾
-    return res
-
-print(bfs(G,5))
+    ax.set_title(Algorithms[i],fontsize=SIZES)
+#plt.savefig(&quot;C12Clustering.pdf&quot;,bbox_inches='tight')
+#plt.close()
 </code></pre>
+<figure data-type="image" tabindex="1"><img src="https://YI-Pengfei.github.io/post-images/1582251656355.png" alt="" loading="lazy"></figure>
 
             </div>
           </article>
@@ -133,9 +141,9 @@ print(bfs(G,5))
               <div class="next">
                 下一篇
               </div>
-              <a href="https://YI-Pengfei.github.io/post/ji-qi-xue-xi-bi-ji">
+              <a href="https://YI-Pengfei.github.io/post/lenet5-juan-ji-wang-luo">
                 <h3 class="post-title">
-                  机器学习笔记
+                  leNet5卷积网络
                 </h3>
               </a>
             </div>
