@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://YI-Pengfei.github.io/favicon.ico?v=1582256779327">
+<link rel="shortcut icon" href="https://YI-Pengfei.github.io/favicon.ico?v=1582593903797">
 <link rel="stylesheet" href="https://YI-Pengfei.github.io/styles/main.css">
 
 
@@ -45,7 +45,7 @@ def..." />
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://YI-Pengfei.github.io">
-        <img src="https://YI-Pengfei.github.io/images/avatar.png?v=1582256779327" class="site-logo">
+        <img src="https://YI-Pengfei.github.io/images/avatar.png?v=1582593903797" class="site-logo">
         <h1 class="site-title">飞天小南鲸</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -112,8 +112,8 @@ def..." />
             
             <div class="post-content" v-pre>
               <h3 id="bfs">BFS</h3>
-<p><img src="https://YI-Pengfei.github.io/post-images/1581826896242.gif" alt="BFS示意图" loading="lazy"><br>
-BFS基本代码：</p>
+<figure data-type="image" tabindex="1"><img src="https://YI-Pengfei.github.io/post-images/1581826896242.gif" alt="BFS示意图" loading="lazy"></figure>
+<h4 id="bfs基本代码">BFS基本代码：</h4>
 <pre><code class="language-python">import networkx as nx
 
 G = nx.Graph()
@@ -139,6 +139,141 @@ def bfs(G,node):
     return res
 
 print(bfs(G,5))
+</code></pre>
+<h4 id="bfs搜索od之间的路径">BFS搜索OD之间的路径</h4>
+<figure data-type="image" tabindex="2"><img src="https://YI-Pengfei.github.io/post-images/1582547464448.png" alt="有向图示例" loading="lazy"></figure>
+<pre><code class="language-python">&quot;&quot;&quot;
+BFS找源到目的的路径 从S到E的路径:BFS一定能找到路径，但是不一定是最短路径长度，而是最小深度
+&quot;&quot;&quot;
+import networkx as nx
+
+G = nx.DiGraph()
+G.add_edge('S','A',weight=2)
+G.add_edge('S','B',weight=1)
+G.add_edge('S','C',weight=6)
+
+G.add_edge('A','D',weight=6)
+G.add_edge('A','E',weight=20)
+
+G.add_edge('B','E',weight=20)
+G.add_edge('CA','E',weight=8)
+
+def BFS(G,O,D):
+    &quot;&quot;&quot;
+    G:有向图，O:源节点，D:目的节点
+    &quot;&quot;&quot;
+    record = {} ## 记录每一个节点的父节点
+    queue = [O]
+    print('root node is:', O)
+    found=False  ## 
+    while not found:
+        if not queue:
+            break
+        cur_node = queue.pop(0) # 弹出队列第一个元素
+        for child in G.neighbors(cur_node):
+            print(child)
+            record[child]=cur_node
+            queue.append(child)
+            if child==D:
+                found=True
+    
+    if not D in record:
+        print('not found target node')
+        return -1
+    path = [] # 组装路径
+    while D in record:
+        path.insert(0,(record[D],D))
+        D = record[D]
+    
+    return path
+
+print(BFS(G, 'S', 'E')) # 
+&gt;&gt; [('S', 'A'), ('A', 'E')]
+</code></pre>
+<h3 id="dfs">DFS</h3>
+<h4 id="dfs基本代码递归">DFS基本代码(递归)：</h4>
+<pre><code class="language-python">import networkx as nx
+
+G = nx.Graph()
+G.add_edge(1,2)
+G.add_edge(2,4)
+G.add_edge(2,3)
+G.add_edge(3,5)
+
+def dfs(G,node,visited={},res=[]):
+    if not visited: # first run, mark all as unvisited
+        for node in G.nodes():
+            visited[node]=False 
+    res.append(node)
+    visited[node] = True
+    for child in nx.neighbors(G, node):
+        if not visited[child]:
+            res, visited = dfs(G,child,visited,res)
+    return res, visited
+
+res,visited = dfs(G,5,{},[])
+</code></pre>
+<h4 id="dfs搜索od之间的路径">DFS搜索OD之间的路径</h4>
+<pre><code class="language-python">&quot;&quot;&quot;
+DFS找源到目的的路径 从S到E的路径. 后进先出&quot;last-in,first out&quot;
+非递归方法 取节点(不出栈)，找到一个未被访问过的子节点，标记为访问，并入栈，重复
+&quot;&quot;&quot;
+import networkx as nx
+
+G = nx.DiGraph()
+G.add_edge('S','A',weight=2)
+G.add_edge('S','B',weight=1)
+G.add_edge('S','C',weight=6)
+
+G.add_edge('A','D',weight=6)
+G.add_edge('A','E',weight=20)
+
+G.add_edge('B','E',weight=20)
+G.add_edge('CA','E',weight=8)
+
+
+def DFS(G,O,D):
+    queue = [O]
+    found=False
+    visited = set([O])
+    record = {}
+    while not found:
+        if not queue:  ## 终止条件：队列为空
+            break
+        
+        cur_node = queue[-1] ## 每次都从队尾取节点，往深了访问  &quot;last-in,first out&quot;
+        print(cur_node)
+        
+        if len(list(G.neighbors(cur_node)))==0: # 当前节点是叶子节点(到头了)
+            queue.pop(-1) # 栈中弹出该节点 （对该节点的DFS已经结束）
+        else:
+            sign_children_all_visited = True
+            for child in G.neighbors(cur_node):
+                if not child in visited: # 发现未被访问过的子节点
+                    sign_children_all_visited = False
+                    break
+            if not sign_children_all_visited:
+                visited.add(child) # 添加为已访问
+                record[child] = cur_node
+                queue.append(child)  # 入栈
+            else: # 所有子节点都被访问过
+                queue.pop(-1)
+        ###### 设置访问到目的节点D就终止 ######
+        if child==D:
+            found=True
+            
+    ### 构造路径
+    if not D in record:
+        print('not found target node')
+        return -1
+    path = [] # 组装路径
+    while D in record:
+        path.insert(0,(record[D],D))
+        D = record[D]
+    
+    return path
+
+print(DFS(G, 'S', 'E'))
 </code></pre>
 
             </div>
