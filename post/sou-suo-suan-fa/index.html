@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://YI-Pengfei.github.io/favicon.ico?v=1582593903797">
+<link rel="shortcut icon" href="https://YI-Pengfei.github.io/favicon.ico?v=1582602119902">
 <link rel="stylesheet" href="https://YI-Pengfei.github.io/styles/main.css">
 
 
@@ -24,7 +24,9 @@
 
 
 
-    <meta name="description" content="BFS
+    <meta name="description" content="
+
+BFS
 
 BFS基本代码：
 import networkx as nx
@@ -35,7 +37,7 @@ G.add_edge(2,4)
 G.add_edge(2,3)
 G.add_edge(3,5)
 
-def..." />
+d..." />
     <meta name="keywords" content="" />
   </head>
   <body>
@@ -45,7 +47,7 @@ def..." />
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://YI-Pengfei.github.io">
-        <img src="https://YI-Pengfei.github.io/images/avatar.png?v=1582593903797" class="site-logo">
+        <img src="https://YI-Pengfei.github.io/images/avatar.png?v=1582602119902" class="site-logo">
         <h1 class="site-title">飞天小南鲸</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -111,7 +113,9 @@ def..." />
             <div class="post-date">2020-02-16</div>
             
             <div class="post-content" v-pre>
-              <h3 id="bfs">BFS</h3>
+              <p><img src="https://YI-Pengfei.github.io/post-images/1582596932039.png" alt="BFS-按深度层序的" loading="lazy"><br>
+<img src="https://YI-Pengfei.github.io/post-images/1582596960531.png" alt="DFS-不撞南墙不回头的" loading="lazy"></p>
+<h3 id="bfs">BFS</h3>
 <figure data-type="image" tabindex="1"><img src="https://YI-Pengfei.github.io/post-images/1581826896242.gif" alt="BFS示意图" loading="lazy"></figure>
 <h4 id="bfs基本代码">BFS基本代码：</h4>
 <pre><code class="language-python">import networkx as nx
@@ -274,6 +278,63 @@ def DFS(G,O,D):
     return path
 
 print(DFS(G, 'S', 'E'))
+</code></pre>
+<h3 id="dijkstra">Dijkstra</h3>
+<h4 id="dijkstra搜索od之间的路径">Dijkstra搜索OD之间的路径:</h4>
+<figure data-type="image" tabindex="3"><img src="https://YI-Pengfei.github.io/post-images/1582596978367.png" alt="UCS-一致代价搜索-按花费的" loading="lazy"></figure>
+<pre><code class="language-python"># -*- coding: utf-8 -*-
+&quot;&quot;&quot;
+Dijkstra找源到目的地的最短路径 UCS一致代价搜索 
+一致代价搜索总是扩展路径消耗最小的节点N。N点的路径消耗等于前一节点N-1的路径消耗加上N-1到N节点的路径消耗。
+通过将 更新的路径 入堆，确保每次取出来的都是最小的路径
+&quot;&quot;&quot;
+import networkx as nx
+import heapq # 堆
+
+G = nx.DiGraph()
+G.add_edge('S','A',weight=2)
+G.add_edge('S','B',weight=1)
+G.add_edge('S','C',weight=6)
+
+G.add_edge('A','D',weight=6)
+G.add_edge('A','E',weight=20)
+
+G.add_edge('B','E',weight=20)
+G.add_edge('C','E',weight=8)
+
+
+O='S'
+D='D'
+def Dijkstra(G, O, D):
+    INF=10*10
+    dict_sure = {}  ## 记录各个节点的最短路径长度
+    dict_path = dict((node,[O]) for node in G) ## 记录路径
+    dict_dis = dict((node,INF) for node in G)  ## 记录路径长度（初始化为无穷大）
+    dict_dis[O] = 0
+    
+    heap = []
+    heapq.heappush(heap, (0,O))
+
+    while heap:
+        dis, cur_node=heapq.heappop(heap)  ## 弹出最小的长度
+        if cur_node in dict_sure: # 弹出的节点无效
+            continue
+        dict_sure[cur_node] = dis ## 标记为确定
+        path = dict_path[cur_node]
+        ### 添加，遇到目的节点D则终止
+        if D in dict_sure:
+            break
+        ###
+        for child in G.neighbors(cur_node):
+            dis_new = G[cur_node][child]['weight']+dis
+            if child not in dict_sure and dict_dis[child]&gt;dis_new: # 路径长度变短了
+                heapq.heappush(heap, (dis_new,child)) # 入栈
+                dict_dis[child] = dis_new # 更新信息
+                dict_path[child] = path+[child]
+                
+    path = dict_path[D]
+    path = [(path[i],path[i+1]) for i in range(len(path)-1)]
+    return path, dict_sure[D] # 返回路径，路径长度
 </code></pre>
 
             </div>
