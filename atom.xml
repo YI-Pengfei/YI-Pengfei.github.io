@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://YI-Pengfei.github.io</id>
     <title>飞天小南鲸</title>
-    <updated>2020-02-28T01:19:22.211Z</updated>
+    <updated>2020-03-01T01:16:47.871Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://YI-Pengfei.github.io"/>
     <link rel="self" href="https://YI-Pengfei.github.io/atom.xml"/>
@@ -10,6 +10,35 @@
     <logo>https://YI-Pengfei.github.io/images/avatar.png</logo>
     <icon>https://YI-Pengfei.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 飞天小南鲸</rights>
+    <entry>
+        <title type="html"><![CDATA[智能优化算法]]></title>
+        <id>https://YI-Pengfei.github.io/post/zhi-neng-you-hua-suan-fa/</id>
+        <link href="https://YI-Pengfei.github.io/post/zhi-neng-you-hua-suan-fa/">
+        </link>
+        <updated>2020-03-01T01:11:22.000Z</updated>
+        <content type="html"><![CDATA[<p><a href="https://blog.csdn.net/Frank_LJiang/article/details/90949775">https://blog.csdn.net/Frank_LJiang/article/details/90949775</a><br>
+<a href="https://blog.csdn.net/Sinde1992/article/details/50321225">https://blog.csdn.net/Sinde1992/article/details/50321225</a></p>
+<h3 id="进化类算法">进化类算法：</h3>
+<ul>
+<li>遗传算法、差分进化算法</li>
+<li>免疫算法</li>
+</ul>
+<h3 id="群智能算法">群智能算法</h3>
+<ul>
+<li>蚁群算法  1992年</li>
+<li>粒子群优化算法  1995年</li>
+</ul>
+<h3 id="模拟退火算法">模拟退火算法</h3>
+<h3 id="禁忌搜索算法">禁忌搜索算法</h3>
+<h3 id="神经网络算法">神经网络算法</h3>
+<p>为了找出地球上最高的山，一群兔子开始想办法</p>
+<ol>
+<li>兔子朝着比现在高的地方跳去。他们找到了不远处的最高山峰。但是这座山不一定是珠穆朗玛峰。这就是<strong>局部搜索</strong>，它不能保证局部最优值就是全局最优值。</li>
+<li>兔子喝醉了。他随机地跳了很长时间。这期间，它可能走向高处，也可能踏入平地。但是，他渐渐清醒了并朝最高方向跳去。这就是<strong>模拟退火</strong>。</li>
+<li>兔子们吃了失忆药片，并被发射到太空，然后随机落到了地球上的某些地方。他们不知道自己的使命是什么。但是，如果你过几年就杀死一部分海拔低的兔子，多产的兔子们自己就会找到珠穆朗玛峰。这就是<strong>遗传算法</strong>。</li>
+</ol>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Python画图 三维]]></title>
         <id>https://YI-Pengfei.github.io/post/python-hua-tu-san-wei/</id>
@@ -992,88 +1021,6 @@ openstreetmap数据可以在网站<a href="https://download.geofabrik.de/">https
 url = 'http://localhost/nominatim'
 g = geocoder.google('北京市北京站', url=url)
 g.json
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[搭建模块化神经网络的八股Tensorflow]]></title>
-        <id>https://YI-Pengfei.github.io/post/da-jian-mo-kuai-hua-shen-jing-wang-luo-de-ba-gu-tensorflow/</id>
-        <link href="https://YI-Pengfei.github.io/post/da-jian-mo-kuai-hua-shen-jing-wang-luo-de-ba-gu-tensorflow/">
-        </link>
-        <updated>2020-02-13T04:08:53.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="1-前向传播就是搭建网络设计网络结构forwardpy">1. 前向传播就是搭建网络，设计网络结构（forward.py）</h3>
-<pre><code class="language-python">def forward(x,regularizer):  #x是输入，regularizer是正则化权重
-    #该函数完成网络结构的设计，给出输入到输出的通路
-    w=
-    b=
-    y=
-    return y
-
-def get_weight(shape,regularizer):  #shape是w的形状，regularizer是正则化权重0.001
-    w = tf.Variable(  ) #括号里写赋初值的方法，
-    tf.add_to_collection('losses', tf.contrib.layers.l2_regularizer(regularizer)(w))
-    if regularizer!=None:  # L2正则化
-        return w
-
-def get_bias(shape):  #shape是b的形状（就是b的个数）
-    b=tf.Variable(  ) #赋初值
-    return b
-</code></pre>
-<h3 id="2-反向传播就是训练网络优化网络参数backwardpy">2. 反向传播就是训练网络，优化网络参数（backward.py）</h3>
-<pre><code class="language-python">def backward():
-    x=tf.placeholder(    )
-    y_=tf.placeholder(    )
-    y=forward.forward(x,REGULARIZER) #用forward复现网络结构
-    global_step = tf.Variable(0,trainable=False) #轮数计数器定义
-    if loss_method=='MSE':  # 损失函数为均方误差
-        loss = tf.reduce_mean(tf.square(y-y_))
-    elif loss_method=='CE':  # 损失函数为交叉熵
-        ce = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=y,
-                                                            labels=tf.argmax(y_,1))
-        loss = tf.reduce_mean(ce)
-    # 加入正则化
-    loss = loss + tf.add_n(tf.get_collection('losses'))
-
-    ##指数衰减学习率 ##
-    learning_rate = tf.train.exponential_decay(
-        LEARNING_RATE_BASE,
-        global_step,
-        数据集总样本数/BATCH_SIZE,
-        LEARNING_RATE_DECAY,
-        staircase=True)
-
-    train_step=tf.train.GradientDescentOptimizer(learing_rate).minimize(loss,global_step=global_step) #训练过程
-
-    ##滑动平均##
-    ema = tf.train.ExponentialMovingAverage(MOVING_AVERAGE_DECAY,global_step)     #global_step与指数衰减学习率中的公用一个
-    ema_op = ema.apply(tf.trainable_variable())
-    with tf.control_dependencies([train_step,ema_op]):
-        train_op = tf.no_op(name='train')
-
-    ### 实例化可还原滑动平均值的saver
-#    ema = tf.train.ExponentialMovingAverage(滑动平均基数)
-    ema_restore = ema.variables_to_restore()
-    saver = tf.train.Saver(ema_restore)
-
-    with tf.Session() as sess:
-        init_op = tf.global_variables_initializer()
-        sess.run(init_op)
-        ## 断点续训
-        ckpt = tf.train.get_checkpoint_state(SAVER_PATH)
-        if ckpt and ckpt.model_checkpoint_path:
-            saver.restore(sess, ckpt.model_checkpoint_path)
-
-        for i in range(STEPS) # 迭代轮数
-            sess.run(train_step,feed_dict = {x:    ,y_:    })  #执行训练过程
-            if i%轮数 ==0:  #每隔一定轮数，打印信息
-                saver.save(sess, os.path.join(SAVER_PATH,str(i)),
-                           global_step=global_step)
-                loss_v = sess.run(loss, feed_dict={x:xs, y_:ys})
-                print('After %d steps, loss is: %f'%(i, loss_v))
-</code></pre>
-<h3 id="main函数">main函数</h3>
-<pre><code class="language-python">if __name__=='__main__':
-    backward()
 </code></pre>
 ]]></content>
     </entry>
