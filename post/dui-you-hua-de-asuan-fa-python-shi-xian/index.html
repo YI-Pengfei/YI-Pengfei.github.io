@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>堆优化的A*算法-Python实现 | 飞天小南鲸</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://YI-Pengfei.github.io/favicon.ico?v=1585277159119">
+<link rel="stylesheet" href="https://YI-Pengfei.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="堆优化的A*算法-Python实现
+
+笔者CSDN博客地址
+原理参考博客地址
+代码借鉴地址
+
+A*算法解决二维网格地图中的寻路问题
+
+输入：图片（白色区域代表可行，深色区域代表不行可行）
+输出：路径（在图中绘制）
+
+&quot;&quot;..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://YI-Pengfei.github.io">
+        <img src="https://YI-Pengfei.github.io/images/avatar.png?v=1585277159119" class="site-logo">
+        <h1 class="site-title">飞天小南鲸</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      记得戴口罩
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://YI-Pengfei.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">堆优化的A*算法-Python实现</h2>
+            <div class="post-date">2020-03-27</div>
+            
+            <div class="post-content" v-pre>
+              <h3 id="堆优化的a算法-python实现">堆优化的A*算法-Python实现</h3>
+<ul>
+<li><a href="https://blog.csdn.net/FengKuangXiaoZuo/article/details/105135005">笔者CSDN博客地址</a></li>
+<li><a href="https://blog.csdn.net/weixin_44489823/article/details/89382502">原理参考博客地址</a></li>
+<li><a href="https://blog.csdn.net/gzlaiyonghao/article/details/1329956">代码借鉴地址</a></li>
+</ul>
+<p>A*算法解决二维网格地图中的寻路问题</p>
+<ul>
+<li>输入：图片（白色区域代表可行，深色区域代表不行可行）</li>
+<li>输出：路径（在图中绘制）</li>
+</ul>
+<pre><code class="language-python">&quot;&quot;&quot; 方格地图中的A*算法 (openList进行了堆优化)
+A* 算法：  F = G+H
+F: 总移动代价
+G: 起点到当前点的移动代价  直:1, 斜:1.4
+H: 当前点到终点的预估代价  曼哈顿距离
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1.把起点加入 openList中
+2.While True:
+    a.遍历openList，查找F值最小的节点，作为current
+    b.current是终点:
+        ========结束========
+    c.从openList中弹出，放入closeList中
+    d.对八个方位的格点:
+        if 越界 or 是障碍物 or 在closeList中:
+            continue
+        if 不在openList中：
+            设置父节点,F,G,H
+            加入openList中
+        else:
+            if 这条路径更好:
+                设置父节点,F,G
+                更新openList中的对应节点
+3.生成路径path
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+堆优化:
+    openList：作为最小堆，按F值排序存储坐标 （不更新只增加）
+    openDict：坐标:点详细信息 （既更新又增加）
+    get_minfNode() 从openList中弹出坐标，去openDict中取点 （但由于不更新只增加，坐标可能冗余）
+    in_openList() 判断坐标是否在openDict中即可 
+
+&quot;&quot;&quot;
+import math
+from PIL import Image,ImageDraw 
+import numpy as np
+import heapq # 堆
+
+STAT_OBSTACLE='#'
+STAT_NORMAL='.'
+
+def manhattan(x1,y1, x2,y2):
+    &quot;&quot;&quot;两个Point的曼哈顿距离&quot;&quot;&quot;
+    h = abs(x1-x2)+abs(y1-y2)
+    return h
+
+class Node():
+    &quot;&quot;&quot;
+    开放列表和关闭列表的元素类型，parent用来在成功的时候回溯路径
+    &quot;&quot;&quot;
+    def __init__(self, x, y,parent=None, g=0, h=0):
+        self.parent = parent
+        self.x = x
+        self.y = y
+        self.g = g
+        self.h = h
+        self.update()
+    
+    def update(self):
+        self.f = self.g+self.h
+
+
+class A_Star:
+    &quot;&quot;&quot; x是行索引，y是列索引
+    &quot;&quot;&quot;
+    def __init__(self, test_map, start=None, end=None):
+        &quot;&quot;&quot;地图，起点，终点&quot;&quot;&quot;
+        self.map = test_map
+        self.cols = len(test_map[0])
+        self.rows = len(test_map)
+        self.s_x, self.s_y = start if start else [0,0]
+        self.e_x, self.e_y = end if end else [self.rows-1,self.cols-1]
+        self.closeList = set()
+        self.path = []
+        self.openList = []  # 堆，只添加，和弹出最小值点，
+        self.openDict = dict() # openList中的 坐标:详细信息 --&gt;不冗余的
+        
+    
+    def find_path(self):
+        &quot;&quot;&quot;A*算法寻路主程序&quot;&quot;&quot;
+        p = Node(self.s_x, self.s_y, 
+                 h=manhattan(self.s_x,self.s_y, self.e_x,self.e_y)) # 构建开始节点
+        heapq.heappush(self.openList, (p.f,(p.x,p.y)))
+        
+        self.openDict[(p.x,p.y)] = p  # 加进dict目录
+        while True:
+            current = self.get_minfNode()
+            if current.x==self.e_x and current.y==self.e_y:
+                print('find path')
+                self.make_path(current)
+                break
+            
+            self.closeList.add((current.x,current.y))  ## 加入closeList
+            del self.openDict[(current.x,current.y)]
+            self.extend_surrounds(current) # 会更新close list
+
+    def make_path(self,p):
+        &quot;&quot;&quot;从结束点回溯到开始点，开始点的parent==None&quot;&quot;&quot;
+        while p:
+            self.path.append((p.x, p.y))
+            p = p.parent
+    
+    def extend_surrounds(self, node):
+        &quot;&quot;&quot; 将当前点周围可走的点加到openList中，
+            其中 不在openList中的点 设置parent、F,G,H 加进去，
+                 在openList中的点  更新parent、F,G,H
+        &quot;&quot;&quot;
+        motion_direction = [[1, 0], [0,  1], [-1, 0], [0,  -1], 
+                            [1, 1], [1, -1], [-1, 1], [-1, -1]]  
+        for dx, dy in motion_direction:
+            x,y = node.x+dx, node.y+dy
+            new_node = Node(x,y)
+            # 位置无效，或者是障碍物, 或者已经在closeList中 
+            if not self.is_valid_xy(x,y) or not self.not_obstacle(x,y) or self.in_closeList(new_node): 
+                continue
+            if abs(dx)+abs(dy)==2:  ## 斜向
+                h_x,h_y = node.x+dx,node.y # 水平向
+                v_x,v_y = node.x,node.y+dy # 垂直向
+                if not self.is_valid_xy(h_x,h_y) or not self.not_obstacle(h_x,h_y) or self.in_closeList(Node(h_x,h_y)): 
+                    continue
+                if not self.is_valid_xy(v_x,v_y) or not self.not_obstacle(v_x,v_y) or self.in_closeList(Node(v_x,v_y)): 
+                    continue
+            #============ ** 关键 **             ========================
+            #============ 不在openList中，加进去； ========================
+            #============ 在openList中，更新      ========================
+            #============对于openList和openDict来说，操作都一样 ===========
+            new_g = node.g + self.cal_deltaG(node.x,node.y, x,y)
+            sign=False # 是否执行操作的标志 
+            if not self.in_openList(new_node): # 不在openList中
+                # 加进来，设置 父节点, F, G, H
+                new_node.h = self.cal_H(new_node)
+                sign=True
+            elif self.openDict[(new_node.x,new_node.y)].g &gt; new_g: # 已在openList中，但现在的路径更好
+                sign=True
+            if sign:
+                new_node.parent = node
+                new_node.g = new_g
+                new_node.f = self.cal_F(new_node)
+                self.openDict[(new_node.x,new_node.y)]=new_node # 更新dict目录
+                heapq.heappush(self.openList, (new_node.f,(new_node.x,new_node.y)))
+        
+    def get_minfNode(self):
+        &quot;&quot;&quot;从openList中取F=G+H值最小的 (堆-O(1))&quot;&quot;&quot;
+        while True:
+            f, best_xy=heapq.heappop(self.openList)
+            if best_xy in self.openDict:
+                return self.openDict[best_xy]
+
+    def in_closeList(self, node):
+        &quot;&quot;&quot;判断是否在closeList中 (集合-O(1)) &quot;&quot;&quot;
+        return True if (node.x,node.y) in self.closeList else False
+     
+    def in_openList(self, node):
+        &quot;&quot;&quot;判断是否在openList中 (字典-O(1))&quot;&quot;&quot;
+        if not (node.x,node.y) in self.openDict:
+            return False
+        else:
+            return True
+
+    def is_valid_xy(self, x,y):
+        if x &lt; 0 or x &gt;= self.rows or y &lt; 0 or y &gt;= self.cols:
+            return False
+        return True
+        
+    def not_obstacle(self,x,y):
+        return self.map[x][y] != STAT_OBSTACLE
+    
+    def cal_deltaG(self,x1,y1,x2,y2):
+        &quot;&quot;&quot; 计算两点之间行走的代价
+            （为简化计算）上下左右直走，代价为1.0，斜走，代价为1.4  G值
+        &quot;&quot;&quot;
+        if x1 == x2 or y1 == y2:
+            return 1.0
+        return 1.4
+    
+    def cal_H(self, node):
+        &quot;&quot;&quot; 曼哈顿距离 估计距离目标点的距离&quot;&quot;&quot;
+        return abs(node.x-self.e_x)+abs(node.y-self.e_y) # 剩余路径的估计长度
+    
+    def cal_F(self, node):
+        &quot;&quot;&quot; 计算F值 F = G+H 
+            A*算法的精髓：已经消耗的代价G，和预估将要消耗的代价H
+        &quot;&quot;&quot;
+        return node.g + node.h
+
+
+def plot(test_map,path):
+	&quot;&quot;&quot;绘制地图和路径
+		test_map:二维数组
+		path:路径坐标数组
+	&quot;&quot;&quot;
+    out = []
+    for x in range(len(test_map)):
+        temp = []
+        for y in range(len(test_map[0])):
+            if test_map[x][y]==STAT_OBSTACLE:
+                temp.append(0)
+            elif test_map[x][y]==STAT_NORMAL:
+                temp.append(255)
+            elif test_map[x][y]=='*':
+                temp.append(127)
+            else:
+                temp.append(255)
+        out.append(temp)
+    for x,y in path:
+        out[x][y] = 127
+    out = np.array(out)
+    img = Image.fromarray(out)
+    img.show()
+
+def path_length(path):
+	&quot;&quot;&quot;计算路径长度&quot;&quot;&quot;
+    l = 0
+    for i in range(len(path)-1):
+        x1,y1 = path[i]
+        x2,y2 = path[i+1]
+        if x1 == x2 or y1 == y2:
+            l+=1.0
+        else:
+            l+=1.4
+    return l
+    
+
+def img_to_map(img_file):
+	&quot;&quot;&quot;地图图片变二维数组&quot;&quot;&quot;
+    test_map = []
+    img = Image.open(img_file)
+    img = img.resize((100,100))  ### resize图片尺寸
+    img_gray = img.convert('L')  # 地图灰度化
+    img_arr = np.array(img_gray)
+    img_binary = np.where(img_arr&lt;127,0,255)
+    for x in range(img_binary.shape[0]):
+        temp_row = []
+        for y in range(img_binary.shape[1]):
+            status = STAT_OBSTACLE if img_binary[x,y]==0 else STAT_NORMAL 
+            temp_row.append(status)
+        test_map.append(temp_row)
+    
+    return test_map
+
+# ===== test case ===============
+test_map=img_to_map('map_2.bmp')
+a = A_Star(test_map)
+a.find_path()
+plot(test_map,a.path)
+print('path length:',path_length(a.path))
+</code></pre>
+<h3 id="测试用例及结果">测试用例及结果</h3>
+<figure data-type="image" tabindex="1"><img src="https://upload-images.jianshu.io/upload_images/9401268-d70c60bf0acbba18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="map1.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://upload-images.jianshu.io/upload_images/9401268-1246c66f2489a55b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="map2.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://upload-images.jianshu.io/upload_images/9401268-2d9eae0a5384902f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="map5.png" loading="lazy"></figure>
+<h3 id="存在的问题">存在的问题</h3>
+<p>不确定是否是最优路径<br>
+原文描述：<br>
+“ If we overestimate this distance, however, it is not guaranteed to give us the shortest path. In such cases, we have what is called an &quot;inadmissible heuristic.&quot;.</p>
+<p>Technically, in this example, the Manhattan method is inadmissible because it slightly overestimates the remaining distance.”<br>
+即如果我们高估了H，则不能保证最短路径。而曼哈顿距离略微高估了。</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://YI-Pengfei.github.io/post/zhi-neng-you-hua-suan-fa/">
+                  <h3 class="post-title">
+                    智能优化算法
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

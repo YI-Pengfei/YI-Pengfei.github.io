@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://YI-Pengfei.github.io</id>
     <title>飞天小南鲸</title>
-    <updated>2020-03-07T00:21:55.620Z</updated>
+    <updated>2020-03-27T02:46:06.119Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://YI-Pengfei.github.io"/>
     <link rel="self" href="https://YI-Pengfei.github.io/atom.xml"/>
@@ -10,6 +10,280 @@
     <logo>https://YI-Pengfei.github.io/images/avatar.png</logo>
     <icon>https://YI-Pengfei.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 飞天小南鲸</rights>
+    <entry>
+        <title type="html"><![CDATA[堆优化的A*算法-Python实现]]></title>
+        <id>https://YI-Pengfei.github.io/post/dui-you-hua-de-asuan-fa-python-shi-xian/</id>
+        <link href="https://YI-Pengfei.github.io/post/dui-you-hua-de-asuan-fa-python-shi-xian/">
+        </link>
+        <updated>2020-03-27T02:45:13.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="堆优化的a算法-python实现">堆优化的A*算法-Python实现</h3>
+<ul>
+<li><a href="https://blog.csdn.net/FengKuangXiaoZuo/article/details/105135005">笔者CSDN博客地址</a></li>
+<li><a href="https://blog.csdn.net/weixin_44489823/article/details/89382502">原理参考博客地址</a></li>
+<li><a href="https://blog.csdn.net/gzlaiyonghao/article/details/1329956">代码借鉴地址</a></li>
+</ul>
+<p>A*算法解决二维网格地图中的寻路问题</p>
+<ul>
+<li>输入：图片（白色区域代表可行，深色区域代表不行可行）</li>
+<li>输出：路径（在图中绘制）</li>
+</ul>
+<pre><code class="language-python">&quot;&quot;&quot; 方格地图中的A*算法 (openList进行了堆优化)
+A* 算法：  F = G+H
+F: 总移动代价
+G: 起点到当前点的移动代价  直:1, 斜:1.4
+H: 当前点到终点的预估代价  曼哈顿距离
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1.把起点加入 openList中
+2.While True:
+    a.遍历openList，查找F值最小的节点，作为current
+    b.current是终点:
+        ========结束========
+    c.从openList中弹出，放入closeList中
+    d.对八个方位的格点:
+        if 越界 or 是障碍物 or 在closeList中:
+            continue
+        if 不在openList中：
+            设置父节点,F,G,H
+            加入openList中
+        else:
+            if 这条路径更好:
+                设置父节点,F,G
+                更新openList中的对应节点
+3.生成路径path
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+堆优化:
+    openList：作为最小堆，按F值排序存储坐标 （不更新只增加）
+    openDict：坐标:点详细信息 （既更新又增加）
+    get_minfNode() 从openList中弹出坐标，去openDict中取点 （但由于不更新只增加，坐标可能冗余）
+    in_openList() 判断坐标是否在openDict中即可 
+
+&quot;&quot;&quot;
+import math
+from PIL import Image,ImageDraw 
+import numpy as np
+import heapq # 堆
+
+STAT_OBSTACLE='#'
+STAT_NORMAL='.'
+
+def manhattan(x1,y1, x2,y2):
+    &quot;&quot;&quot;两个Point的曼哈顿距离&quot;&quot;&quot;
+    h = abs(x1-x2)+abs(y1-y2)
+    return h
+
+class Node():
+    &quot;&quot;&quot;
+    开放列表和关闭列表的元素类型，parent用来在成功的时候回溯路径
+    &quot;&quot;&quot;
+    def __init__(self, x, y,parent=None, g=0, h=0):
+        self.parent = parent
+        self.x = x
+        self.y = y
+        self.g = g
+        self.h = h
+        self.update()
+    
+    def update(self):
+        self.f = self.g+self.h
+
+
+class A_Star:
+    &quot;&quot;&quot; x是行索引，y是列索引
+    &quot;&quot;&quot;
+    def __init__(self, test_map, start=None, end=None):
+        &quot;&quot;&quot;地图，起点，终点&quot;&quot;&quot;
+        self.map = test_map
+        self.cols = len(test_map[0])
+        self.rows = len(test_map)
+        self.s_x, self.s_y = start if start else [0,0]
+        self.e_x, self.e_y = end if end else [self.rows-1,self.cols-1]
+        self.closeList = set()
+        self.path = []
+        self.openList = []  # 堆，只添加，和弹出最小值点，
+        self.openDict = dict() # openList中的 坐标:详细信息 --&gt;不冗余的
+        
+    
+    def find_path(self):
+        &quot;&quot;&quot;A*算法寻路主程序&quot;&quot;&quot;
+        p = Node(self.s_x, self.s_y, 
+                 h=manhattan(self.s_x,self.s_y, self.e_x,self.e_y)) # 构建开始节点
+        heapq.heappush(self.openList, (p.f,(p.x,p.y)))
+        
+        self.openDict[(p.x,p.y)] = p  # 加进dict目录
+        while True:
+            current = self.get_minfNode()
+            if current.x==self.e_x and current.y==self.e_y:
+                print('find path')
+                self.make_path(current)
+                break
+            
+            self.closeList.add((current.x,current.y))  ## 加入closeList
+            del self.openDict[(current.x,current.y)]
+            self.extend_surrounds(current) # 会更新close list
+
+    def make_path(self,p):
+        &quot;&quot;&quot;从结束点回溯到开始点，开始点的parent==None&quot;&quot;&quot;
+        while p:
+            self.path.append((p.x, p.y))
+            p = p.parent
+    
+    def extend_surrounds(self, node):
+        &quot;&quot;&quot; 将当前点周围可走的点加到openList中，
+            其中 不在openList中的点 设置parent、F,G,H 加进去，
+                 在openList中的点  更新parent、F,G,H
+        &quot;&quot;&quot;
+        motion_direction = [[1, 0], [0,  1], [-1, 0], [0,  -1], 
+                            [1, 1], [1, -1], [-1, 1], [-1, -1]]  
+        for dx, dy in motion_direction:
+            x,y = node.x+dx, node.y+dy
+            new_node = Node(x,y)
+            # 位置无效，或者是障碍物, 或者已经在closeList中 
+            if not self.is_valid_xy(x,y) or not self.not_obstacle(x,y) or self.in_closeList(new_node): 
+                continue
+            if abs(dx)+abs(dy)==2:  ## 斜向
+                h_x,h_y = node.x+dx,node.y # 水平向
+                v_x,v_y = node.x,node.y+dy # 垂直向
+                if not self.is_valid_xy(h_x,h_y) or not self.not_obstacle(h_x,h_y) or self.in_closeList(Node(h_x,h_y)): 
+                    continue
+                if not self.is_valid_xy(v_x,v_y) or not self.not_obstacle(v_x,v_y) or self.in_closeList(Node(v_x,v_y)): 
+                    continue
+            #============ ** 关键 **             ========================
+            #============ 不在openList中，加进去； ========================
+            #============ 在openList中，更新      ========================
+            #============对于openList和openDict来说，操作都一样 ===========
+            new_g = node.g + self.cal_deltaG(node.x,node.y, x,y)
+            sign=False # 是否执行操作的标志 
+            if not self.in_openList(new_node): # 不在openList中
+                # 加进来，设置 父节点, F, G, H
+                new_node.h = self.cal_H(new_node)
+                sign=True
+            elif self.openDict[(new_node.x,new_node.y)].g &gt; new_g: # 已在openList中，但现在的路径更好
+                sign=True
+            if sign:
+                new_node.parent = node
+                new_node.g = new_g
+                new_node.f = self.cal_F(new_node)
+                self.openDict[(new_node.x,new_node.y)]=new_node # 更新dict目录
+                heapq.heappush(self.openList, (new_node.f,(new_node.x,new_node.y)))
+        
+    def get_minfNode(self):
+        &quot;&quot;&quot;从openList中取F=G+H值最小的 (堆-O(1))&quot;&quot;&quot;
+        while True:
+            f, best_xy=heapq.heappop(self.openList)
+            if best_xy in self.openDict:
+                return self.openDict[best_xy]
+
+    def in_closeList(self, node):
+        &quot;&quot;&quot;判断是否在closeList中 (集合-O(1)) &quot;&quot;&quot;
+        return True if (node.x,node.y) in self.closeList else False
+     
+    def in_openList(self, node):
+        &quot;&quot;&quot;判断是否在openList中 (字典-O(1))&quot;&quot;&quot;
+        if not (node.x,node.y) in self.openDict:
+            return False
+        else:
+            return True
+
+    def is_valid_xy(self, x,y):
+        if x &lt; 0 or x &gt;= self.rows or y &lt; 0 or y &gt;= self.cols:
+            return False
+        return True
+        
+    def not_obstacle(self,x,y):
+        return self.map[x][y] != STAT_OBSTACLE
+    
+    def cal_deltaG(self,x1,y1,x2,y2):
+        &quot;&quot;&quot; 计算两点之间行走的代价
+            （为简化计算）上下左右直走，代价为1.0，斜走，代价为1.4  G值
+        &quot;&quot;&quot;
+        if x1 == x2 or y1 == y2:
+            return 1.0
+        return 1.4
+    
+    def cal_H(self, node):
+        &quot;&quot;&quot; 曼哈顿距离 估计距离目标点的距离&quot;&quot;&quot;
+        return abs(node.x-self.e_x)+abs(node.y-self.e_y) # 剩余路径的估计长度
+    
+    def cal_F(self, node):
+        &quot;&quot;&quot; 计算F值 F = G+H 
+            A*算法的精髓：已经消耗的代价G，和预估将要消耗的代价H
+        &quot;&quot;&quot;
+        return node.g + node.h
+
+
+def plot(test_map,path):
+	&quot;&quot;&quot;绘制地图和路径
+		test_map:二维数组
+		path:路径坐标数组
+	&quot;&quot;&quot;
+    out = []
+    for x in range(len(test_map)):
+        temp = []
+        for y in range(len(test_map[0])):
+            if test_map[x][y]==STAT_OBSTACLE:
+                temp.append(0)
+            elif test_map[x][y]==STAT_NORMAL:
+                temp.append(255)
+            elif test_map[x][y]=='*':
+                temp.append(127)
+            else:
+                temp.append(255)
+        out.append(temp)
+    for x,y in path:
+        out[x][y] = 127
+    out = np.array(out)
+    img = Image.fromarray(out)
+    img.show()
+
+def path_length(path):
+	&quot;&quot;&quot;计算路径长度&quot;&quot;&quot;
+    l = 0
+    for i in range(len(path)-1):
+        x1,y1 = path[i]
+        x2,y2 = path[i+1]
+        if x1 == x2 or y1 == y2:
+            l+=1.0
+        else:
+            l+=1.4
+    return l
+    
+
+def img_to_map(img_file):
+	&quot;&quot;&quot;地图图片变二维数组&quot;&quot;&quot;
+    test_map = []
+    img = Image.open(img_file)
+    img = img.resize((100,100))  ### resize图片尺寸
+    img_gray = img.convert('L')  # 地图灰度化
+    img_arr = np.array(img_gray)
+    img_binary = np.where(img_arr&lt;127,0,255)
+    for x in range(img_binary.shape[0]):
+        temp_row = []
+        for y in range(img_binary.shape[1]):
+            status = STAT_OBSTACLE if img_binary[x,y]==0 else STAT_NORMAL 
+            temp_row.append(status)
+        test_map.append(temp_row)
+    
+    return test_map
+
+# ===== test case ===============
+test_map=img_to_map('map_2.bmp')
+a = A_Star(test_map)
+a.find_path()
+plot(test_map,a.path)
+print('path length:',path_length(a.path))
+</code></pre>
+<h3 id="测试用例及结果">测试用例及结果</h3>
+<figure data-type="image" tabindex="1"><img src="https://upload-images.jianshu.io/upload_images/9401268-d70c60bf0acbba18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="map1.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://upload-images.jianshu.io/upload_images/9401268-1246c66f2489a55b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="map2.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://upload-images.jianshu.io/upload_images/9401268-2d9eae0a5384902f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="map5.png" loading="lazy"></figure>
+<h3 id="存在的问题">存在的问题</h3>
+<p>不确定是否是最优路径<br>
+原文描述：<br>
+“ If we overestimate this distance, however, it is not guaranteed to give us the shortest path. In such cases, we have what is called an &quot;inadmissible heuristic.&quot;.</p>
+<p>Technically, in this example, the Manhattan method is inadmissible because it slightly overestimates the remaining distance.”<br>
+即如果我们高估了H，则不能保证最短路径。而曼哈顿距离略微高估了。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[智能优化算法]]></title>
         <id>https://YI-Pengfei.github.io/post/zhi-neng-you-hua-suan-fa/</id>
@@ -808,224 +1082,6 @@ y=a^{(1)}W^{(2)}
 <li>平衡网络流</li>
 <li>IP地址分配管理</li>
 </ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[fedora27下的OpenStreetMap离线地理编码服务器的搭建(Nominatim)]]></title>
-        <id>https://YI-Pengfei.github.io/post/fedora27-xia-de-openstreetmap-chi-xian-di-li-bian-ma-fu-wu-qi-de-da-jian-nominatim/</id>
-        <link href="https://YI-Pengfei.github.io/post/fedora27-xia-de-openstreetmap-chi-xian-di-li-bian-ma-fu-wu-qi-de-da-jian-nominatim/">
-        </link>
-        <updated>2020-02-14T00:56:09.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="前言">前言</h1>
-<p>CSDN上有关于ubuntu如何安装Nominatim的博文<a href="https://blog.csdn.net/u013719339/article/details/53908990">ubuntu16.04下的OpenStreetMap离线地理编码服务器的搭建(Nominatim)</a>，但是作者尚未查询到中文的、关于fedora如何安装Nominatim的博文，甚至也未见英文的博文，这是本文写作的目的。</p>
-<p><strong>可以参考的网站：</strong></p>
-<ul>
-<li>Nominatim官方文档<a href="https://nominatim.org/release-docs/develop/appendix/Install-on-Centos-7/">Installation on CentOS 7</a>，CentOS和Fedora还比较像，但是也有不同，最重要的就是fedora装的时候注意指定版本，版本，版本！！<br>
-(fedora与ubuntu的软件目录，配置、启动方式有很大不同，参考ubuntu下的安装反而更容易混淆)<br>
-本文是对于fedora27安装Nominatim的心得步骤，不同的系统、不同的系统版本是有差别的。我的建议是：<mark>注意软件版本，注意相互之间的依赖关系。先通读本文，掌握整个安装思路和重点，切记不顾实际光粘命令行。</mark></li>
-</ul>
-<p><ul class="markdownIt-TOC">
-<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
-<li><a href="#%E4%B8%80-%E6%96%B0%E5%BB%BAfedora%E7%94%A8%E6%88%B7">一、新建Fedora用户</a></li>
-<li><a href="#%E4%BA%8C-%E8%A3%85%E4%BE%9D%E8%B5%96%E8%BD%AF%E4%BB%B6">二、装依赖（软件）</a>
-<ul>
-<li><a href="#1%E4%B8%BB%E8%A6%81%E5%88%86%E4%B8%89%E5%A4%A7%E7%B1%BB">1）主要分三大类：</a></li>
-<li><a href="#2%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4">2）安装命令：</a></li>
-</ul>
-</li>
-<li><a href="#%E4%B8%89-%E9%85%8D%E7%BD%AE%E5%92%8C%E5%90%AF%E5%8A%A8postgresql-10-fedora%E7%B3%BB%E7%BB%9F%E4%B8%8B">三、配置（和启动）postgresql 10 （Fedora系统下）</a>
-<ul>
-<li><a href="#1-%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8F%8A%E5%90%AF%E5%8A%A8">1） 初始化及启动</a></li>
-<li><a href="#2-%E9%85%8D%E7%BD%AEpostgresqlconf%E6%96%87%E4%BB%B6">2） 配置postgresql.conf文件</a></li>
-<li><a href="#3-%E6%B7%BB%E5%8A%A0%E4%B8%A4%E4%B8%AApostgres%E7%94%A8%E6%88%B7">3) 添加两个postgres用户</a></li>
-</ul>
-</li>
-<li><a href="#%E5%9B%9B-%E8%A3%85nominatim">四、装Nominatim</a>
-<ul>
-<li><a href="#1%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9%E5%B9%B6%E6%94%B9%E6%9D%83%E9%99%90">1）建文件夹并改权限</a></li>
-<li><a href="#2-%E4%B8%8B%E8%BD%BD-%E7%BC%96%E8%AF%91-%E5%AE%89%E8%A3%85nominatim">2) 下载、编译、安装Nominatim</a></li>
-</ul>
-</li>
-<li><a href="#%E4%BA%94-%E9%85%8D%E7%BD%AEapache-webserver">五、配置Apache Webserver</a></li>
-<li><a href="#%E5%85%AD-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE">六、导入数据</a></li>
-<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
-<li><a href="#%E9%99%84-%E6%9C%80%E5%90%8E%E7%9A%84%E6%95%88%E6%9E%9C">附、最后的效果</a></li>
-</ul>
-(目录)</p>
-<h1 id="一-新建fedora用户">一、新建Fedora用户</h1>
-<p>Nominatim很乱，先新建个用户，不然各种<strong>权限问题</strong>：</p>
-<ul>
-<li>图形化操作：设置--&gt;详情--&gt;用户--&gt;解锁--&gt;新建(账户类型选<strong>管理员</strong>，这样nominatim就跟你原来的账户权限一样)；</li>
-<li>然后注销当前用户，切换到nominatim用户；</li>
-<li><mark>以下所有操作都在nominatim这个账户下做的。</mark><br>
-<img src="https://img-blog.csdn.net/20181019162710923?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZlbmdLdWFuZ1hpYW9adW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="图形化操作：设置--&gt;详情--&gt;用户--&gt;解锁--&gt;新建--&gt;管理员" height="400" loading="lazy"></li>
-</ul>
-<h1 id="二-装依赖软件">二、装依赖（软件）</h1>
-<p><mark>这部分最重要！！！是后边成功配置的前提，不要光粘到命令行，先看一眼我说的是什么！！！！</mark><br>
-官方<a href="https://blog.csdn.net/u013719339/article/details/53908990">CentOS的安装教程</a>没指定软件的版本，粘贴到fedora27中后，postgresql被不同的依赖项分别安装了两个版本（一个9.x，一个10），后边各种问题，崩溃。。所以重要的是<mark>版本，版本，版本！！！</mark></p>
-<h2 id="1主要分三大类">1）主要分三大类：</h2>
-<ol>
-<li>postgresql类（分9.x版本的和10版本的，不同版本配置文件的位置不同，本文装的是10版本）</li>
-<li>postgis类 （它的版本应该与postgresql的对应，如postgis25_10的意思就是postgis是2.5版本，支持postgresql 10，，，但实际证明postgis2.5版本不被Nominatim支持，本文最后选的postgis23_10）</li>
-<li>php (没什么问题，不用指定版本，好像是7.1版本)</li>
-</ol>
-<h2 id="2安装命令">2）安装命令：</h2>
-<ol>
-<li>postgresql10相关：</li>
-</ol>
-<pre><code>sudo dnf install postgresql10 postgresql10-libs postgresql10-server postgresql10-contrib postgresql10-devel
-</code></pre>
-<ol start="2">
-<li>postgis相关</li>
-</ol>
-<pre><code>sudo dnf install postgis23_10 postgis23_10-utils
-</code></pre>
-<ol start="3">
-<li>php相关</li>
-</ol>
-<pre><code>sudo dnf install php php-pgsql php-pear php-pear-DB php-intl
-</code></pre>
-<ol start="4">
-<li>其他</li>
-</ol>
-<pre><code>sudo dnf install libpqxx-devel proj-epsg bzip2-devel proj-devel libxml2-devel boost-devel \
-                 wget git cmake make gcc gcc-c++ libtool policycoreutils-python \
-                 expat-devel zlib-devel
-</code></pre>
-<p><strong>切记：不要好几个教程对着看，然后重复粘贴命令，软件都装重了！！然后各种问题，，，上边列出来的软件如果都装好了，应该就够了，</strong>（我之前一直处理openstreetmap的.pbf数据，所以与.pbf数据相关的库早就装好了，读者要是知道openstreetmap但还不知道.pbf数据，那你得下点功夫了，本文就不扯怎么装.pbf相关的库了）</p>
-<h1 id="三-配置和启动postgresql-10-fedora系统下">三、配置（和启动）postgresql 10 （Fedora系统下）</h1>
-<p>千万<mark>不要参考</mark>：1. ubuntu中postgresql的配置和启动方式； 2. postgresql 9的配置和启动方式。！！！！不然各种乱（因为不同系统下文件路径不一样，而且9和10版本的文件路径也不一样）</p>
-<h2 id="1-初始化及启动">1） 初始化及启动</h2>
-<pre><code>sudo /usr/pgsql-10/bin/postgresql-10-setup initdb
-</code></pre>
-<pre><code>sudo systemctl enable postgresql-10.service
-</code></pre>
-<pre><code>sudo systemctl start postgresql-10.service
-</code></pre>
-<h2 id="2-配置postgresqlconf文件">2） 配置postgresql.conf文件</h2>
-<p>启动管理员权限下的文本编辑器，编辑postgresql.conf文件</p>
-<pre><code>sudo gedit /var/lib/pgsql/10/data/postgresql.conf
-</code></pre>
-<p>修改如下内容，括号中的值代表要修改成的值</p>
-<pre><code>shared_buffers (2GB)
-maintenance_work_mem (10GB)
-work_mem (50MB)
-effective_cache_size (24GB)
-synchronous_commit = off
-checkpoint_timeout = 10min
-checkpoint_completion_target = 0.9
-</code></pre>
-<p>改完之后，重启服务:</p>
-<pre><code>sudo systemctl restart postgresql-10.service
-</code></pre>
-<h2 id="3-添加两个postgres用户">3) 添加两个postgres用户</h2>
-<p>老实说我也不明白为什么要添加这两个用户，但是注意：<br>
-<em>这是postgres的用户，不是fedora操作系统的用户！！！！ 意思好像是数据库中的用户？？？</em><br>
-（我刚开始卡了很长很长时间，到后来反正也还没明白，苦笑）</p>
-<ul>
-<li>先用命令进入postgres用户 （很绕，我也讲不太清楚这块，好像是因为安装postgresql后自动出来的一个postgres用户，但它只能做特定的数据库相关的事）</li>
-</ul>
-<pre><code>su - postgres
-</code></pre>
-<p>(这块新读者可能容易出问题，密码输入的是nominatim用户的密码)</p>
-<ul>
-<li>运行如下命令，新建两个postgres用户：</li>
-</ul>
-<pre><code>createuser -s nominatim
-createuser apache
-</code></pre>
-<ul>
-<li>然后退回nominatim账户</li>
-</ul>
-<pre><code>exit
-</code></pre>
-<p>如图（我的都创建过了，所以提示失败）<br>
-<img src="https://img-blog.csdn.net/20181019172207974?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZlbmdLdWFuZ1hpYW9adW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述" height="250" loading="lazy"></p>
-<h1 id="四-装nominatim">四、装Nominatim</h1>
-<p>本文将nominatim安装在<code>/opt/nominatim</code>文件夹下（注意官方<a href="https://blog.csdn.net/u013719339/article/details/53908990">CentOS的安装教程</a>是在<code>/srv/nominatim</code>，并将它定义成了<code>$USERHOME</code>，本文少定义，省的混。。读者就跟我装一个路径吧，过程理清了之后想换也方便，，不然后边的配置讲不清楚）</p>
-<h2 id="1建文件夹并改权限">1）建文件夹并改权限</h2>
-<pre><code>sudo mkdir /opt/nominatim
-</code></pre>
-<pre><code>sudo chmod 777 -R /opt/nominatim
-</code></pre>
-<h2 id="2-下载-编译-安装nominatim">2) 下载、编译、安装Nominatim</h2>
-<ul>
-<li><a href="https://github.com/openstreetmap/Nominatim">官网github</a>上下载(截止到我下载的时候是3.20版本)，并移动到<code>/opt/nominatim</code>目录下，解压缩......之后应该是我这样的（还没有<code>build</code>文件夹）<br>
-<img src="https://img-blog.csdn.net/2018101917375673?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZlbmdLdWFuZ1hpYW9adW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述" height="150" loading="lazy"></li>
-<li>先进入<code>Nominatim</code>文件夹里，运行命令<code>wget -O data/country_osm_grid.sql.gz https://www.nominatim.org/data/country_grid.sql.gz</code>下载国家网格(country grid)数据<br>
-<img src="https://img-blog.csdn.net/20181019174142809?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZlbmdLdWFuZ1hpYW9adW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述" loading="lazy"></li>
-<li>退回来，新建<code>build</code>文件夹，进入<code>build</code>文件夹，cmake，然后make</li>
-</ul>
-<pre><code>cd /opt/nominatim
-mkdir build
-cd build
-cmake /opt/nominatim/Nominatim
-make
-</code></pre>
-<p>(<em>在这个目录下进行cmake和make</em>)<br>
-<img src="https://img-blog.csdn.net/20181019174830163?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZlbmdLdWFuZ1hpYW9adW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述" loading="lazy"></p>
-<ul>
-<li>还在<code>build</code>文件夹内，配置<code>settings/local.php</code>文件(即<code>/opt/nominatim/build/settings/local.php</code>)，内容如下(没有就新建)：</li>
-</ul>
-<pre><code>&lt;?php
- // Paths
- @define('CONST_Postgresql_Version', '10.5');  //这个是参照ubuntu安装的那篇的配置文件添加的，好像没有也行
- @define('CONST_Postgis_Version', '2.3');  // 好像没有也行
- //web set
- @define('CONST_Database_Web_User', 'apache');
- @define('CONST_Website_BaseURL', '/nominatim/');
- @define('CONST_Osm2pgsql_Flatnode_File', '/opt/nominatim/build/flatnode.file'); // 这是官方推荐添加的（非必须）
-</code></pre>
-<p><mark>如果cmake或make不成功，多半是因为前边的postgresql和postgis没装好（只是没装好，还不涉及配置的问题）。。。没更好的办法，按提示去网上查根本特么没有什么答案。。把装了的软件重新卸了，重装，重配置，等你到了不用看教程也大致明白哪里重要的时候，就能装好了</mark></p>
-<h1 id="五-配置apache-webserver">五、配置Apache Webserver</h1>
-<ul>
-<li>配置文件为 <code>/etc/httpd/conf.d/nominatim.conf</code>（没有就新建），同样gedit打开，编辑内容如下：</li>
-</ul>
-<pre><code>&lt;Directory &quot;/opt/nominatim/build/website&quot;&gt;
-  Options FollowSymLinks MultiViews
-  AddType text/html   .php
-  DirectoryIndex search.php
-  Require all granted
-&lt;/Directory&gt;
-Alias /nominatim /opt/nominatim/build/website
-</code></pre>
-<p><em>这里<code>/opt/nominatim</code>就对应上一节Nominatim的位置。</em></p>
-<ul>
-<li>重新载入apache：</li>
-</ul>
-<pre><code>sudo systemctl enable httpd
-sudo systemctl restart httpd
-</code></pre>
-<p>这时候你打开网址<a href="http://localhost/nominatim">http://localhost/nominatim</a>应该就可以看到一些内容了（文本内容，提示严重错误，没有nominatim数据库之类的，因为还没有导入数据嘛）</p>
-<h1 id="六-导入数据">六、导入数据</h1>
-<ul>
-<li>（可选）下载额外的wiki数据，进入到<code>/opt/nominatim/Nominatim/data</code>目录下，运行命令：</li>
-</ul>
-<pre><code>wget https://www.nominatim.org/data/wikipedia_article.sql.bin
-wget https://www.nominatim.org/data/wikipedia_redirect.sql.bin
-</code></pre>
-<ul>
-<li>导入数据：<br>
-openstreetmap数据可以在网站<a href="https://download.geofabrik.de/">https://download.geofabrik.de/</a>下载（读者应该知道吧）。导入命令（还在<code>/opt/nominatim/build</code>目录下呢）：</li>
-</ul>
-<pre><code>./utils/setup.php --osm-file &lt;data file&gt; --all [--osm2pgsql-cache 28000] 2&gt;&amp;1 | tee setup.log
-</code></pre>
-<p>里边<code>&lt;data file&gt;</code>替换为你的.pbf文件，<code>--osm2pgsql-cache 28000</code>是可选参数，一个实际的命令如图：<br>
-<img src="https://img-blog.csdn.net/20181019181616197?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZlbmdLdWFuZ1hpYW9adW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述" loading="lazy"><br>
-要试一试有没有问题的话先选一个小点儿的数据，如北京的。同样地，<mark>如果导入不成功多半是因为前边的postgresql和postgis没装好</mark>，例如，我刚开始装的postgis25_10(2.5版本)，不被支持，提示: <strong>found postgis version 0</strong>(应该就是没找到的意思)，后来换了低版本的postgis23_10，导入成功了。 如果失败，再次导入之前要先删除数据库，命令：</p>
-<pre><code>sudo -u postgresdropdb nominatim
-</code></pre>
-<h1 id="总结">总结</h1>
-<p>本文给出的是Fedora27下安装Nominatim的基本方法，postgresql的版本为10，postgis的版本为2.3，php版本为7.1，Nominatim的版本为3.2。并给出了配置postgresql、apache、nominatim的方法。需要特别注意的是：安装软件过程中要指定软件版本，注意区分不同操作系统、不同软件版本的安装、配置上的差异。限于作者水平和应用场景，关于局域网的配置、更多额外辅助数据的添加、保持数据实时更新的方法未做讨论，这部分内容可以参考<a href="https://nominatim.org/release-docs/develop/">Nominatim官方文档</a>以及<a href="https://blog.csdn.net/u013719339/article/details/53908990">ubuntu16.04下的OpenStreetMap离线地理编码服务器的搭建(Nominatim)</a>。</p>
-<h1 id="附-最后的效果">附、最后的效果</h1>
-<p><img src="https://img-blog.csdn.net/20181019182036905?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZlbmdLdWFuZ1hpYW9adW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述" loading="lazy"><br>
-不联网也会有结果，但是可能网格图片显示有问题。。<br>
-本人的是为了用python中的<code>geocoder</code>库离线使用地理编码功能，python代码如下：</p>
-<pre><code>import geocoder 
-url = 'http://localhost/nominatim'
-g = geocoder.google('北京市北京站', url=url)
-g.json
-</code></pre>
 ]]></content>
     </entry>
 </feed>
