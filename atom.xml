@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://YI-Pengfei.github.io</id>
     <title>飞天小南鲸</title>
-    <updated>2020-03-28T01:11:04.577Z</updated>
+    <updated>2020-03-28T23:59:17.286Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://YI-Pengfei.github.io"/>
     <link rel="self" href="https://YI-Pengfei.github.io/atom.xml"/>
@@ -95,8 +95,8 @@ class A_Star:
         self.map = test_map
         self.cols = len(test_map[0])
         self.rows = len(test_map)
-        self.s_x, self.s_y = start if start else [0,0]
-        self.e_x, self.e_y = end if end else [self.rows-1,self.cols-1]
+        self.startXY = tuple(start) if start else (0,0)
+        self.endXY = tuple(end) if end else (self.rows-1, self.cols-1)
         self.closeList = set()
         self.path = []
         self.openList = []  # 堆，只添加，和弹出最小值点，
@@ -105,17 +105,17 @@ class A_Star:
     
     def find_path(self):
         &quot;&quot;&quot;A*算法寻路主程序&quot;&quot;&quot;
-        p = Node(self.s_x, self.s_y, 
-                 h=manhattan(self.s_x,self.s_y, self.e_x,self.e_y)) # 构建开始节点
+        p = Node(self.startXY[0], self.startXY[1], 
+                 h=manhattan(self.startXY[0],self.startXY[1], self.endXY[0],self.endXY[1])) # 构建开始节点
         heapq.heappush(self.openList, (p.f,(p.x,p.y)))
         
         self.openDict[(p.x,p.y)] = p  # 加进dict目录
         while True:
             current = self.get_minfNode()
-            if current.x==self.e_x and current.y==self.e_y:
-                print('find path')
+            if (current.x,current.y)==self.endXY:
+                print('found path successfully..')
                 self.make_path(current)
-                break
+                return 
             
             self.closeList.add((current.x,current.y))  ## 加入closeList
             del self.openDict[(current.x,current.y)]
@@ -202,7 +202,7 @@ class A_Star:
     
     def cal_H(self, node):
         &quot;&quot;&quot; 曼哈顿距离 估计距离目标点的距离&quot;&quot;&quot;
-        return abs(node.x-self.e_x)+abs(node.y-self.e_y) # 剩余路径的估计长度
+        return abs(node.x-self.endXY[0])+abs(node.y-self.endXY[1]) # 剩余路径的估计长度
     
     def cal_F(self, node):
         &quot;&quot;&quot; 计算F值 F = G+H 
@@ -210,12 +210,11 @@ class A_Star:
         &quot;&quot;&quot;
         return node.g + node.h
 
-
 def plot(test_map,path):
-	&quot;&quot;&quot;绘制地图和路径
-		test_map:二维数组
-		path:路径坐标数组
-	&quot;&quot;&quot;
+    &quot;&quot;&quot;绘制地图和路径
+        test_map:二维数组
+        path:路径坐标数组
+    &quot;&quot;&quot;
     out = []
     for x in range(len(test_map)):
         temp = []
@@ -236,7 +235,7 @@ def plot(test_map,path):
     img.show()
 
 def path_length(path):
-	&quot;&quot;&quot;计算路径长度&quot;&quot;&quot;
+    &quot;&quot;&quot;计算路径长度&quot;&quot;&quot;
     l = 0
     for i in range(len(path)-1):
         x1,y1 = path[i]
@@ -249,7 +248,7 @@ def path_length(path):
     
 
 def img_to_map(img_file):
-	&quot;&quot;&quot;地图图片变二维数组&quot;&quot;&quot;
+    &quot;&quot;&quot;地图图片变二维数组&quot;&quot;&quot;
     test_map = []
     img = Image.open(img_file)
     img = img.resize((100,100))  ### resize图片尺寸
@@ -266,7 +265,7 @@ def img_to_map(img_file):
     return test_map
 
 # ===== test case ===============
-test_map=img_to_map('map_2.bmp')
+test_map=img_to_map('map_1.bmp')
 a = A_Star(test_map)
 a.find_path()
 plot(test_map,a.path)
