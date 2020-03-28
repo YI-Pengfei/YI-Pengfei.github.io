@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://YI-Pengfei.github.io</id>
     <title>飞天小南鲸</title>
-    <updated>2020-03-28T01:06:49.524Z</updated>
+    <updated>2020-03-28T01:07:32.262Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://YI-Pengfei.github.io"/>
     <link rel="self" href="https://YI-Pengfei.github.io/atom.xml"/>
@@ -769,7 +769,7 @@ if __name__=='__main__':
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[搜索算法]]></title>
+        <title type="html"><![CDATA[图搜索算法]]></title>
         <id>https://YI-Pengfei.github.io/post/sou-suo-suan-fa/</id>
         <link href="https://YI-Pengfei.github.io/post/sou-suo-suan-fa/">
         </link>
