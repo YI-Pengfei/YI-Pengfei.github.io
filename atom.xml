@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://YI-Pengfei.github.io</id>
     <title>飞天小南鲸</title>
-    <updated>2020-03-28T01:07:32.262Z</updated>
+    <updated>2020-03-28T01:11:04.577Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://YI-Pengfei.github.io"/>
     <link rel="self" href="https://YI-Pengfei.github.io/atom.xml"/>
@@ -273,9 +273,9 @@ plot(test_map,a.path)
 print('path length:',path_length(a.path))
 </code></pre>
 <h3 id="测试用例及结果">测试用例及结果</h3>
-<figure data-type="image" tabindex="1"><img src="https://upload-images.jianshu.io/upload_images/9401268-d70c60bf0acbba18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="map1.png" loading="lazy"></figure>
-<figure data-type="image" tabindex="2"><img src="https://upload-images.jianshu.io/upload_images/9401268-1246c66f2489a55b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="map2.png" loading="lazy"></figure>
-<figure data-type="image" tabindex="3"><img src="https://upload-images.jianshu.io/upload_images/9401268-2d9eae0a5384902f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="map5.png" loading="lazy"></figure>
+<p><img src="https://YI-Pengfei.github.io/post-images/1585357842632.png" alt="" loading="lazy"><br>
+<img src="https://YI-Pengfei.github.io/post-images/1585357848707.png" alt="" loading="lazy"><br>
+<img src="https://YI-Pengfei.github.io/post-images/1585357856210.png" alt="" loading="lazy"></p>
 <h3 id="存在的问题">存在的问题</h3>
 <p>不确定是否是最优路径<br>
 原文描述：<br>
