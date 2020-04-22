@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://YI-Pengfei.github.io</id>
     <title>飞天小南鲸</title>
-    <updated>2020-03-28T23:59:17.286Z</updated>
+    <updated>2020-04-22T02:25:01.098Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://YI-Pengfei.github.io"/>
     <link rel="self" href="https://YI-Pengfei.github.io/atom.xml"/>
@@ -10,6 +10,19 @@
     <logo>https://YI-Pengfei.github.io/images/avatar.png</logo>
     <icon>https://YI-Pengfei.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 飞天小南鲸</rights>
+    <entry>
+        <title type="html"><![CDATA[UAV路径规划综述总结]]></title>
+        <id>https://YI-Pengfei.github.io/post/uav-lu-jing-gui-hua-zong-shu-zong-jie/</id>
+        <link href="https://YI-Pengfei.github.io/post/uav-lu-jing-gui-hua-zong-shu-zong-jie/">
+        </link>
+        <updated>2020-04-22T02:23:00.000Z</updated>
+        <content type="html"><![CDATA[<ul>
+<li><a href="https://ieeexplore.ieee.org/document/7053093">A Literature Review of UAV 3D Path Planning</a><br>
+<img src="https://YI-Pengfei.github.io/post-images/1587522271745.jpg" alt="" loading="lazy"><br>
+<img src="https://YI-Pengfei.github.io/post-images/1587522283490.png" alt="" loading="lazy"></li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[堆优化的A*算法-Python实现]]></title>
         <id>https://YI-Pengfei.github.io/post/dui-you-hua-de-asuan-fa-python-shi-xian/</id>
@@ -1058,29 +1071,6 @@ y=a^{(1)}W^{(2)}
 <p>其中，第一项是预测结果与标准答案之前的差距（如交叉熵、均方误差）；第二项是正则化计算结果。</p>
 <h2 id="卷积神经网络">卷积神经网络</h2>
 <figure data-type="image" tabindex="2"><img src="https://YI-Pengfei.github.io/post-images/1581896531157.png" alt="LeNet-5" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[北航论文记录]]></title>
-        <id>https://YI-Pengfei.github.io/post/lun-wen-xiang-guan-wen-ti-ji-lu/</id>
-        <link href="https://YI-Pengfei.github.io/post/lun-wen-xiang-guan-wen-ti-ji-lu/">
-        </link>
-        <updated>2020-02-15T05:00:50.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="肖振宇">肖振宇</h3>
-<p>无人机组网，毫米波通信  Unmanned aerial vehicles (UAVs) ,  millimeter wave</p>
-<ul>
-<li>信道估计方法</li>
-<li>波束赋形Beamforming</li>
-<li>多目标路径规划问题--》无人机安全路径规划</li>
-<li>无人机动态路由协议</li>
-</ul>
-<h3 id="徐桢">徐桢</h3>
-<p>卫星网络，航空自组网</p>
-<ul>
-<li>卫星组网路由算法</li>
-<li>平衡网络流</li>
-<li>IP地址分配管理</li>
-</ul>
 ]]></content>
     </entry>
 </feed>

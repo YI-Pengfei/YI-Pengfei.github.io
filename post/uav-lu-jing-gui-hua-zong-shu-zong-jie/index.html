@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>应用tflearn实现神经网络-一个简单的例子 | 飞天小南鲸</title>
+<title>UAV路径规划综述总结 | 飞天小南鲸</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -24,12 +24,12 @@
 
 
 
-    <meta name="description" content="tflearn官方文档 http://tflearn.org/
-&quot;&quot;&quot;
-练习tensorflow和tflearn
-&quot;&quot;&quot;
-import tensorflow as tf
-impor..." />
+    <meta name="description" content="
+A Literature Review of UAV 3D Path Planning
+
+
+
+..." />
     <meta name="keywords" content="" />
   </head>
   <body>
@@ -101,95 +101,24 @@ impor..." />
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">应用tflearn实现神经网络-一个简单的例子</h2>
-            <div class="post-date">2020-02-21</div>
+            <h2 class="post-title">UAV路径规划综述总结</h2>
+            <div class="post-date">2020-04-22</div>
             
             <div class="post-content" v-pre>
-              <p>tflearn官方文档 <a href="http://tflearn.org/">http://tflearn.org/</a><br>
-&quot;&quot;&quot;<br>
-练习tensorflow和tflearn<br>
-&quot;&quot;&quot;</p>
-<pre><code class="language-python">import tensorflow as tf
-import tflearn
-import numpy as np
-import random
-from matplotlib import pyplot as plt
-
-tf.reset_default_graph()
-
-def generate_data(n=5, num=1000):
-    &quot;&quot;&quot;产生测试用的数据&quot;&quot;&quot;
-    d = [0,1]
-
-    allX = []
-    allY = []
-    for count in range(num):
-        lst = []
-        label = [0,1]
-        for i in range(n):
-            rnd = random.choice(d)
-            if len(lst)&gt;=1 and rnd==1 and rnd==lst[-1]:
-                label = [1,0]   ## 有连续两个1
-            lst.append(rnd)
-        allX.append(lst)
-        allY.append(label)
-    ## 随机将数据分为两组，训练组 和 测试组
-    allX = np.array(allX)
-    allY = np.array(allY)
-    trainIndex = sorted(random.sample(list(range(num)), int(num/5)))
-    testIndex = sorted(list(set(range(num))- set(trainIndex)))
-    trainX, trainY = allX[trainIndex,:], allY[trainIndex ,:]
-    testX, testY = allX[testIndex,:], allY[testIndex ,:]
-
-    return trainX, trainY, testX, testY
-
-
-def train_model(trainX, trainY, acti):
-    &quot;&quot;&quot;构建神经网络，训练神经网络&quot;&quot;&quot;
-    n_in, n_out = len(trainX[0]), len(trainY[0])
-    net = tflearn.input_data(shape=[None, n_in])
-    net = tflearn.fully_connected(net, 8, activation=acti)
-    net = tflearn.fully_connected(net, 8, activation=acti)
-    net = tflearn.fully_connected(net, n_out, activation=acti)
-    net = tflearn.regression(net, optimizer='adam', 
-                             loss='categorical_crossentropy',
-                             learning_rate=0.01)
-    
-    model = tflearn.DNN(net, tensorboard_verbose=3)
-    model.fit(trainX, trainY, n_epoch=100, show_metric=True, batch_size=50)
-    return model
-
-
-def test_model(model, testX, testY):
-    &quot;&quot;&quot;测试神经网络&quot;&quot;&quot;
-    pred = model.predict(testX)
-    n_right=0
-    for i,lst in enumerate(pred):
-        if lst[0]&gt;lst[1]:
-            res = [1,0]
-        else:
-            res = [0,1]
-        if res==testY[i].tolist():
-            n_right+=1
-        
-    accuracy = n_right/len(pred)
-    return accuracy
-
-
-trainX, trainY, testX, testY = generate_data(n=5, num=1000)
-model = train_model(trainX, trainY, acti='softmax') # 训练模型
-accuracy = test_model(model, testX, testY)
-print('Predict accuracy is:%f'%accuracy)
-</code></pre>
+              <ul>
+<li><a href="https://ieeexplore.ieee.org/document/7053093">A Literature Review of UAV 3D Path Planning</a><br>
+<img src="https://YI-Pengfei.github.io/post-images/1587522271745.jpg" alt="" loading="lazy"><br>
+<img src="https://YI-Pengfei.github.io/post-images/1587522283490.png" alt="" loading="lazy"></li>
+</ul>
 
             </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://YI-Pengfei.github.io/post/guan-lian-gui-ze-xue-xi-association-rule-learning/">
+                <a href="https://YI-Pengfei.github.io/post/dui-you-hua-de-asuan-fa-python-shi-xian/">
                   <h3 class="post-title">
-                    关联规则学习 Association rule learning
+                    堆优化的A*算法-Python实现
                   </h3>
                 </a>
               </div>
