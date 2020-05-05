@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>无人机通信阅读记录-IEEE Communication Magazine | 飞天小南鲸</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://YI-Pengfei.github.io/favicon.ico?v=1588651438967">
+<link rel="stylesheet" href="https://YI-Pengfei.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="
+Aerial Control System for Spectrum Efficiency in UAV-to-Cellular Communications
+
+
+利用无人机管理信息降低网络频谱的问题 分离数据平面和控制平面，控制平面由空..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://YI-Pengfei.github.io">
+        <img src="https://YI-Pengfei.github.io/images/avatar.png?v=1588651438967" class="site-logo">
+        <h1 class="site-title">飞天小南鲸</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      记得戴口罩
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://YI-Pengfei.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">无人机通信阅读记录-IEEE Communication Magazine</h2>
+            <div class="post-date">2020-05-03</div>
+            
+            <div class="post-content" v-pre>
+              <ol>
+<li><strong>Aerial Control System for Spectrum Efficiency in UAV-to-Cellular Communications</strong></li>
+</ol>
+<ul>
+<li>利用无人机管理信息降低网络频谱的问题 分离数据平面和控制平面，控制平面由空中的无人机完成</li>
+<li>无人机向物联网设备提供5G连接</li>
+<li>但是无人机的使用带来了影响频谱效率和网络性能的挑战</li>
+<li>自组网self-organized network+ aerial control system (ACS) 空中控制系统</li>
+<li>cluster header (CH)负责无人机任务，调整和重新规划</li>
+<li>挑战：如何为无人机群分组；如何选首领</li>
+</ul>
+<ol start="2">
+<li><strong>Ultra-Reliable IoT Communications with UAVs: A Swarm Use Case</strong></li>
+</ol>
+<ul>
+<li>超可靠通信 无人机物联网服务</li>
+<li>软件层：
+<ul>
+<li>数据封装：Micro Air Vehicle Communication Protocol (MAVLink)</li>
+<li>嵌入式操作系统：OpenWRT 作为托管网络协议的嵌入式操作系统</li>
+<li>低延迟通信协议：
+<ul>
+<li>Mac层对 星形</li>
+<li>网络层（也叫路由协议）对 网状</li>
+<li>建议将蜂窝网络应用于城市无人机群的广域控制</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>硬件实现</li>
+<li>LoRa</li>
+<li>实验对比了WIFI，LoRa，LTE下的可靠性和轮训延迟</li>
+</ul>
+<ol start="3">
+<li><strong>Design of Future UAV-Relay Tactical Data Link for Reliable UAV Control and Situational Awareness</strong></li>
+</ol>
+<ul>
+<li>无人机做中继的战术数据链</li>
+<li>基本网络结构：
+<ul>
+<li>跳频来抗干扰</li>
+<li>分布式TDMA 防止单点故障</li>
+<li>显式acknowledgment (ACK)，隐式ACK，Mirroring 有效的中继</li>
+<li>相对导航和时间同步</li>
+</ul>
+</li>
+<li>频谱分配和管理：</li>
+<li>Spectrum Sharing</li>
+</ul>
+<ol start="4">
+<li><strong>ComProSe: Shaping Future Public Safety Communities with ProSe-Based UAVs</strong></li>
+</ol>
+<ul>
+<li>公共安全通信服务 基于ProSe (近距离通信技术 Proximity Services)</li>
+<li>主要解决：</li>
+<li>不同用户组之间的cooperation</li>
+<li>多媒体通信支持</li>
+<li>与设备良好的用户交互</li>
+<li>解决方案（基于3GPP的近距离通信技术Proximity Services (ProSe) ）由三部分组成：
+<ul>
+<li>Public safety control center (PS-CC)</li>
+</ul>
+</li>
+<li>Public safety UAV (PS-UAV)</li>
+<li>Public safety User (PS-User)</li>
+</ul>
+<ol start="5">
+<li><strong>Aerial Access and Backhaul in mmWave B5G Systems: Performance Dynamics and Optimization</strong></li>
+</ol>
+<ul>
+<li>Integrated access and backhaul (IAB)集成访问和回程 系统设计</li>
+<li>需考虑的建模选择：</li>
+<li>无人机基站三维布局下的位置</li>
+<li>精确地空对地NR(New Radio)传播模型</li>
+<li>际的UE（用户设备）部署和运动模型</li>
+<li>结合实际的部署考虑</li>
+</ul>
+<ol start="6">
+<li><strong>Power Control in UAV-Supported Ultra Dense Networks: Communications, Caching, and Energy Transfer</strong> <strong>比较有意思，基本的场景和相应的仿真</strong></li>
+</ol>
+<ul>
+<li>超密集网络 Ultra Dense networks (UDNs)  + UAV supported</li>
+<li>Power control problem 功率控制问题</li>
+<li>需要考虑的点：
+<ul>
+<li>覆盖率和停机率 Coverage and outage probability   增加发射功率可以提高覆盖率，但是会增加干扰</li>
+<li>频谱和能源效率 Spectral/Energy Efficiency</li>
+<li>数据率和延迟 network Rate/Delay   高数据率--&gt;高延迟</li>
+</ul>
+</li>
+<li><strong>四种场景下的实验分析</strong>：
+<ul>
+<li>UAV-supported BS <strong>基站</strong></li>
+<li>UAV-supported Relay <strong>中继</strong></li>
+<li>UAV-supported Energy Transfer <strong>能量传送</strong></li>
+<li>UAV-supported Caching <strong>缓存</strong></li>
+</ul>
+</li>
+</ul>
+<ol start="7">
+<li><strong>Adaptive Communication Protocols in Flying Ad Hoc Network</strong></li>
+</ol>
+<ul>
+<li>PPMAC Protocol MAC协议:
+<ul>
+<li>position prediction</li>
+<li>communication control</li>
+<li>data transission</li>
+</ul>
+</li>
+<li>RLSRP protocol (self-learning routing protocol based on reinforcement learning)</li>
+</ul>
+<ol start="8">
+<li><strong>Spectrum Management for MmWave Enabled UAV Swarm Networks: Challenges and Opportunities</strong></li>
+</ol>
+<ul>
+<li>MmWave+UAV swarm --&gt;Spectrum Management (SM)毫米比+无人机--&gt;频谱管理</li>
+</ul>
+<ol start="9">
+<li><strong>An SDN-MQTT Based Communication System for Battlefield UAV Swarms</strong></li>
+</ol>
+<ul>
+<li>设计了一个战场无人机群通信系统 用软件定义网SDN+MQTT协议  分布式的</li>
+</ul>
+<ol start="10">
+<li><strong>UAV-Aided Cooperation for FSO Communication Systems</strong></li>
+</ol>
+<ul>
+<li>光通信 + 无人机做中继</li>
+<li>无人机提供包缓存功能</li>
+<li>两个场景：上下悬浮的，  水平远近移动的</li>
+</ul>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://YI-Pengfei.github.io/post/wu-ren-ji-dian-xing-ying-yong-chang-jing/">
+                  <h3 class="post-title">
+                    无人机典型应用场景
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

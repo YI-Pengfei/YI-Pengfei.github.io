@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://YI-Pengfei.github.io</id>
     <title>飞天小南鲸</title>
-    <updated>2020-04-23T07:00:11.229Z</updated>
+    <updated>2020-05-05T04:04:02.996Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://YI-Pengfei.github.io"/>
     <link rel="self" href="https://YI-Pengfei.github.io/atom.xml"/>
@@ -10,6 +10,158 @@
     <logo>https://YI-Pengfei.github.io/images/avatar.png</logo>
     <icon>https://YI-Pengfei.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 飞天小南鲸</rights>
+    <entry>
+        <title type="html"><![CDATA[无人机通信阅读记录-IEEE Communication Magazine]]></title>
+        <id>https://YI-Pengfei.github.io/post/wu-ren-ji-tong-xin-yue-du-ji-lu-ieee-communication-magazine/</id>
+        <link href="https://YI-Pengfei.github.io/post/wu-ren-ji-tong-xin-yue-du-ji-lu-ieee-communication-magazine/">
+        </link>
+        <updated>2020-05-03T06:57:47.000Z</updated>
+        <content type="html"><![CDATA[<ol>
+<li><strong>Aerial Control System for Spectrum Efficiency in UAV-to-Cellular Communications</strong></li>
+</ol>
+<ul>
+<li>利用无人机管理信息降低网络频谱的问题 分离数据平面和控制平面，控制平面由空中的无人机完成</li>
+<li>无人机向物联网设备提供5G连接</li>
+<li>但是无人机的使用带来了影响频谱效率和网络性能的挑战</li>
+<li>自组网self-organized network+ aerial control system (ACS) 空中控制系统</li>
+<li>cluster header (CH)负责无人机任务，调整和重新规划</li>
+<li>挑战：如何为无人机群分组；如何选首领</li>
+</ul>
+<ol start="2">
+<li><strong>Ultra-Reliable IoT Communications with UAVs: A Swarm Use Case</strong></li>
+</ol>
+<ul>
+<li>超可靠通信 无人机物联网服务</li>
+<li>软件层：
+<ul>
+<li>数据封装：Micro Air Vehicle Communication Protocol (MAVLink)</li>
+<li>嵌入式操作系统：OpenWRT 作为托管网络协议的嵌入式操作系统</li>
+<li>低延迟通信协议：
+<ul>
+<li>Mac层对 星形</li>
+<li>网络层（也叫路由协议）对 网状</li>
+<li>建议将蜂窝网络应用于城市无人机群的广域控制</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>硬件实现</li>
+<li>LoRa</li>
+<li>实验对比了WIFI，LoRa，LTE下的可靠性和轮训延迟</li>
+</ul>
+<ol start="3">
+<li><strong>Design of Future UAV-Relay Tactical Data Link for Reliable UAV Control and Situational Awareness</strong></li>
+</ol>
+<ul>
+<li>无人机做中继的战术数据链</li>
+<li>基本网络结构：
+<ul>
+<li>跳频来抗干扰</li>
+<li>分布式TDMA 防止单点故障</li>
+<li>显式acknowledgment (ACK)，隐式ACK，Mirroring 有效的中继</li>
+<li>相对导航和时间同步</li>
+</ul>
+</li>
+<li>频谱分配和管理：</li>
+<li>Spectrum Sharing</li>
+</ul>
+<ol start="4">
+<li><strong>ComProSe: Shaping Future Public Safety Communities with ProSe-Based UAVs</strong></li>
+</ol>
+<ul>
+<li>公共安全通信服务 基于ProSe (近距离通信技术 Proximity Services)</li>
+<li>主要解决：</li>
+<li>不同用户组之间的cooperation</li>
+<li>多媒体通信支持</li>
+<li>与设备良好的用户交互</li>
+<li>解决方案（基于3GPP的近距离通信技术Proximity Services (ProSe) ）由三部分组成：
+<ul>
+<li>Public safety control center (PS-CC)</li>
+</ul>
+</li>
+<li>Public safety UAV (PS-UAV)</li>
+<li>Public safety User (PS-User)</li>
+</ul>
+<ol start="5">
+<li><strong>Aerial Access and Backhaul in mmWave B5G Systems: Performance Dynamics and Optimization</strong></li>
+</ol>
+<ul>
+<li>Integrated access and backhaul (IAB)集成访问和回程 系统设计</li>
+<li>需考虑的建模选择：</li>
+<li>无人机基站三维布局下的位置</li>
+<li>精确地空对地NR(New Radio)传播模型</li>
+<li>际的UE（用户设备）部署和运动模型</li>
+<li>结合实际的部署考虑</li>
+</ul>
+<ol start="6">
+<li><strong>Power Control in UAV-Supported Ultra Dense Networks: Communications, Caching, and Energy Transfer</strong> <strong>比较有意思，基本的场景和相应的仿真</strong></li>
+</ol>
+<ul>
+<li>超密集网络 Ultra Dense networks (UDNs)  + UAV supported</li>
+<li>Power control problem 功率控制问题</li>
+<li>需要考虑的点：
+<ul>
+<li>覆盖率和停机率 Coverage and outage probability   增加发射功率可以提高覆盖率，但是会增加干扰</li>
+<li>频谱和能源效率 Spectral/Energy Efficiency</li>
+<li>数据率和延迟 network Rate/Delay   高数据率--&gt;高延迟</li>
+</ul>
+</li>
+<li><strong>四种场景下的实验分析</strong>：
+<ul>
+<li>UAV-supported BS <strong>基站</strong></li>
+<li>UAV-supported Relay <strong>中继</strong></li>
+<li>UAV-supported Energy Transfer <strong>能量传送</strong></li>
+<li>UAV-supported Caching <strong>缓存</strong></li>
+</ul>
+</li>
+</ul>
+<ol start="7">
+<li><strong>Adaptive Communication Protocols in Flying Ad Hoc Network</strong></li>
+</ol>
+<ul>
+<li>PPMAC Protocol MAC协议:
+<ul>
+<li>position prediction</li>
+<li>communication control</li>
+<li>data transission</li>
+</ul>
+</li>
+<li>RLSRP protocol (self-learning routing protocol based on reinforcement learning)</li>
+</ul>
+<ol start="8">
+<li><strong>Spectrum Management for MmWave Enabled UAV Swarm Networks: Challenges and Opportunities</strong></li>
+</ol>
+<ul>
+<li>MmWave+UAV swarm --&gt;Spectrum Management (SM)毫米比+无人机--&gt;频谱管理</li>
+</ul>
+<ol start="9">
+<li><strong>An SDN-MQTT Based Communication System for Battlefield UAV Swarms</strong></li>
+</ol>
+<ul>
+<li>设计了一个战场无人机群通信系统 用软件定义网SDN+MQTT协议  分布式的</li>
+</ul>
+<ol start="10">
+<li><strong>UAV-Aided Cooperation for FSO Communication Systems</strong></li>
+</ol>
+<ul>
+<li>光通信 + 无人机做中继</li>
+<li>无人机提供包缓存功能</li>
+<li>两个场景：上下悬浮的，  水平远近移动的</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[无人机典型应用场景]]></title>
+        <id>https://YI-Pengfei.github.io/post/wu-ren-ji-dian-xing-ying-yong-chang-jing/</id>
+        <link href="https://YI-Pengfei.github.io/post/wu-ren-ji-dian-xing-ying-yong-chang-jing/">
+        </link>
+        <updated>2020-05-03T02:05:59.000Z</updated>
+        <content type="html"><![CDATA[<ul>
+<li>Power Control in UAV-Supported Ultra Dense Networks: Communications, Caching, and Energy Transfer<br>
+<img src="https://YI-Pengfei.github.io/post-images/1588471581320.png" alt="" loading="lazy"></li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[UAV路径规划综述总结]]></title>
         <id>https://YI-Pengfei.github.io/post/uav-lu-jing-gui-hua-zong-shu-zong-jie/</id>
@@ -785,299 +937,6 @@ def main():
 if __name__=='__main__':
     main()
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[图搜索算法]]></title>
-        <id>https://YI-Pengfei.github.io/post/sou-suo-suan-fa/</id>
-        <link href="https://YI-Pengfei.github.io/post/sou-suo-suan-fa/">
-        </link>
-        <updated>2020-02-16T04:20:38.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="bfs">BFS</h3>
-<p>按层扩展<br>
-<img src="https://YI-Pengfei.github.io/post-images/1581826896242.gif" alt="BFS示意图" loading="lazy"><br>
-<img src="https://YI-Pengfei.github.io/post-images/1582596932039.png" alt="BFS-按深度层序的" loading="lazy"></p>
-<h4 id="bfs基本代码">BFS基本代码：</h4>
-<pre><code class="language-python">import networkx as nx
-
-G = nx.Graph()
-G.add_edge(1,2)
-G.add_edge(2,4)
-G.add_edge(2,3)
-G.add_edge(3,5)
-
-def bfs(G,node):
-    res = []
-    visited = {}
-    for node in G.nodes(): # 标记所有节点为 &quot;未访问&quot;
-        visited[node] = False
-    queue = [node]
-    visited[node] = True
-    while queue:
-        cur_node = queue.pop(0) # 队头出列
-        res.append(cur_node)
-        for child in nx.neighbors(G, cur_node):
-            if not visited[child]:
-                visited[child]=True
-                queue.append(child) # 入队尾
-    return res
-
-print(bfs(G,5))
-</code></pre>
-<h4 id="bfs搜索od之间的路径">BFS搜索OD之间的路径</h4>
-<figure data-type="image" tabindex="1"><img src="https://YI-Pengfei.github.io/post-images/1582547464448.png" alt="有向图示例" loading="lazy"></figure>
-<pre><code class="language-python">&quot;&quot;&quot;
-BFS找源到目的的路径 从S到E的路径:BFS一定能找到路径，但是不一定是最短路径长度，而是最小深度
-&quot;&quot;&quot;
-import networkx as nx
-
-G = nx.DiGraph()
-G.add_edge('S','A',weight=2)
-G.add_edge('S','B',weight=1)
-G.add_edge('S','C',weight=6)
-
-G.add_edge('A','D',weight=6)
-G.add_edge('A','E',weight=20)
-
-G.add_edge('B','E',weight=20)
-G.add_edge('CA','E',weight=8)
-
-def BFS(G,O,D):
-    &quot;&quot;&quot;
-    G:有向图，O:源节点，D:目的节点
-    &quot;&quot;&quot;
-    record = {} ## 记录每一个节点的父节点
-    queue = [O]
-    print('root node is:', O)
-    found=False  ## 
-    while not found:
-        if not queue:
-            break
-        cur_node = queue.pop(0) # 弹出队列第一个元素
-        for child in G.neighbors(cur_node):
-            print(child)
-            record[child]=cur_node
-            queue.append(child)
-            if child==D:
-                found=True
-    
-    if not D in record:
-        print('not found target node')
-        return -1
-    path = [] # 组装路径
-    while D in record:
-        path.insert(0,(record[D],D))
-        D = record[D]
-    
-    return path
-
-print(BFS(G, 'S', 'E')) # 
-&gt;&gt; [('S', 'A'), ('A', 'E')]
-</code></pre>
-<h3 id="dfs">DFS</h3>
-<p>按深度扩展<br>
-<img src="https://YI-Pengfei.github.io/post-images/1582596960531.png" alt="DFS-不撞南墙不回头的" loading="lazy"></p>
-<h4 id="dfs基本代码递归">DFS基本代码(递归)：</h4>
-<pre><code class="language-python">import networkx as nx
-
-G = nx.Graph()
-G.add_edge(1,2)
-G.add_edge(2,4)
-G.add_edge(2,3)
-G.add_edge(3,5)
-
-def dfs(G,node,visited={},res=[]):
-    if not visited: # first run, mark all as unvisited
-        for node in G.nodes():
-            visited[node]=False 
-    res.append(node)
-    visited[node] = True
-    for child in nx.neighbors(G, node):
-        if not visited[child]:
-            res, visited = dfs(G,child,visited,res)
-    return res, visited
-
-res,visited = dfs(G,5,{},[])
-</code></pre>
-<h4 id="dfs搜索od之间的路径">DFS搜索OD之间的路径</h4>
-<pre><code class="language-python">&quot;&quot;&quot;
-DFS找源到目的的路径 从S到E的路径. 后进先出&quot;last-in,first out&quot;
-非递归方法 取节点(不出栈)，找到一个未被访问过的子节点，标记为访问，并入栈，重复
-&quot;&quot;&quot;
-import networkx as nx
-
-G = nx.DiGraph()
-G.add_edge('S','A',weight=2)
-G.add_edge('S','B',weight=1)
-G.add_edge('S','C',weight=6)
-
-G.add_edge('A','D',weight=6)
-G.add_edge('A','E',weight=20)
-
-G.add_edge('B','E',weight=20)
-G.add_edge('CA','E',weight=8)
-
-
-def DFS(G,O,D):
-    queue = [O]
-    found=False
-    visited = set([O])
-    record = {}
-    while not found:
-        if not queue:  ## 终止条件：队列为空
-            break
-        
-        cur_node = queue[-1] ## 每次都从队尾取节点，往深了访问  &quot;last-in,first out&quot;
-        print(cur_node)
-        
-        if len(list(G.neighbors(cur_node)))==0: # 当前节点是叶子节点(到头了)
-            queue.pop(-1) # 栈中弹出该节点 （对该节点的DFS已经结束）
-        else:
-            sign_children_all_visited = True
-            for child in G.neighbors(cur_node):
-                if not child in visited: # 发现未被访问过的子节点
-                    sign_children_all_visited = False
-                    break
-            if not sign_children_all_visited:
-                visited.add(child) # 添加为已访问
-                record[child] = cur_node
-                queue.append(child)  # 入栈
-            else: # 所有子节点都被访问过
-                queue.pop(-1)
-        ###### 设置访问到目的节点D就终止 ######
-        if child==D:
-            found=True
-            
-    ### 构造路径
-    if not D in record:
-        print('not found target node')
-        return -1
-    path = [] # 组装路径
-    while D in record:
-        path.insert(0,(record[D],D))
-        D = record[D]
-    
-    return path
-
-print(DFS(G, 'S', 'E'))
-</code></pre>
-<h3 id="dijkstra">Dijkstra</h3>
-<p>按最小代价扩展</p>
-<h4 id="dijkstra搜索od之间的路径">Dijkstra搜索OD之间的路径:</h4>
-<figure data-type="image" tabindex="2"><img src="https://YI-Pengfei.github.io/post-images/1582596978367.png" alt="UCS-一致代价搜索-按花费的" loading="lazy"></figure>
-<pre><code class="language-python"># -*- coding: utf-8 -*-
-&quot;&quot;&quot;
-Dijkstra找源到目的地的最短路径 UCS一致代价搜索 
-一致代价搜索总是扩展路径消耗最小的节点N。N点的路径消耗等于前一节点N-1的路径消耗加上N-1到N节点的路径消耗。
-通过将 更新的路径 入堆，确保每次取出来的都是最小的路径
-&quot;&quot;&quot;
-import networkx as nx
-import heapq # 堆
-
-G = nx.DiGraph()
-G.add_edge('S','A',weight=2)
-G.add_edge('S','B',weight=1)
-G.add_edge('S','C',weight=6)
-
-G.add_edge('A','D',weight=6)
-G.add_edge('A','E',weight=20)
-
-G.add_edge('B','E',weight=20)
-G.add_edge('C','E',weight=8)
-
-
-O='S'
-D='D'
-def Dijkstra(G, O, D):
-    INF=10*10
-    dict_sure = {}  ## 记录各个节点的最短路径长度
-    dict_path = dict((node,[O]) for node in G) ## 记录路径
-    dict_dis = dict((node,INF) for node in G)  ## 记录路径长度（初始化为无穷大）
-    dict_dis[O] = 0
-    
-    heap = []
-    heapq.heappush(heap, (0,O))
-
-    while heap:
-        dis, cur_node=heapq.heappop(heap)  ##未访问点中距离最小的点和对应的距离
-        if cur_node in dict_sure: # 弹出的节点无效(保证是未访问的)
-            continue
-        dict_sure[cur_node] = dis ## 标记为确定
-        path = dict_path[cur_node]
-        ### 添加，遇到目的节点D则终止
-        if D in dict_sure:
-            break
-        ###
-        for child in G.neighbors(cur_node):
-            dis_new = G[cur_node][child]['weight']+dis
-            if child not in dict_sure and dict_dis[child]&gt;dis_new: # 路径长度变短了
-                heapq.heappush(heap, (dis_new,child)) # 入栈
-                dict_dis[child] = dis_new # 更新信息
-                dict_path[child] = path+[child]
-                
-    path = dict_path[D]
-    path = [(path[i],path[i+1]) for i in range(len(path)-1)]
-    return path, dict_sure[D] # 返回路径，路径长度
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[机器学习笔记]]></title>
-        <id>https://YI-Pengfei.github.io/post/ji-qi-xue-xi-bi-ji/</id>
-        <link href="https://YI-Pengfei.github.io/post/ji-qi-xue-xi-bi-ji/">
-        </link>
-        <updated>2020-02-16T01:04:31.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="神经元">神经元</h3>
-<p>神经网络的基本模型是神经元，神经元的基本模型就是数学中的乘、加运算：<br>
-<img src="https://YI-Pengfei.github.io/post-images/1581815704630.png" alt="神经元" loading="lazy"></p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi><mo>=</mo><msub><mi>x</mi><mn>1</mn></msub><msub><mi>w</mi><mn>1</mn></msub><mo>+</mo><msub><mi>x</mi><mn>2</mn></msub><msub><mi>w</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">y=x_1 w_1 + x_2 w_2
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.73333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></p>
-<h3 id="神经网络">神经网络</h3>
-<figure data-type="image" tabindex="1"><img src="https://YI-Pengfei.github.io/post-images/1581816066755.png" alt="两层的神经网络（一个隐藏层）" loading="lazy"></figure>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>a</mi><mrow><mo>(</mo><mn>1</mn><mo>)</mo></mrow></msup><mo>=</mo><mi>X</mi><msup><mi>W</mi><mrow><mo>(</mo><mn>1</mn><mo>)</mo></mrow></msup><mspace linebreak="newline"></mspace><mi>y</mi><mo>=</mo><msup><mi>a</mi><mrow><mo>(</mo><mn>1</mn><mo>)</mo></mrow></msup><msup><mi>W</mi><mrow><mo>(</mo><mn>2</mn><mo>)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">a^{(1)}=XW^{(1)} \\
-y=a^{(1)}W^{(2)}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.938em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.938em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.938em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">2</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span></span></span></span></span></p>
-<p>更进一步地，过激活函数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span></span></span></span>以提高表现力的神经元模型：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>(</mo><munder><mo>∑</mo><mi>i</mi></munder><msub><mi>x</mi><mi>i</mi></msub><msub><mi>w</mi><mi>i</mi></msub><mo>+</mo><mi>b</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">f(\sum_i x_iw_i+b)
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.327674em;vertical-align:-1.277669em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0500050000000003em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">b</span><span class="mclose">)</span></span></span></span></span></p>
-<p>常用的激活函数有:</p>
-<ul>
-<li>relu</li>
-<li>sigmoid</li>
-<li>tanh</li>
-<li><a href="https://www.jianshu.com/p/6db999961393">https://www.jianshu.com/p/6db999961393</a><br>
-<img src="https://YI-Pengfei.github.io/post-images/1583109874689.png" alt="" loading="lazy"><br>
-<img src="https://YI-Pengfei.github.io/post-images/1583540404333.webp" alt="https://www.jianshu.com/p/6db999961393" loading="lazy"></li>
-</ul>
-<h3 id="损失函数loss">损失函数loss</h3>
-<p>计算得到的预测值<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span>与已知答案<span class='katex-error' title='ParseError: KaTeX parse error: Expected group after &#039;_&#039; at position 2: y_̲'>y_</span>的差距：</p>
-<ul>
-<li>均方误差MSE</li>
-<li>自定义损失函数：根据问题的实际情况</li>
-<li>交叉熵CE（Cross Entropy）</li>
-</ul>
-<p>反向传播训练中，以减小loss值为优化目标，有<strong>梯度下降</strong>，<strong>momentum优化器</strong>，<strong>adam优化器</strong>等优化方法。</p>
-<h3 id="学习率">学习率</h3>
-<p>决定每次参数更新的幅度。在训练过程中，参数的更新向着损失函数梯度下降的方向。参数更新的公式为：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>w</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>w</mi><mi>n</mi></msub><mo>−</mo><mi>l</mi><mi>e</mi><mi>a</mi><mi>r</mi><mi>n</mi><mi>i</mi><mi>n</mi><mi>g</mi><mi mathvariant="normal">_</mi><mi>r</mi><mi>a</mi><mi>t</mi><mi>e</mi><mi mathvariant="normal">Δ</mi></mrow><annotation encoding="application/x-tex">w_{n+1}=w_n-learning\_rate \Delta
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.638891em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.73333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.00444em;vertical-align:-0.31em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">n</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">a</span><span class="mord mathdefault">t</span><span class="mord mathdefault">e</span><span class="mord">Δ</span></span></span></span></span></p>
-<ul>
-<li>指数衰减学习率：<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>e</mi><mi>a</mi><mi>r</mi><mi>n</mi><mi>i</mi><mi>n</mi><mi>g</mi><mi mathvariant="normal">_</mi><mi>r</mi><mi>a</mi><mi>t</mi><mi>e</mi><mo>=</mo><mi>L</mi><mi>E</mi><mi>A</mi><mi>R</mi><mi>N</mi><mi>I</mi><mi>N</mi><mi>G</mi><mi mathvariant="normal">_</mi><mi>R</mi><mi>A</mi><mi>T</mi><mi>E</mi><mi mathvariant="normal">_</mi><mi>B</mi><mi>A</mi><mi>S</mi><mi>E</mi><mo>∗</mo><mi>L</mi><mi>E</mi><mi>A</mi><mi>R</mi><mi>N</mi><mi>I</mi><mi>N</mi><mi>G</mi><mi mathvariant="normal">_</mi><mi>R</mi><mi>A</mi><mi>T</mi><mi>E</mi><mi mathvariant="normal">_</mi><mi>D</mi><mi>E</mi><mi>C</mi><mi>A</mi><mi>Y</mi><mo>∗</mo><mfrac><mrow><mi>g</mi><mi>l</mi><mi>o</mi><mi>b</mi><mi>a</mi><mi>l</mi><mi mathvariant="normal">_</mi><mi>s</mi><mi>t</mi><mi>e</mi><mi>p</mi></mrow><mrow><mi>L</mi><mi>E</mi><mi>A</mi><mi>R</mi><mi>N</mi><mi>I</mi><mi>N</mi><mi>G</mi><mi mathvariant="normal">_</mi><mi>R</mi><mi>A</mi><mi>T</mi><mi>E</mi><mi mathvariant="normal">_</mi><mi>B</mi><mi>A</mi><mi>T</mi><mi>C</mi><mi>H</mi><mi mathvariant="normal">_</mi><mi>S</mi><mi>I</mi><mi>Z</mi><mi>E</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">learning\_rate=LEARNING\_RATE\_BASE * LEARNING\_RATE\_DECAY * \frac{global\_step}{LEARNING\_RATE\_BATCH\_SIZE}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00444em;vertical-align:-0.31em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">n</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">a</span><span class="mord mathdefault">t</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.99333em;vertical-align:-0.31em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault">G</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.99333em;vertical-align:-0.31em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault">G</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.39044em;vertical-align:-0.996em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.39444em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault">G</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.07153em;">Z</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.6999999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">b</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mord mathdefault">e</span><span class="mord mathdefault">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.996em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
-其中，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mi>E</mi><mi>A</mi><mi>R</mi><mi>N</mi><mi>I</mi><mi>N</mi><mi>G</mi><mi mathvariant="normal">_</mi><mi>R</mi><mi>A</mi><mi>T</mi><mi>E</mi><mi mathvariant="normal">_</mi><mi>B</mi><mi>A</mi><mi>S</mi><mi>E</mi></mrow><annotation encoding="application/x-tex">LEARNING\_RATE\_BASE</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.99333em;vertical-align:-0.31em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault">G</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span></span></span></span>为学习率初始值（如0.1），<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mi>E</mi><mi>A</mi><mi>R</mi><mi>N</mi><mi>I</mi><mi>N</mi><mi>G</mi><mi mathvariant="normal">_</mi><mi>R</mi><mi>A</mi><mi>T</mi><mi>E</mi><mi mathvariant="normal">_</mi><mi>D</mi><mi>E</mi><mi>C</mi><mi>A</mi><mi>Y</mi></mrow><annotation encoding="application/x-tex">LEARNING\_RATE\_DECAY</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.99333em;vertical-align:-0.31em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault">G</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span></span></span></span>为学习率衰减率（如0.99），<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi><mi>l</mi><mi>o</mi><mi>b</mi><mi>a</mi><mi>l</mi><mi mathvariant="normal">_</mi><mi>s</mi><mi>t</mi><mi>e</mi><mi>p</mi></mrow><annotation encoding="application/x-tex">global\_step</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00444em;vertical-align:-0.31em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">b</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mord mathdefault">e</span><span class="mord mathdefault">p</span></span></span></span>记录了当前训练轮数，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mi>E</mi><mi>A</mi><mi>R</mi><mi>N</mi><mi>I</mi><mi>N</mi><mi>G</mi><mi mathvariant="normal">_</mi><mi>R</mi><mi>A</mi><mi>T</mi><mi>E</mi><mi mathvariant="normal">_</mi><mi>B</mi><mi>A</mi><mi>T</mi><mi>C</mi><mi>H</mi><mi mathvariant="normal">_</mi><mi>S</mi><mi>I</mi><mi>Z</mi><mi>E</mi></mrow><annotation encoding="application/x-tex">LEARNING\_RATE\_BATCH\_SIZE</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.99333em;vertical-align:-0.31em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault">G</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.07153em;">Z</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span></span></span></span>表示喂入多少轮<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>B</mi><mi>A</mi><mi>T</mi><mi>C</mi><mi>H</mi><mi mathvariant="normal">_</mi><mi>S</mi><mi>I</mi><mi>Z</mi><mi>E</mi></mrow><annotation encoding="application/x-tex">BATCH\_SIZE</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.99333em;vertical-align:-0.31em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.07153em;">Z</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span></span></span></span>后，更新一次学习率(一般设为：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">总</mi><mi mathvariant="normal">样</mi><mi mathvariant="normal">本</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">/</mi><mi>B</mi><mi>A</mi><mi>T</mi><mi>C</mi><mi>H</mi><mi mathvariant="normal">_</mi><mi>S</mi><mi>I</mi><mi>Z</mi><mi>E</mi></mrow><annotation encoding="application/x-tex">总样本数/BATCH\_SIZE</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.06em;vertical-align:-0.31em;"></span><span class="mord cjk_fallback">总</span><span class="mord cjk_fallback">样</span><span class="mord cjk_fallback">本</span><span class="mord cjk_fallback">数</span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.07153em;">Z</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span></span></span></span>)。</li>
-</ul>
-<h3 id="滑动平均">滑动平均</h3>
-<p>记录一段时间内模型中所有参数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>各自的平均值。利用滑动平均值可以增强模型的泛化能力。计算公式：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">影</mi><mi mathvariant="normal">子</mi><mo>=</mo><mi mathvariant="normal">衰</mi><mi mathvariant="normal">减</mi><mi mathvariant="normal">率</mi><mo>∗</mo><mi mathvariant="normal">影</mi><mi mathvariant="normal">子</mi><mo>+</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi mathvariant="normal">衰</mi><mi mathvariant="normal">减</mi><mi mathvariant="normal">率</mi><mo>)</mo><mo>∗</mo><mi mathvariant="normal">参</mi><mi mathvariant="normal">数</mi></mrow><annotation encoding="application/x-tex">影子=衰减率*影子 + (1-衰减率)*参数
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">影</span><span class="mord cjk_fallback">子</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord cjk_fallback">衰</span><span class="mord cjk_fallback">减</span><span class="mord cjk_fallback">率</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord cjk_fallback">影</span><span class="mord cjk_fallback">子</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord cjk_fallback">衰</span><span class="mord cjk_fallback">减</span><span class="mord cjk_fallback">率</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">参</span><span class="mord cjk_fallback">数</span></span></span></span></span></p>
-<p>其中，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">衰</mi><mi mathvariant="normal">减</mi><mi mathvariant="normal">率</mi><mo>=</mo><mi>m</mi><mi>i</mi><mi>n</mi><mo>{</mo><mi>M</mi><mi>O</mi><mi>V</mi><mi>I</mi><mi>N</mi><mi>G</mi><mi mathvariant="normal">_</mi><mi>A</mi><mi>V</mi><mi>E</mi><mi>R</mi><mi>A</mi><mi>G</mi><mi>E</mi><mi mathvariant="normal">_</mi><mi>D</mi><mi>E</mi><mi>C</mi><mi>A</mi><mi>Y</mi><mo separator="true">,</mo><mfrac><mrow><mn>1</mn><mo>+</mo><mi mathvariant="normal">轮</mi><mi mathvariant="normal">数</mi></mrow><mrow><mn>10</mn><mo>+</mo><mi mathvariant="normal">轮</mi><mi mathvariant="normal">数</mi></mrow></mfrac><mo>}</mo></mrow><annotation encoding="application/x-tex">衰减率=min\{MOVING\_AVERAGE\_DECAY, \frac{1+轮数}{10+轮数}\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">衰</span><span class="mord cjk_fallback">减</span><span class="mord cjk_fallback">率</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.2484389999999999em;vertical-align:-0.403331em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mopen">{</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault">G</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">A</span><span class="mord mathdefault">G</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">0</span><span class="mbin mtight">+</span><span class="mord cjk_fallback mtight">轮</span><span class="mord cjk_fallback mtight">数</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mbin mtight">+</span><span class="mord cjk_fallback mtight">轮</span><span class="mord cjk_fallback mtight">数</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.403331em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">}</span></span></span></span>，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">影</mi><mi mathvariant="normal">子</mi><mi mathvariant="normal">初</mi><mi mathvariant="normal">值</mi><mo>=</mo><mi mathvariant="normal">参</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">初</mi><mi mathvariant="normal">值</mi></mrow><annotation encoding="application/x-tex">影子初值=参数初值</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">影</span><span class="mord cjk_fallback">子</span><span class="mord cjk_fallback">初</span><span class="mord cjk_fallback">值</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">参</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">初</span><span class="mord cjk_fallback">值</span></span></span></span>。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>M</mi><mi>O</mi><mi>V</mi><mi>I</mi><mi>N</mi><mi>G</mi><mi mathvariant="normal">_</mi><mi>A</mi><mi>V</mi><mi>E</mi><mi>R</mi><mi>A</mi><mi>G</mi><mi>E</mi><mi mathvariant="normal">_</mi><mi>D</mi><mi>E</mi><mi>C</mi><mi>A</mi><mi>Y</mi></mrow><annotation encoding="application/x-tex">MOVING\_AVERAGE\_DECAY</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.99333em;vertical-align:-0.31em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault">G</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">A</span><span class="mord mathdefault">G</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span></span></span></span>表示滑动平均衰减率，一般会赋接近1的值。</p>
-<h3 id="正则化">正则化</h3>
-<p>在损失函数中给每个参数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span></span></span></span>加上权重，引入模型复杂度指标，从而抑制模型噪声，减小过拟合：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>s</mi><mi>s</mi><mo>=</mo><mi>l</mi><mi>o</mi><mi>s</mi><mi>s</mi><mo>(</mo><mi>y</mi><mi mathvariant="normal">与</mi><mi>y</mi><mi mathvariant="normal">_</mi><mo>)</mo><mo>+</mo><mi>R</mi><mi>E</mi><mi>G</mi><mi>U</mi><mi>L</mi><mi>A</mi><mi>R</mi><mi>I</mi><mi>Z</mi><mi>E</mi><mi>R</mi><mo>∗</mo><mi>l</mi><mi>o</mi><mi>s</mi><mi>s</mi><mo>(</mo><mi>w</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">loss = loss(y与y\_) + REGULARIZER*loss(w)
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">s</span><span class="mord mathdefault">s</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.06em;vertical-align:-0.31em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">s</span><span class="mord mathdefault">s</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mord cjk_fallback">与</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord mathdefault">G</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mord mathdefault">L</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.07153em;">Z</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">s</span><span class="mord mathdefault">s</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mclose">)</span></span></span></span></span></p>
-<p>其中，第一项是预测结果与标准答案之前的差距（如交叉熵、均方误差）；第二项是正则化计算结果。</p>
-<h2 id="卷积神经网络">卷积神经网络</h2>
-<figure data-type="image" tabindex="2"><img src="https://YI-Pengfei.github.io/post-images/1581896531157.png" alt="LeNet-5" loading="lazy"></figure>
 ]]></content>
     </entry>
 </feed>

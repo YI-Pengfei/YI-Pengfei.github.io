@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>标签列表 | 飞天小南鲸</title>
+<title>无人机典型应用场景 | 飞天小南鲸</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -12,13 +12,24 @@
 <link rel="stylesheet" href="https://YI-Pengfei.github.io/styles/main.css">
 
 
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
 
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 
 
-    <meta name="description" content="记得戴口罩">
+    <meta name="description" content="
+Power Control in UAV-Supported Ultra Dense Networks: Communications, Caching, and Energy Transfer
+
+
+..." />
+    <meta name="keywords" content="" />
   </head>
   <body>
     <div id="app" class="main">
@@ -88,10 +99,39 @@
 
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
-          <h2 class="tag-list-title">标签列表</h2>
-          <div class="tags-container">
+          <div class="post-detail">
+            <h2 class="post-title">无人机典型应用场景</h2>
+            <div class="post-date">2020-05-03</div>
             
+            <div class="post-content" v-pre>
+              <ul>
+<li>Power Control in UAV-Supported Ultra Dense Networks: Communications, Caching, and Energy Transfer<br>
+<img src="https://YI-Pengfei.github.io/post-images/1588471581320.png" alt="" loading="lazy"></li>
+</ul>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://YI-Pengfei.github.io/post/uav-lu-jing-gui-hua-zong-shu-zong-jie/">
+                  <h3 class="post-title">
+                    UAV路径规划综述总结
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
           </div>
+
         </div>
       </div>
     </div>
@@ -111,6 +151,29 @@ var app = new Vue({
 </script>
 
 
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
 
 
 
