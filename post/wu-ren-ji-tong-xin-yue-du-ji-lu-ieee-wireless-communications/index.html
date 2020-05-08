@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>关联规则学习 Association rule learning | 飞天小南鲸</title>
+<title>无人机通信阅读记录-IEEE Wireless Communications | 飞天小南鲸</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -24,9 +24,12 @@
 
 
 
-    <meta name="description" content="http://rasbt.github.io/mlxtend/api_subpackages/mlxtend.frequent_patterns/
-&quot;&quot;&quot;
-关联规则学习 Association rule lea..." />
+    <meta name="description" content="
+Research Challenges and Opportunities of UAV Millimeter-Wave Communications
+
+
+
+UAV Channel Acquisition and Precoder Des..." />
     <meta name="keywords" content="" />
   </head>
   <body>
@@ -98,56 +101,109 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">关联规则学习 Association rule learning</h2>
-            <div class="post-date">2020-02-21</div>
+            <h2 class="post-title">无人机通信阅读记录-IEEE Wireless Communications</h2>
+            <div class="post-date">2020-05-05</div>
             
             <div class="post-content" v-pre>
-              <p><a href="http://rasbt.github.io/mlxtend/api_subpackages/mlxtend.frequent_patterns/">http://rasbt.github.io/mlxtend/api_subpackages/mlxtend.frequent_patterns/</a><br>
-&quot;&quot;&quot;<br>
-关联规则学习 Association rule learning 的目的是从大数据中发现变量之间的相关性<br>
-如&quot;啤酒和尿布&quot;的故事<br>
-Apriori alogrithm<br>
-实现Apriori alogrithm 用 mlxtend.frequent_patterns<br>
-&quot;&quot;&quot;</p>
-<pre><code class="language-python">import pandas as pd
-from mlxtend.frequent_patterns import apriori
-from mlxtend.frequent_patterns import association_rules
-## 创建数据
-columns = ['Milk', 'Bread', 'Butter', 'Beer', 'Diaper']
-L_transactions=[[1,1,0,0,0],
-                [0,0,1,0,0],
-                [0,0,0,1,1],
-                [1,1,1,0,0],
-                [0,1,0,0,0]]
-df = pd.DataFrame(L_transactions, columns=columns)
-
-frequent_itemsets=apriori(df,min_support=0.4)  ## 计算频繁项集 p&gt;0.4
-print(frequent_itemsets)
-
-rules = association_rules(frequent_itemsets, metric='confidence', min_threshold=0.5)  ## 求关联规则
-print(rules)
-</code></pre>
-<p>输出：</p>
-<pre><code class="language-python">   support itemsets
-0      0.4      (0)
-1      0.6      (1)
-2      0.4      (2)
-3      0.4   (0, 1)
-  antecedents consequents     ...      leverage  conviction
-0         (0)         (1)     ...          0.16         inf
-1         (1)         (0)     ...          0.16    1.800000
-
-[2 rows x 9 columns]
-</code></pre>
+              <ol>
+<li><strong>Research Challenges and Opportunities of UAV Millimeter-Wave Communications</strong></li>
+</ol>
+<ul>
+<li><img src="https://YI-Pengfei.github.io/post-images/1588652394306.png" alt="" loading="lazy"></li>
+<li>UAV Channel Acquisition and Precoder Design
+<ul>
+<li>UAV Channel Estimation
+<ul>
+<li>Channel variation effect is one of the most severe issues for UAV communication, and <em>fast channel estimation for a high-mobility UAV communication system</em> is required</li>
+</ul>
+</li>
+<li>UAV Fast Beam Training and Tracking
+<ul>
+<li>毫米波系统中，信道通常由有限数量的多路分量，可表示为路径增益与导向矢量（或波束）的乘积</li>
+<li>UAV的高动态导致路径增益和波束到达/发射角的快速变化</li>
+<li>因此需要efficient beam training methods+beam tracking</li>
+</ul>
+</li>
+<li>Intermittent Path Change 断断续续的路径变化
+<ul>
+<li>多路分量随着UAV的随机移动而改变，对设计预编码器和波束形成码书造成挑战</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>UAV MmWave For Cellular Network</li>
+</ul>
+<ol start="2">
+<li><strong>Physical Layer Security in UAV Systems: Challenges and Opportunities</strong></li>
+</ol>
+<ul>
+<li>被动窃听，主动干扰</li>
+<li>反窃听技术 Anti-Eavesdropping Techniques：
+<ul>
+<li><em>Joint Trajectory and Resource Allocation Design</em></li>
+<li>Robust Joint Design 当窃听位置部分已知或统计上的位置已知时</li>
+<li>Artificial Noise</li>
+</ul>
+</li>
+<li>先进技术：
+<ul>
+<li>NOMA</li>
+<li>3D Beamforming</li>
+<li>MmWave</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li><strong>Fundamental Trade-offs in  Communication and Trajectory Design for UAV-Wireless Network</strong></li>
+</ol>
+<ul>
+<li>UAV-ground通信的主要优势：
+<ul>
+<li>Line-of-sight (LoS)-dominated UAV-ground channel---&gt; 较少受到信道损伤的影响，如阴影和衰落</li>
+<li>UAV's controllable high mobility in 3D space</li>
+</ul>
+</li>
+<li><em>UAV communication and trajectory design</em>中需要考虑的点：
+<ul>
+<li>throughput</li>
+<li>delay</li>
+<li>energy</li>
+</ul>
+</li>
+<li>典型应用场景<br>
+<img src="https://YI-Pengfei.github.io/post-images/1588846383384.png" alt="" loading="lazy"></li>
+</ul>
+<ol start="5">
+<li><strong>Machine Learning for Wireless Connectivity and Security of Cellular-Connected UAVs</strong></li>
+</ol>
+<ul>
+<li>典型应用场景：<br>
+<img src="https://YI-Pengfei.github.io/post-images/1588894998078.png" alt="" loading="lazy">
+<ul>
+<li>UAV-based delivery system （UAV-DSs)
+<ul>
+<li>efficient handover and online path planning</li>
+</ul>
+</li>
+<li>UAV-based real-time multimedia streaming (UAV-RMS)</li>
+<li>UAV-enabled intelligent transportation systems (UAV-ITS)
+<ul>
+<li>cooperative multi-UAV data transmission and secured consensus of UAV swarms</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><img src="https://YI-Pengfei.github.io/post-images/1588900293110.png" alt="" loading="lazy"></li>
+</ul>
 
             </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://YI-Pengfei.github.io/post/wu-jian-du-xue-xi-kmeans-ju-lei-he-ceng-ci-ju-lei/">
+                <a href="https://YI-Pengfei.github.io/post/wu-ren-ji-tong-xin-yue-du-ji-lu-ieee-communication-magazine/">
                   <h3 class="post-title">
-                    无监督学习-Kmeans聚类和 层次聚类
+                    无人机通信阅读记录-IEEE Communication Magazine
                   </h3>
                 </a>
               </div>

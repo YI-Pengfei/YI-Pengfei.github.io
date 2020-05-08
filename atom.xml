@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://YI-Pengfei.github.io</id>
     <title>飞天小南鲸</title>
-    <updated>2020-05-05T04:04:42.895Z</updated>
+    <updated>2020-05-08T06:28:42.990Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://YI-Pengfei.github.io"/>
     <link rel="self" href="https://YI-Pengfei.github.io/atom.xml"/>
@@ -10,6 +10,104 @@
     <logo>https://YI-Pengfei.github.io/images/avatar.png</logo>
     <icon>https://YI-Pengfei.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 飞天小南鲸</rights>
+    <entry>
+        <title type="html"><![CDATA[无人机通信阅读记录-IEEE Wireless Communications]]></title>
+        <id>https://YI-Pengfei.github.io/post/wu-ren-ji-tong-xin-yue-du-ji-lu-ieee-wireless-communications/</id>
+        <link href="https://YI-Pengfei.github.io/post/wu-ren-ji-tong-xin-yue-du-ji-lu-ieee-wireless-communications/">
+        </link>
+        <updated>2020-05-05T04:18:20.000Z</updated>
+        <content type="html"><![CDATA[<ol>
+<li><strong>Research Challenges and Opportunities of UAV Millimeter-Wave Communications</strong></li>
+</ol>
+<ul>
+<li><img src="https://YI-Pengfei.github.io/post-images/1588652394306.png" alt="" loading="lazy"></li>
+<li>UAV Channel Acquisition and Precoder Design
+<ul>
+<li>UAV Channel Estimation
+<ul>
+<li>Channel variation effect is one of the most severe issues for UAV communication, and <em>fast channel estimation for a high-mobility UAV communication system</em> is required</li>
+</ul>
+</li>
+<li>UAV Fast Beam Training and Tracking
+<ul>
+<li>毫米波系统中，信道通常由有限数量的多路分量，可表示为路径增益与导向矢量（或波束）的乘积</li>
+<li>UAV的高动态导致路径增益和波束到达/发射角的快速变化</li>
+<li>因此需要efficient beam training methods+beam tracking</li>
+</ul>
+</li>
+<li>Intermittent Path Change 断断续续的路径变化
+<ul>
+<li>多路分量随着UAV的随机移动而改变，对设计预编码器和波束形成码书造成挑战</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>UAV MmWave For Cellular Network</li>
+</ul>
+<ol start="2">
+<li><strong>Physical Layer Security in UAV Systems: Challenges and Opportunities</strong></li>
+</ol>
+<ul>
+<li>被动窃听，主动干扰</li>
+<li>反窃听技术 Anti-Eavesdropping Techniques：
+<ul>
+<li><em>Joint Trajectory and Resource Allocation Design</em></li>
+<li>Robust Joint Design 当窃听位置部分已知或统计上的位置已知时</li>
+<li>Artificial Noise</li>
+</ul>
+</li>
+<li>先进技术：
+<ul>
+<li>NOMA</li>
+<li>3D Beamforming</li>
+<li>MmWave</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li><strong>Fundamental Trade-offs in  Communication and Trajectory Design for UAV-Wireless Network</strong></li>
+</ol>
+<ul>
+<li>UAV-ground通信的主要优势：
+<ul>
+<li>Line-of-sight (LoS)-dominated UAV-ground channel---&gt; 较少受到信道损伤的影响，如阴影和衰落</li>
+<li>UAV's controllable high mobility in 3D space</li>
+</ul>
+</li>
+<li><em>UAV communication and trajectory design</em>中需要考虑的点：
+<ul>
+<li>throughput</li>
+<li>delay</li>
+<li>energy</li>
+</ul>
+</li>
+<li>典型应用场景<br>
+<img src="https://YI-Pengfei.github.io/post-images/1588846383384.png" alt="" loading="lazy"></li>
+</ul>
+<ol start="5">
+<li><strong>Machine Learning for Wireless Connectivity and Security of Cellular-Connected UAVs</strong></li>
+</ol>
+<ul>
+<li>典型应用场景：<br>
+<img src="https://YI-Pengfei.github.io/post-images/1588894998078.png" alt="" loading="lazy">
+<ul>
+<li>UAV-based delivery system （UAV-DSs)
+<ul>
+<li>efficient handover and online path planning</li>
+</ul>
+</li>
+<li>UAV-based real-time multimedia streaming (UAV-RMS)</li>
+<li>UAV-enabled intelligent transportation systems (UAV-ITS)
+<ul>
+<li>cooperative multi-UAV data transmission and secured consensus of UAV swarms</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><img src="https://YI-Pengfei.github.io/post-images/1588900293110.png" alt="" loading="lazy"></li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[无人机通信阅读记录-IEEE Communication Magazine]]></title>
         <id>https://YI-Pengfei.github.io/post/wu-ren-ji-tong-xin-yue-du-ji-lu-ieee-communication-magazine/</id>
@@ -695,248 +793,6 @@ for i in range(la):
 #plt.close()
 </code></pre>
 <figure data-type="image" tabindex="1"><img src="https://YI-Pengfei.github.io/post-images/1582256775343.png" alt="" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[leNet5卷积网络]]></title>
-        <id>https://YI-Pengfei.github.io/post/lenet5-juan-ji-wang-luo/</id>
-        <link href="https://YI-Pengfei.github.io/post/lenet5-juan-ji-wang-luo/">
-        </link>
-        <updated>2020-02-17T02:13:14.000Z</updated>
-        <content type="html"><![CDATA[<p>对mnist数据集训练leNet5卷积网络<br>
-<img src="https://YI-Pengfei.github.io/post-images/1581906013166.png" alt="" loading="lazy"></p>
-<ul>
-<li>mnist_lenet5_forward.py</li>
-</ul>
-<pre><code class="language-python">import tensorflow as tf
-IMAGE_SIZE = 28
-NUM_CHANNELS = 1 # 单通道
-CONV1_SIZE = 5 # 卷积核尺寸 5*5*1*32
-CONV1_KERNEL_NUM = 32 ## 卷积核的个数
-CONV2_SIZE = 5
-CONV2_KERNEL_NUM = 64
-FC_SIZE = 512 # 全连接层 512
-OUTPUT_NODE = 10
-
-def get_weight(shape, regularizer):
-    &quot;&quot;&quot;权重生成函数
-    shape: 生成张量的维度
-    regularizer: 正则化权重
-    &quot;&quot;&quot;
-    w = tf.Variable(tf.truncated_normal(shape, stddev=0.1), dtype=tf.float32) # 创建方法在 3.2节
-    if regularizer!=None:  # L2正则化
-        tf.add_to_collection('losses', tf.contrib.layers.l2_regularizer(regularizer)(w))
-    return w
-
-def get_bias(shape):
-    # 生成 偏置
-    b = tf.Variable(tf.constant(0.5, shape=shape)) # shape=[11]
-    return b
-
-def conv2d(x,w):
-    &quot;&quot;&quot;卷积计算函数&quot;&quot;&quot;
-    return tf.nn.conv2d(x, # 输入描述 [batch,行分辨率,列分辨率,通道数]
-                        w, # 卷积核描述 [行分辨率,列分辨率,通道数,卷积核个数]
-                        strides=[1,1,1,1], # 核滑动步长[1,行步长,列步长,1]，
-                        padding='SAME'  # 填充模式
-                        )
-
-def max_pool_2x2(x):
-    &quot;&quot;&quot;最大池化函数&quot;&quot;&quot;
-    return tf.nn.max_pool(x, # 输入描述 [batch,行分辨率,列分辨率,通道数]
-                          ksize=[1,2,2,1], # 池化核描述[1,行分辨率,列分辨率,1]，
-                          strides=[1,2,2,1], # 池化核滑动步长[1,行步长,列步长,1]，
-                          padding='SAME' # 填充模式
-                          )
-    
-
-def forward(x, train, regularizer):
-    conv1_w = get_weight([CONV1_SIZE, CONV1_SIZE,NUM_CHANNELS, CONV1_KERNEL_NUM], regularizer)
-    conv1_b = get_bias([CONV1_KERNEL_NUM])
-    conv1 = conv2d(x, conv1_w)  # 卷积
-    relu1 = tf.nn.relu(tf.nn.bias_add(conv1, conv1_b)) # 加偏置
-    pool1 = max_pool_2x2(relu1)  # 最大池化
-    
-    conv2_w = get_weight([CONV2_SIZE, CONV2_SIZE, CONV1_KERNEL_NUM, CONV2_KERNEL_NUM], regularizer)
-    conv2_b = get_bias([CONV2_KERNEL_NUM])
-    conv2 = conv2d(pool1, conv2_w)
-    relu2 = tf.nn.relu(tf.nn.bias_add(conv2, conv2_b))
-    pool2 = max_pool_2x2(relu2)
-    
-    pool_shape = pool2.get_shape().as_list()
-    nodes = pool_shape[1]*pool_shape[2]*pool_shape[3]  # 特征的长度*宽度*深度
-    reshaped = tf.reshape(pool2, [pool_shape[0], nodes])  # pool_shape[0] 是一个BATCH的值
-    
-    fc1_w = get_weight([nodes, FC_SIZE], regularizer)
-    fc1_b = get_bias([FC_SIZE])
-    fc1 = tf.nn.relu(tf.matmul(reshaped, fc1_w) + fc1_b)
-    if train: # 训练时使用dropout
-        fc1 = tf.nn.dropout(fc1, 0.5)
-    
-    fc2_w = get_weight([FC_SIZE, OUTPUT_NODE], regularizer)
-    fc2_b = get_bias([OUTPUT_NODE])
-    y = tf.matmul(fc1, fc2_w)+fc2_b
-    return y
-</code></pre>
-<ul>
-<li>mnist_lenet5_backward.py</li>
-</ul>
-<pre><code class="language-python"># -*- coding: utf-8 -*-
-&quot;&quot;&quot;
-Created on Mon Feb 17 08:56:24 2020
-
-@author: y1064
-&quot;&quot;&quot;
-
-import tensorflow as tf
-from tensorflow.examples.tutorials.mnist import input_data
-import mnist_lenet5_forward
-import os
-import numpy as np
-
-BATCH_SIZE = 100
-LEARNING_RATE_BASE = 0.005
-LEARNING_RATE_DECAY = 0.99
-REGULARIZER = 0.0001
-STEPS = 50000
-MOVING_AVERAGE_DECAY = 0.99
-MODEL_SAVE_PATH = 'model/'
-MODEL_NAME = 'mnist_model'
-
-def backward(mnist):
-    x = tf.placeholder(tf.float32,  ## 输入是四阶张量
-                       [
-                        BATCH_SIZE,
-                        mnist_lenet5_forward.IMAGE_SIZE,
-                        mnist_lenet5_forward.IMAGE_SIZE,
-                        mnist_lenet5_forward.NUM_CHANNELS
-                               ])
-    y_ = tf.placeholder(tf.float32, 
-                        [None, mnist_lenet5_forward.OUTPUT_NODE])
-    y = mnist_lenet5_forward.forward(x, True, REGULARIZER)
-    global_step = tf.Variable(0, trainable=False)
-    
-    ce = tf.nn.sparse_softmax_cross_entropy_with_logits(
-            logits=y, labels=tf.argmax(y_, 1))
-    cem = tf.reduce_mean(ce)
-    loss = cem + tf.add_n(tf.get_collection('losses'))
-    
-    learning_rate = tf.train.exponential_decay(
-            LEARNING_RATE_BASE,
-            global_step,
-            mnist.train.num_examples/BATCH_SIZE,
-            LEARNING_RATE_DECAY,
-            staircase = True)
-    
-    train_step = tf.train.GradientDescentOptimizer(
-            learning_rate).minimize(loss, global_step=global_step)
-    
-    ema = tf.train.ExponentialMovingAverage(
-            MOVING_AVERAGE_DECAY, global_step)
-    ema_op = ema.apply(tf.trainable_variables())
-    with tf.control_dependencies([train_step, ema_op]):
-        train_op = tf.no_op(name='train')
-    
-    saver = tf.train.Saver()
-    
-    with tf.Session() as sess:
-        init_op = tf.global_variables_initializer()
-        sess.run(init_op)
-        
-        ckpt = tf.train.get_checkpoint_state(MODEL_SAVE_PATH)
-        if ckpt and ckpt.model_checkpoint_path:
-            saver.restore(sess, ckpt.model_checkpoint_path)
-        
-        for i in range(STEPS):
-            xs, ys = mnist.train.next_batch(BATCH_SIZE)
-            ## 这样reshape就能变成四阶张量？？、
-            reshaped_xs = np.reshape(xs, (
-                        BATCH_SIZE,
-                        mnist_lenet5_forward.IMAGE_SIZE,
-                        mnist_lenet5_forward.IMAGE_SIZE,
-                        mnist_lenet5_forward.NUM_CHANNELS))
-            _, loss_value, step = sess.run([train_op, loss, global_step],
-                                           feed_dict={x:reshaped_xs, y_:ys})
-            if i%100==0:
-                print(&quot;After %d training steps, loss on training batch is %g.&quot;%(step, loss_value))
-                saver.save(sess, os.path.join(MODEL_SAVE_PATH, MODEL_NAME), global_step=global_step)
-
-def main():
-    mnist = input_data.read_data_sets('./data/', one_hot=True)
-    backward(mnist)
-
-if __name__=='__main__':
-    main()
-</code></pre>
-<ul>
-<li>mnist_lenet5_test.py</li>
-</ul>
-<pre><code class="language-python"># -*- coding: utf-8 -*-
-&quot;&quot;&quot;
-Created on Mon Feb 17 09:16:06 2020
-
-@author: y1064
-&quot;&quot;&quot;
-import time
-import tensorflow as tf
-from tensorflow.examples.tutorials.mnist import input_data
-import mnist_lenet5_forward
-import mnist_lenet5_backward
-import os
-import numpy as np
-
-TEST_INTERVAL_SECS = 5
-
-def test(mnist):
-    with tf.Graph().as_default() as g:
-        x = tf.placeholder(tf.float32, [
-                mnist.test.num_examples,
-                mnist_lenet5_forward.IMAGE_SIZE,
-                mnist_lenet5_forward.IMAGE_SIZE,
-                mnist_lenet5_forward.NUM_CHANNELS
-                ])
-        y_ = tf.placeholder(tf.float32, 
-                            [None, mnist_lenet5_forward.OUTPUT_NODE])
-        y = mnist_lenet5_forward.forward(x, False, None)
-        
-        ema = tf.train.ExponentialMovingAverage(
-                mnist_lenet5_backward.MOVING_AVERAGE_DECAY)
-        ema_restore = ema.variables_to_restore()
-        saver = tf.train.Saver(ema_restore)
-        
-        correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(y_,1))
-        accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-        
-        while True:
-            with tf.Session() as sess:
-                ckpt = tf.train.get_checkpoint_state(mnist_lenet5_backward.MODEL_SAVE_PATH)
-                if ckpt and ckpt.model_checkpoint_path:
-                    saver.restore(sess, ckpt.model_checkpoint_path)
-                    
-                    global_step = ckpt.model_checkpoint_path.split('/')[-1].split(' ')[-1]
-                    reshaped_x = np.reshape(mnist.test.images, (
-                            mnist.test.num_examples,
-                            mnist_lenet5_forward.IMAGE_SIZE,
-                            mnist_lenet5_forward.IMAGE_SIZE,
-                            mnist_lenet5_forward.NUM_CHANNELS
-                            ))
-                    accuracy_score = sess.run(accuracy, feed_dict = {
-                            x:reshaped_x,
-                            y_:mnist.test.labels
-                            })
-                    print('After %s training steps, test accuracy=%g'%(global_step, accuracy_score))
-                else:
-                    print('No checkpoint file found')
-            
-            time.sleep(TEST_INTERVAL_SECS)
-
-def main():
-    mnist = input_data.read_data_sets('./data/', one_hot=True)
-    test(mnist)
-    
-if __name__=='__main__':
-    main()
-</code></pre>
 ]]></content>
     </entry>
 </feed>
