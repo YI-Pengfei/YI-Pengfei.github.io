@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://YI-Pengfei.github.io</id>
     <title>飞天小南鲸</title>
-    <updated>2020-05-08T06:28:42.990Z</updated>
+    <updated>2020-05-10T12:16:08.883Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://YI-Pengfei.github.io"/>
     <link rel="self" href="https://YI-Pengfei.github.io/atom.xml"/>
@@ -10,6 +10,42 @@
     <logo>https://YI-Pengfei.github.io/images/avatar.png</logo>
     <icon>https://YI-Pengfei.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 飞天小南鲸</rights>
+    <entry>
+        <title type="html"><![CDATA[无人机通信阅读记录-综述]]></title>
+        <id>https://YI-Pengfei.github.io/post/wu-ren-ji-tong-xin-yue-du-ji-lu-zong-shu/</id>
+        <link href="https://YI-Pengfei.github.io/post/wu-ren-ji-tong-xin-yue-du-ji-lu-zong-shu/">
+        </link>
+        <updated>2020-05-10T08:54:39.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="survey-on-unmanned-aerial-vehicle-networks-a-cyber-physical-system-perspective">Survey on Unmanned Aerial Vehicle Networks: A Cyber Physical System Perspective</h3>
+<ul>
+<li>
+<p>无人机信息物理系统CPS组件</p>
+<ul>
+<li>通信<br>
+<img src="https://YI-Pengfei.github.io/post-images/1589100938739.png" alt="" loading="lazy"></li>
+<li>计算</li>
+<li>控制
+<ul>
+<li>UAV network of cell level (UCL)</li>
+<li>UAV network of system level (USL)</li>
+<li>UAV network of system of system level (USoS)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>三个层级：<br>
+<img src="https://YI-Pengfei.github.io/post-images/1589111556060.png" alt="" loading="lazy"></p>
+<ul>
+<li>细胞级<br>
+<img src="https://YI-Pengfei.github.io/post-images/1589112938797.png" alt="" loading="lazy"></li>
+<li>系统级<br>
+<img src="https://YI-Pengfei.github.io/post-images/1589112912370.png" alt="" loading="lazy"></li>
+</ul>
+</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[无人机通信阅读记录-IEEE Wireless Communications]]></title>
         <id>https://YI-Pengfei.github.io/post/wu-ren-ji-tong-xin-yue-du-ji-lu-ieee-wireless-communications/</id>
@@ -51,7 +87,7 @@
 <li>被动窃听，主动干扰</li>
 <li>反窃听技术 Anti-Eavesdropping Techniques：
 <ul>
-<li><em>Joint Trajectory and Resource Allocation Design</em></li>
+<li><strong>Joint Trajectory and Resource Allocation Design</strong></li>
 <li>Robust Joint Design 当窃听位置部分已知或统计上的位置已知时</li>
 <li>Artificial Noise</li>
 </ul>
@@ -74,7 +110,7 @@
 <li>UAV's controllable high mobility in 3D space</li>
 </ul>
 </li>
-<li><em>UAV communication and trajectory design</em>中需要考虑的点：
+<li><strong>UAV communication and trajectory design</strong>中需要考虑的点：
 <ul>
 <li>throughput</li>
 <li>delay</li>
@@ -105,6 +141,38 @@
 </ul>
 </li>
 <li><img src="https://YI-Pengfei.github.io/post-images/1588900293110.png" alt="" loading="lazy"></li>
+</ul>
+<ol start="6">
+<li><strong>Reinforcement Learning for a Cellular Internet of UAVs: Protocol Design, Trajectory Control, and Resource Management</strong></li>
+</ol>
+<ul>
+<li>无人机收集传感数据发送给基站<br>
+<img src="https://YI-Pengfei.github.io/post-images/1589014496803.png" alt="" loading="lazy"></li>
+<li>应用：
+<ul>
+<li>Multi-Armed Bandit Learning for User Association</li>
+<li>Q-Learning for Trajectory Control</li>
+<li>Actor-Critic Learning for Power Management</li>
+<li>Deep Reinforcement Learning for Subchannel Allocation</li>
+</ul>
+</li>
+</ul>
+<ol start="7">
+<li><strong>UAV Communications Based on Non-Orthogonal Multiple Access</strong></li>
+</ol>
+<ul>
+<li>The key concept of NOMA is to serve multiple users on the same resource block (time/frequency/code/space) but with different power levels. NOMA的关键概念是在相同的资源块(时间/频率/代码/空间)上以不同的功率级别服务多个用户。</li>
+<li>使用随机几何进行<strong>网络的性能分析</strong> Using a stocastic-geometry-based model, the ground users are grouped together to share the same resource with NOMA and associated with the most suitable UAV</li>
+<li>Joint Power Allocation and Trajectory Design
+<ul>
+<li>无人机与地面用户之间的通信距离可以根据实时需求进行调整</li>
+</ul>
+</li>
+<li>Dynamic UAV Placement and Movement Design
+<ul>
+<li>K-means聚类分组 + Q-learning放置无人机+Q-learning实时调整无人机</li>
+</ul>
+</li>
 </ul>
 ]]></content>
     </entry>
@@ -748,51 +816,6 @@ print(rules)
 
 [2 rows x 9 columns]
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[无监督学习-Kmeans聚类和 层次聚类]]></title>
-        <id>https://YI-Pengfei.github.io/post/wu-jian-du-xue-xi-kmeans-ju-lei-he-ceng-ci-ju-lei/</id>
-        <link href="https://YI-Pengfei.github.io/post/wu-jian-du-xue-xi-kmeans-ju-lei-he-ceng-ci-ju-lei/">
-        </link>
-        <updated>2020-02-21T02:18:15.000Z</updated>
-        <content type="html"><![CDATA[<p>&quot;&quot;&quot;<br>
-Kmeans聚类和 层次聚类<br>
-<a href="https://scikit-learn.org/stable/modules/clustering.html#clustering">https://scikit-learn.org/stable/modules/clustering.html#clustering</a><br>
-&quot;&quot;&quot;</p>
-<pre><code class="language-python">import numpy as np
-import matplotlib.pyplot as plt
-import sklearn.cluster
-SIZES,SEED,k,num=20,0,5,2
-colors=[&quot;ro&quot;,&quot;b*&quot;,&quot;gs&quot;,&quot;y^&quot;,&quot;kx&quot;]
-Algorithms=[&quot;Kmeans&quot;,&quot;Hierarchical-Single&quot;,&quot;Hierarchical-Average&quot;,&quot;Hierarchical-Maximum&quot;]
-la=len(Algorithms)
-Lx=np.concatenate([np.cos(np.arange(0,np.pi,0.01))*(100+j)/100+np.random.rand(int(np.pi/0.01)+1)*0.05 for j in range(num)]+[np.cos(np.arange(0,np.pi,0.01))*(100+j)/200+np.random.rand(int(np.pi/0.01)+1)*0.05 for j in range(num)])
-Ly=np.concatenate([np.sin(np.arange(0,np.pi,0.01))*(100+j)/100+np.random.rand(int(np.pi/0.01)+1)*0.05 for j in range(num)]+[np.sin(np.arange(0,np.pi,0.01))*(100+j)/200+np.random.rand(int(np.pi/0.01)+1)*0.05 for j in range(num)])
-n=len(Lx)
-c=np.sqrt((Lx-Lx.reshape(n,1))**2+(Ly-Ly.reshape(n,1))**2)  # 为什么这个是目标？？？ 代价函数：误差平方和（SSE）
-fig=plt.figure(figsize=(8,4*la))
-for i in range(la):
-    if Algorithms[i]==&quot;Kmeans&quot;:
-        y_pred = sklearn.cluster.KMeans(n_clusters=k,random_state=SEED).fit_predict(list(zip(Lx,Ly)))
-    elif Algorithms[i]==&quot;Hierarchical-Single&quot;:
-        y_pred = sklearn.cluster.AgglomerativeClustering(linkage=&quot;ward&quot;, n_clusters=k).fit_predict(list(zip(Lx,Ly)))
-    elif Algorithms[i]==&quot;Hierarchical-Average&quot;:
-        y_pred = sklearn.cluster.AgglomerativeClustering(linkage=&quot;average&quot;, n_clusters=k).fit_predict(list(zip(Lx,Ly)))
-    elif Algorithms[i]==&quot;Hierarchical-Maximum&quot;:
-        y_pred = sklearn.cluster.AgglomerativeClustering(linkage=&quot;complete&quot;, n_clusters=k).fit_predict(list(zip(Lx,Ly)))
-
-    ax = plt.subplot(la,2,i+1)
-    for j in range(n):
-
-        cluster = y_pred[j]
-        plt.plot(Lx[j],Ly[j],colors[cluster],markersize=5)
-
-    ax.set_title(Algorithms[i],fontsize=SIZES)
-#plt.savefig(&quot;C12Clustering.pdf&quot;,bbox_inches='tight')
-#plt.close()
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://YI-Pengfei.github.io/post-images/1582256775343.png" alt="" loading="lazy"></figure>
 ]]></content>
     </entry>
 </feed>
