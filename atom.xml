@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://YI-Pengfei.github.io</id>
     <title>飞天小南鲸</title>
-    <updated>2020-05-10T12:55:13.071Z</updated>
+    <updated>2020-05-26T03:32:36.588Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://YI-Pengfei.github.io"/>
     <link rel="self" href="https://YI-Pengfei.github.io/atom.xml"/>
@@ -43,8 +43,14 @@
 <li>系统级<br>
 <img src="https://YI-Pengfei.github.io/post-images/1589112912370.png" alt="" loading="lazy"><br>
 <img src="https://YI-Pengfei.github.io/post-images/1589113901830.png" alt="" loading="lazy"></li>
+<li>系统的系统级 system of system level</li>
 </ul>
 </li>
+</ul>
+<h3 id="accessing-from-the-sky-a-tutorial-on-uav-communications-for-5g-and-beyond">Accessing From the Sky: A Tutorial on UAV Communications for 5G and Beyond</h3>
+<ul>
+<li>信道<br>
+<img src="https://YI-Pengfei.github.io/post-images/1589694183212.png" alt="" loading="lazy"></li>
 </ul>
 ]]></content>
     </entry>
@@ -173,6 +179,18 @@
 <li>Dynamic UAV Placement and Movement Design
 <ul>
 <li>K-means聚类分组 + Q-learning放置无人机+Q-learning实时调整无人机</li>
+</ul>
+</li>
+</ul>
+<ol start="9">
+<li><strong>Safeguarding Wireless Network with UAVs: A Physical Layer Security Perspective</strong></li>
+</ol>
+<ul>
+<li>空对地 A2G：
+<ul>
+<li>3D波束赋形<img src="https://YI-Pengfei.github.io/post-images/1590462402475.png" alt="" loading="lazy"></li>
+<li>位置/航迹与通信的协同设计<img src="https://YI-Pengfei.github.io/post-images/1590462416951.png" alt="" loading="lazy"></li>
+<li>多无人机协同<img src="https://YI-Pengfei.github.io/post-images/1590462424077.png" alt="" loading="lazy"></li>
 </ul>
 </li>
 </ul>
@@ -315,6 +333,54 @@
 <li>光通信 + 无人机做中继</li>
 <li>无人机提供包缓存功能</li>
 <li>两个场景：上下悬浮的，  水平远近移动的</li>
+</ul>
+<ol start="12">
+<li><strong>UAVs as Mobile Infrastructure: Addressing Battery Lifetime</strong></li>
+</ol>
+<ul>
+<li>几个UAV轮流提供服务</li>
+<li>光换电池</li>
+<li>磁场充电、太阳能、激光充电</li>
+<li>电池技术改善</li>
+</ul>
+<ol start="13">
+<li><strong>The Sky Is Not the Limit: LTE for Unmanned Aerial Vehicles</strong></li>
+</ol>
+<ul>
+<li>连接需求：
+<ul>
+<li>命令和控制 (Command and Control)：3GPP requirements on command and control are data rates up to <strong>100 kb/s</strong> and packet error rate lower than <strong>0.1 percent</strong> within <strong>50 ms</strong> latency bound. 命令和控制数据的数据率在100kb/s，包错误率低于0.1%，小于50ms的延迟。</li>
+<li>数据通信：比如摄像数据或遥感监视数据要求UAV实时回传图片视频，数据率可能高达50Mb/s。</li>
+</ul>
+</li>
+<li>空中信道特性：
+<ul>
+<li>视距传输VS非视距传输  视距传输概率与高度、2D距离的关系<br>
+<img src="https://YI-Pengfei.github.io/post-images/1589156559852.png" alt="" loading="lazy"></li>
+<li>大尺度路径损耗  自由空间、实测、3GPP<br>
+<img src="https://YI-Pengfei.github.io/post-images/1589157078858.png" alt="" loading="lazy"></li>
+</ul>
+</li>
+<li>技术可行性和挑战
+<ul>
+<li>基站天线pattern 水平向、垂向、三维<br>
+<img src="https://YI-Pengfei.github.io/post-images/1589157765956.png" alt="" loading="lazy"></li>
+</ul>
+</li>
+<li>潜在增强
+<ul>
+<li>干扰抑制</li>
+<li>机动增强</li>
+</ul>
+</li>
+</ul>
+<ol start="14">
+<li><strong>14.UAV-Based IoT Platform+A Crowd Surveillance Use Case</strong></li>
+</ol>
+<ul>
+<li>UAV-Based IoT Plateform<br>
+<img src="https://YI-Pengfei.github.io/post-images/1589238302764.png" alt="" loading="lazy"></li>
+<li>UAV配备摄像机、4G通信，进行人群监测，<strong>实验</strong>对比onboard计算 和 卸载到MEC(Mobile Edge Computing)的计算效率和能源消耗情况。</li>
 </ul>
 ]]></content>
     </entry>
