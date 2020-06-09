@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://YI-Pengfei.github.io</id>
     <title>飞天小南鲸</title>
-    <updated>2020-06-09T01:37:14.308Z</updated>
+    <updated>2020-06-09T01:56:29.356Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://YI-Pengfei.github.io"/>
     <link rel="self" href="https://YI-Pengfei.github.io/atom.xml"/>
@@ -212,7 +212,7 @@
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[无人机通信阅读记录-IEEE Communication Magazine]]></title>
+        <title type="html"><![CDATA[无人机通信阅读记录-IEEE Communications Magazine]]></title>
         <id>https://YI-Pengfei.github.io/post/wu-ren-ji-tong-xin-yue-du-ji-lu-ieee-communication-magazine/</id>
         <link href="https://YI-Pengfei.github.io/post/wu-ren-ji-tong-xin-yue-du-ji-lu-ieee-communication-magazine/">
         </link>
@@ -389,13 +389,37 @@
 </ul>
 </li>
 </ul>
-<ol start="14">
-<li><strong>14.UAV-Based IoT Platform+A Crowd Surveillance Use Case</strong></li>
+<ol>
+<li><strong>UAV-Based IoT Platform+A Crowd Surveillance Use Case</strong></li>
 </ol>
 <ul>
 <li>UAV-Based IoT Plateform<br>
 <img src="https://YI-Pengfei.github.io/post-images/1589238302764.png" alt="" loading="lazy"></li>
 <li>UAV配备摄像机、4G通信，进行人群监测，<strong>实验</strong>对比onboard计算 和 卸载到MEC(Mobile Edge Computing)的计算效率和能源消耗情况。</li>
+</ul>
+<ol start="24">
+<li><strong>Aerial Access and Backhaul in mmWave B5G Systems: Performance Dynamics and Optimization</strong></li>
+</ol>
+<ul>
+<li>Integrated access and backhaul (IAB)</li>
+<li>地面接入点AP，用户UE，无人机基站</li>
+<li>建模的考虑上：
+<ul>
+<li>UAV-BS位置的三维布局</li>
+<li>精确的A2G毫米波传输模型</li>
+<li>现实的用户部署和移动性模型</li>
+<li>结合实际的部署考虑</li>
+</ul>
+</li>
+<li>场景示例：几个AP，几个UAV，用户是分簇的。用户可以直接连AP(UE--&gt;AP)，或者UE--&gt;UAV--&gt;AP。<br>
+<img src="https://YI-Pengfei.github.io/post-images/1591667382167.png" alt="" loading="lazy"></li>
+<li>方法：
+<ul>
+<li>Reference Point Group Mobility (RPGM) model描述用户的移动（基本思想是每个簇有个header，header的移动控制着群体的移动）</li>
+<li>Particle swarm optimization (PSO)粒子群优化算法做动态优化（基本思想是产生一系列可行解，然后解的迭代受局部最优解和已知全局最优解的综合影响）</li>
+<li>Metrics度量：平均用户吞吐量mean UE throughput，公平性fairness (Jain's fairness index)</li>
+</ul>
+</li>
 </ul>
 ]]></content>
     </entry>
