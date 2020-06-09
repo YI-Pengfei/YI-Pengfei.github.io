@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://YI-Pengfei.github.io</id>
     <title>飞天小南鲸</title>
-    <updated>2020-05-26T03:32:36.588Z</updated>
+    <updated>2020-06-09T01:37:14.308Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://YI-Pengfei.github.io"/>
     <link rel="self" href="https://YI-Pengfei.github.io/atom.xml"/>
@@ -185,12 +185,27 @@
 <ol start="9">
 <li><strong>Safeguarding Wireless Network with UAVs: A Physical Layer Security Perspective</strong></li>
 </ol>
+<h4 id="应对地面的干扰窃听者">应对地面的干扰/窃听者</h4>
 <ul>
 <li>空对地 A2G：
 <ul>
 <li>3D波束赋形<img src="https://YI-Pengfei.github.io/post-images/1590462402475.png" alt="" loading="lazy"></li>
 <li>位置/航迹与通信的协同设计<img src="https://YI-Pengfei.github.io/post-images/1590462416951.png" alt="" loading="lazy"></li>
 <li>多无人机协同<img src="https://YI-Pengfei.github.io/post-images/1590462424077.png" alt="" loading="lazy"></li>
+</ul>
+</li>
+<li>地对空G2A
+<ul>
+<li>同样，无人机端接收的3D波束赋形</li>
+<li>调整位置，并且地面可以通过D2D通信将信息转发到其他节点，再由其他节点转发给UAV，以躲避干扰</li>
+</ul>
+</li>
+</ul>
+<h4 id="应对空中的干扰窃听者">应对空中的干扰/窃听者</h4>
+<ul>
+<li>地面通信中应对无人机窃听
+<ul>
+<li>多跳D2D中继<img src="https://YI-Pengfei.github.io/post-images/1590466434790.png" alt="" loading="lazy"></li>
 </ul>
 </li>
 </ul>
