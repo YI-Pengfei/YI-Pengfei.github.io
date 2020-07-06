@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://YI-Pengfei.github.io/favicon.ico?v=1591667784045">
+<link rel="shortcut icon" href="https://YI-Pengfei.github.io/favicon.ico?v=1594005540457">
 <link rel="stylesheet" href="https://YI-Pengfei.github.io/styles/main.css">
 
 
@@ -38,7 +38,7 @@ Aerial Control System for Spectrum Efficiency in UAV-to-Cellular Communications
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://YI-Pengfei.github.io">
-        <img src="https://YI-Pengfei.github.io/images/avatar.png?v=1591667784045" class="site-logo">
+        <img src="https://YI-Pengfei.github.io/images/avatar.png?v=1594005540457" class="site-logo">
         <h1 class="site-title">飞天小南鲸</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -305,6 +305,46 @@ Aerial Control System for Spectrum Efficiency in UAV-to-Cellular Communications
 <li>Reference Point Group Mobility (RPGM) model描述用户的移动（基本思想是每个簇有个header，header的移动控制着群体的移动）</li>
 <li>Particle swarm optimization (PSO)粒子群优化算法做动态优化（基本思想是产生一系列可行解，然后解的迭代受局部最优解和已知全局最优解的综合影响）</li>
 <li>Metrics度量：平均用户吞吐量mean UE throughput，公平性fairness (Jain's fairness index)</li>
+</ul>
+</li>
+</ul>
+<ol start="25">
+<li><strong>Wireless Communications with Unmanned Aerial Vehicles: Opportunities and Challenges 2016年</strong></li>
+</ol>
+<ul>
+<li>基本网络结构：
+<ul>
+<li>Control and Non-Payload Communications Link 控制链</li>
+<li>Data Link 数据链</li>
+</ul>
+</li>
+<li>信道特性
+<ul>
+<li>空对地：LoS+blocked</li>
+<li>空对空：LoS+higher Doppler frequencies</li>
+</ul>
+</li>
+<li>设计考虑：
+<ul>
+<li>无人机部署和路径规划
+<ul>
+<li>UAV-aided cellular coverage 可以用多无人机服务多用户，，自旋翼无人机比较好</li>
+<li>UAV-aided information dissemination or collection for delay-tolerant data 一架就够了</li>
+</ul>
+</li>
+<li>Energy-Aware deployment and operation
+<ul>
+<li>energy-aware deployment 比如多架无人机替换着来</li>
+<li>energy-efficient operation 减少不必要的能量损耗，比如不上下飞，满足通信需求的同时最小化能量消耗</li>
+</ul>
+</li>
+<li>MIMO for UAV-Aided Communications</li>
+</ul>
+</li>
+<li>两大场景
+<ul>
+<li>UAV-Enabled Mobile Relaying 往原点飞收数据，往目的地飞发数据，循环往复</li>
+<li>D2D-Enhanced UAV Information Dissemination 无人机给地面很多节点发消息，，每个节点可能只能收到一部分，节点之间用D2D通信来交换数据，可以省时省力</li>
 </ul>
 </li>
 </ul>
